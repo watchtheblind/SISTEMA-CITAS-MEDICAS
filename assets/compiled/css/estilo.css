@@ -1,0 +1,18 @@
+.tarjeta{
+    box-shadow: 7px 7px 10px gray;
+ }
+
+ .bg-viber {
+    background: linear-gradient(45deg, #7B519D, #946db4); }
+  .bg-amazon {
+    background: linear-gradient(45deg, #000, #1a1a1a); }
+  .bg-c-blue {
+    background: linear-gradient(45deg, #4099ff, #73b4ff); }
+  .bg-c-pink {
+    background: linear-gradient(45deg, #FF5370, #ff869a); }
+  .bg-c-green {
+    background: linear-gradient(45deg, #2ed8b6, #59e0c5); }
+  .bg-c-yellow {
+    background: linear-gradient(45deg, #FFB64D, #ffcb80); }
+  .bg-c-orenge {
+    background: linear-gradient(45deg, #FE8A7D, #feb8b0); }
