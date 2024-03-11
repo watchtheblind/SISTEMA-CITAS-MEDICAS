@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-03-2024 a las 22:50:38
+-- Tiempo de generación: 11-03-2024 a las 20:14:58
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -38,28 +38,25 @@ CREATE TABLE `paciente` (
   `comunidad` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Volcado de datos para la tabla `paciente`
 --
 
-CREATE TABLE `usuarios` (
-  `cedula` int(11) NOT NULL,
-  `trabajador` text NOT NULL,
-  `cargo` text NOT NULL,
-  `email` text NOT NULL,
-  `nombre_usuario` text NOT NULL,
-  `contrasena` text NOT NULL,
-  `perfil` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `paciente` (`cedula`, `nombre`, `apellido`, `telf`, `estado`, `municipio`, `parroquia`, `comunidad`) VALUES
+(0, '', '', 0, 'Aragua', '', '', ''),
+(999, '', '', 0, 'Delta Amacuro', '', '', ''),
+(78554, '', '', 0, 'Aragua', '', '', ''),
+(2147483647, '', '', 0, 'Sucre', '', '', '');
 
 --
--- Volcado de datos para la tabla `usuarios`
+-- Índices para tablas volcadas
 --
 
-INSERT INTO `usuarios` (`cedula`, `trabajador`, `cargo`, `email`, `nombre_usuario`, `contrasena`, `perfil`) VALUES
-(1, 'asdasd', 'asd', 'a', 'dd', 'dd', 1);
+--
+-- Indices de la tabla `paciente`
+--
+ALTER TABLE `paciente`
+  ADD UNIQUE KEY `UNIQUE` (`cedula`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

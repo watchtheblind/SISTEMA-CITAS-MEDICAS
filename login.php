@@ -3,9 +3,8 @@ include "conectarBD.php";
 session_start(); 
 //consulta para obtener el id
 
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -13,23 +12,57 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recibos de Pago</title>
-
-
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="shortcut icon" href="./assets/compiled/png/logo.png" type="image/x-icon">
-
-
     <link rel="stylesheet" href="./assets/compiled/css/app.css">
     <link rel="stylesheet" href="./assets/compiled/css/app-dark.css">
     <link rel="stylesheet" href="./assets/compiled/css/iconly.css">
     <link rel="stylesheet" href="./assets/compiled/css/estilo.css">
     <link rel="stylesheet" type="text/css" href="assets/css/sweetalert2.css">
     <link rel="stylesheet" href="./assets/compiled/css/bootstrap-icons.css">
-
 </head>
-
+<script>
+    import Swal from 'sweetalert2';
+</script>
 <body>
-  
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        if (location.search.includes('shSuccMsg=1')) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Paciente registrado con exito',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        if (location.search.includes('shSuccMsg=0')) {
+            Swal.fire({
+            icon: "error",
+            title: "Este usuario ya existe!",
+            showConfirmButton: false,
+            timer: 1500
+            });
+        }
+    });
+
+//     <script>
+//     document.addEventListener('DOMContentLoaded', function() {
+//         if (location.search.includes('showSuccessMessage=1')) {
+//             Swal.fire({
+//                 icon: 'success',
+//                 title: 'Registration successful',
+//                 text: 'You have successfully registered a new patient.',
+//                 showConfirmButton: false,
+//                 timer: 1500
+//             }).then(() => {
+//                 history.replaceState(null, null, '/login.php');
+//             });
+//         }
+//     });
+// </script>
+</script>
     <script src="assets/static/js/initTheme.js"></script>
     <div id="app">
         <div id="sidebar">
@@ -144,7 +177,7 @@ session_start();
             <div>
                 <div class="card bg-c-orenge order-card">
                     <div class="card-block p-2">
-                        <h4 class="d-flex justify-content-center mb-10">
+                        <h4 class="d-flex justify-content-center mb-10 ">
                             PROGRAMA DE CONTROL DE CITAS MÉDICAS CEDOCABAR
                         </h4>
                         <h4 class="font-bold">
@@ -232,64 +265,68 @@ session_start();
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel text-danger">CEDOCABAR</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <form class="row center" action="registroPaciente.php" method="POST">
-                                    <div class="form-row col-md-8 offset-md-2 text-center">
-                                        <h3>Pacientes</h3>
-                                        <div class="form-group">
-                                            <label for="inputNombre1">Nombres</label>
-                                            <input type="nombre" name="pacNom" class="form-control" id="inputEmail4" placeholder="Ej: Pedro José">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputPassword4">Apellidos</label>
-                                            <input type="apellido" name="pacApe" class="form-control" id="inputPassword4" placeholder="Ej: Fernández Contreras">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputAddress">Cedula</label>
-                                            <input type="tel" name="pacCed" class="form-control" id="inputTel" placeholder="Ej: 5674123">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputAddress">Telefono</label>
-                                            <input type="tel" name="pacTel" class="form-control" id="inputTel" placeholder="04XX-XXXXXXX">
-                                        </div>
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel text-danger">CEDOCABAR</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <form class="row center" action="registroPaciente.php" method="POST">
+                            <h3>Pacientes</h3>
+                                <div class="form-row col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputNombre1">Nombres</label>
+                                        <input type="nombre" name="pacNom" class="form-control" id="inputEmail4" placeholder="Ej: Pedro José">
                                     </div>
-                                    <div class="form-row col-md-8 offset-md-2 text-center">
-                                        <div class="form-group">
-                                            <label for="inputAddress2">Estado</label>
-                                            <input type="text" name="pacEdo" class="form-control" id="inputAddress2" placeholder="Ej: Aragua">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputAddress2">Municipio</label>
-                                            <input type="text" name="pacMun" class="form-control" id="inputAddress2" placeholder="Ej: Girardot">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputAddress2">Parroquia</label>
-                                            <input type="text" name="pacParroq" class="form-control" id="inputAddress2" placeholder="Ej: Las Delicias">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputAddress2">Comunidad</label>
-                                            <input type="text" name="pacCom" class="form-control" id="inputAddress2" placeholder="Ej: La Pedrera">
-                                        </div>
+                                    <div class="form-group">
+                                        <label for="inputAddress2">Telefono</label>
+                                        <input type="number" onkeydown="return event.keyCode !== 69" name="pacTel" class="form-control" id="inputTel" placeholder="04XX-XXXXXXX">
                                     </div>
-                                    <button type="submit" class="btn bg-c-blue w-60 text-dark" id="aceptar">Aceptar</button>
-                                </form>
-                            </div>
-
+                                    <div class="form-group">
+                                        <label for="inputAddress">Cedula</label>
+                                        <input type="number" onkeydown="return event.keyCode !== 69" name="pacCed" class="form-control" id="inputTel" placeholder="Ej: 5674123">
+                                    </div>
+                                </div>
+                                <div class="form-row col-md-6">
+                                    <div class="form-group">
+                                        <label for="inputPassword4">Apellidos</label>
+                                        <input type="apellido" name="pacApe" class="form-control" id="inputPassword4" placeholder="Ej: Fernández Contreras">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputAddress2">Estado</label>
+                                        <select required class="form-select" name="pacEdo" id="estados" aria-label="Default select example">
+                                            <option  value="" disabled selected hidden>Escoja estado</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputAddress2">Municipio</label>
+                                        <input type="text" name="pacMun" class="form-control" id="inputMunicipio" placeholder="Ej: Girardot">
+                                    </div>
+                                </div>
+                                <div class="form-row col-md-12 text-center">
+                                    <div class="form-group">
+                                        <label for="inputAddress2">Parroquia</label>
+                                        <input type="text" name="pacParroq" class="form-control" id="inputAddress2" placeholder="Ej: Las Delicias">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputAddress2">Comunidad</label>
+                                        <input type="text" name="pacCom" class="form-control" id="inputAddress2" placeholder="Ej: La Pedrera">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn bg-c-blue w-60 text-dark" id="aceptar">Aceptar</button>
+                                
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
     <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -328,8 +365,19 @@ session_start();
 
 
     <!-- fin modal filtrar  ARC-->
-
-
+    <!-- script para mostrar estados -->
+    <script>
+        const estados = ['Aragua', 'Distrito Capital','Carabobo','Sucre','Amazonas','Anzoátegui','Apure','Barinas','Bolívar','Cojedes',
+        'Delta Amacuro','Falcón','Guárico','Lara','Mérida','Miranda','Monagas','Nueva Esparta','Portuguesa',
+        'Táchira','Trujillo','La Guaira','Yaracuy','Zulia'];
+        const select = document.getElementById('estados');
+        for (let i = 0; i < estados.length; i++) {
+        const option = document.createElement('option');
+        option.value = estados[i];
+        option.textContent = estados[i];
+        select.appendChild(option);
+        }
+    </script>
 
     <script src="assets/static/js/components/dark.js"></script>
     <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
