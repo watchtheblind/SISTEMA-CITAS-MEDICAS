@@ -28,14 +28,16 @@ session_start();
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         if (location.search.includes('shSuccMsg=1')) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Paciente registrado con exito',
-                showConfirmButton: false,
-                timer: 1500
-            });
-        }
-    });
+        Swal.fire({
+            icon: 'success',
+            title: 'Datos registrados con éxito',
+            showConfirmButton: false,
+            timer: 1500
+        }).then(() => {
+            history.pushState('', document.title, window.location.pathname);
+        });
+    }
+});
     document.addEventListener('DOMContentLoaded', function() {
         if (location.search.includes('shSuccMsg=0')) {
             Swal.fire({
@@ -43,9 +45,11 @@ session_start();
             title: "¡Este usuario ya existe!",
             showConfirmButton: false,
             timer: 1500
-            });
-        }
-    });
+            }).then(() => {
+            history.pushState('', document.title, window.location.pathname);
+        });
+    }
+});
 
 // </script>
 </script>
@@ -416,7 +420,6 @@ session_start();
         select.appendChild(option);
         }
     </script>
-
     <script src="assets/static/js/components/dark.js"></script>
     <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/compiled/js/app.js"></script>

@@ -73,12 +73,12 @@
             $stmt->bindParam(':cargo', $MedCargo);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
-                header('Location: dashboard.php?shSuccMsg=2');
+                header('Location: dashboard.php?shSuccMsg=1');
                 exit;
             }
         }
         catch (PDOException $e){
-            header('Location: dashboard.php?shSuccMsg=3');
+            header('Location: dashboard.php?shSuccMsg=2');
             exit;
         }
         }
