@@ -11,7 +11,7 @@ $stmt->execute();
 
 if ($stmt->rowCount() > 0) {
     $_SESSION['user'] = $usuario;
-    header("Location: login.php");
+    header("Location: dashboard.php");
     exit();
 }else{
 echo '

@@ -40,27 +40,13 @@ session_start();
         if (location.search.includes('shSuccMsg=0')) {
             Swal.fire({
             icon: "error",
-            title: "Este usuario ya existe!",
+            title: "¡Este usuario ya existe!",
             showConfirmButton: false,
             timer: 1500
             });
         }
     });
 
-//     <script>
-//     document.addEventListener('DOMContentLoaded', function() {
-//         if (location.search.includes('showSuccessMessage=1')) {
-//             Swal.fire({
-//                 icon: 'success',
-//                 title: 'Registration successful',
-//                 text: 'You have successfully registered a new patient.',
-//                 showConfirmButton: false,
-//                 timer: 1500
-//             }).then(() => {
-//                 history.replaceState(null, null, '/login.php');
-//             });
-//         }
-//     });
 // </script>
 </script>
     <script src="assets/static/js/initTheme.js"></script>
@@ -139,14 +125,14 @@ session_start();
                         </li>
 
                         <li class="sidebar-item  op1">
-                            <a href="#" class='sidebar-link' data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <a href="#" class='sidebar-link' data-bs-toggle="modal" data-bs-target="#pacModal">
                                 <i class="bi bi-file-earmark-medical-fill"></i>
                                 <span>ARC</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="#" class='sidebar-link' data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                            <a href="#" class='sidebar-link' data-bs-toggle="modal" data-bs-target="#pacModal2">
                                 <i class="bi bi-file-earmark-medical-fill"></i>
                                 <span>Cambiar Contraseña</span>
                             </a>
@@ -232,15 +218,16 @@ session_start();
                             <div class="col-md-6 col-lg-4">
                                 <div class="card bg-c-green order-card">
                                     <div class="card-block p-5">
-                                        <h6 class="text-center"><i class=""></i><span
-                                                class="text-white text-center">xxxx</span></h6>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#medModal">
+                                            <h6 class="text-center text-white"><i class=""></i><span>Registrar Médico</span></h6>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6 col-lg-4">
                                 <div class="card bg-c-yellow order-card">
                                     <div class="card-block p-5">
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#pacModal">
                                             <h6 class="text-center text-white"><i class=""></i><span>Ingresar Paciente</span></h6>
                                         </a>
 
@@ -263,76 +250,129 @@ session_start();
     <!-- filtrar ARC-->
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel text-danger">CEDOCABAR</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="form-group">
-                            <form class="row center" action="registroPaciente.php" method="POST">
-                            <h3>Pacientes</h3>
-                                <div class="form-row col-md-6">
-                                    <div class="form-group">
-                                        <label for="inputNombre1">Nombres</label>
-                                        <input type="nombre" name="pacNom" class="form-control" id="inputEmail4" placeholder="Ej: Pedro José">
+    <!-- Modal de pacientes-->
+    <div class="modal fade" id="pacModal" tabindex="-1" aria-labelledby="pacModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pacModalLabel text-danger">CEDOCABAR</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <form class="row center" action="registroPaciente.php" method="POST">
+                                <h3>Pacientes</h3>
+                                    <div class="form-row col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputNombre1">Nombres</label>
+                                            <input type="nombre" name="pacNom" class="form-control" id="inputEmail4" placeholder="Ej: Pedro José">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputAddress2">Telefono</label>
+                                            <input type="number" onkeydown="return event.keyCode !== 69" name="pacTel" class="form-control" id="inputTel" placeholder="04XX-XXXXXXX">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputAddress">Cedula</label>
+                                            <input type="number" onkeydown="return event.keyCode !== 69" name="pacCed" class="form-control" id="inputTel" placeholder="Ej: 5674123">
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="inputAddress2">Telefono</label>
-                                        <input type="number" onkeydown="return event.keyCode !== 69" name="pacTel" class="form-control" id="inputTel" placeholder="04XX-XXXXXXX">
+                                    <div class="form-row col-md-6">
+                                        <div class="form-group">
+                                            <label for="inputPassword4">Apellidos</label>
+                                            <input type="apellido" name="pacApe" class="form-control" id="inputPassword4" placeholder="Ej: Fernández Contreras">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputAddress2">Estado</label>
+                                            <select required class="form-select" name="pacEdo" id="estados" aria-label="Default select example">
+                                                <option  value="" disabled selected hidden>Escoja estado</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputAddress2">Municipio</label>
+                                            <input type="text" name="pacMun" class="form-control" id="inputMunicipio" placeholder="Ej: Girardot">
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="inputAddress">Cedula</label>
-                                        <input type="number" onkeydown="return event.keyCode !== 69" name="pacCed" class="form-control" id="inputTel" placeholder="Ej: 5674123">
+                                    <div class="form-row col-md-12 text-center">
+                                        <div class="form-group">
+                                            <label for="inputAddress2">Parroquia</label>
+                                            <input type="text" name="pacParroq" class="form-control" id="inputAddress2" placeholder="Ej: Las Delicias">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputAddress2">Comunidad</label>
+                                            <input type="text" name="pacCom" class="form-control" id="inputAddress2" placeholder="Ej: La Pedrera">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-row col-md-6">
-                                    <div class="form-group">
-                                        <label for="inputPassword4">Apellidos</label>
-                                        <input type="apellido" name="pacApe" class="form-control" id="inputPassword4" placeholder="Ej: Fernández Contreras">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputAddress2">Estado</label>
-                                        <select required class="form-select" name="pacEdo" id="estados" aria-label="Default select example">
-                                            <option  value="" disabled selected hidden>Escoja estado</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputAddress2">Municipio</label>
-                                        <input type="text" name="pacMun" class="form-control" id="inputMunicipio" placeholder="Ej: Girardot">
-                                    </div>
-                                </div>
-                                <div class="form-row col-md-12 text-center">
-                                    <div class="form-group">
-                                        <label for="inputAddress2">Parroquia</label>
-                                        <input type="text" name="pacParroq" class="form-control" id="inputAddress2" placeholder="Ej: Las Delicias">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputAddress2">Comunidad</label>
-                                        <input type="text" name="pacCom" class="form-control" id="inputAddress2" placeholder="Ej: La Pedrera">
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn bg-c-blue w-60 text-dark" id="aceptar">Aceptar</button>
-                                
-                            </form>
+                                    <button type="submit" class="btn bg-c-blue w-60 text-dark" id="aceptar" name="regPaciente">Aceptar</button>
+                                    
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- Modal de médicos -->
+    <div class="modal fade" id="medModal" tabindex="-1" aria-labelledby="MedModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pacModalLabel text-danger">CEDOCABAR</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>                
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <form class="row center" action="registroPaciente.php" method="POST">
+                                        <h3>Pacientes</h3>
+                                        <div class="form-row col-md-6">
+                                            <div class="form-group">
+                                                <label for="inputNombre">Nombres</label>
+                                                <input type="nombre" name="medNom" class="form-control" id="medNombre" placeholder="Ej: Maria José">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputTelefono">Telefono</label>
+                                                <input type="number" onkeydown="return event.keyCode !== 69" name="medTel" class="form-control" id="inputTel" placeholder="04XX-XXXXXXX">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputCedula">Cedula</label>
+                                                <input type="number" onkeydown="return event.keyCode !== 69" name="medCed" class="form-control" id="inputCed" placeholder="Ej: 5674123">
+                                            </div>
+                                        </div>
+                                        <div class="form-row col-md-6">
+                                            <div class="form-group">
+                                                <label for="inputApellido">Apellidos</label>
+                                                <input type="text" name="medApe" class="form-control" id="inputApell" placeholder="Ej: Torres Pérez">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputEspecialidad">Cargo</label>
+                                                <input type="text" name="medCargo" class="form-control" id="inputCargo" placeholder="Ej: Director, R1, R2, etc.">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputEspecialidad">Especialidad</label>
+                                                <input type="text" name="medEspec" class="form-control" id="inputEspec" placeholder="Ej: Pediatra, Cardiólogo, etc.">
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn bg-c-blue w-60 text-dark mt-4" id="aceptar" name="regMedico">Aceptar</button>        
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de cambio de contraseña-->
+    <div class="modal fade" id="pacModal2" tabindex="-1" aria-labelledby="pacModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel text-danger">CEDOCABAR <span id="pass" style="display: none;">
+                    <h5 class="modal-title" id="pacModalLabel text-danger">CEDOCABAR <span id="pass" style="display: none;">
                             <?php echo $_SESSION['password'];?>
                         </span></h5>
 
@@ -361,8 +401,6 @@ session_start();
             </div>
         </div>
     </div>
-
-
 
     <!-- fin modal filtrar  ARC-->
     <!-- script para mostrar estados -->
