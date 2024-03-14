@@ -1,9 +1,15 @@
 <?php 
 include "conectarBD.php";
 session_start(); 
-//consulta para obtener el id
+//consulta para obtener los datos de los médicos
+
+$stmt = $conn->query("SELECT * FROM medicos");
+$stmt->setFetchMode(PDO::FETCH_OBJ);
 
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -60,7 +66,6 @@ session_start();
                 <div class="sidebar-header position-relative">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="logo" class="text-center">
-
                             <h2 class="text-danger">CEDOCABAR</h2>
                             <div class="theme-toggle d-flex gap-2  align-items-center mt-2 text-end">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -143,7 +148,7 @@ session_start();
                         </li>
 
                         <li class="sidebar-item  ">
-                            <a href="logout.php" class='sidebar-link'>
+                            <a href="cerrarSesion.php" class='sidebar-link text-danger '>
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Cerrar Sesion</span>
                             </a>
@@ -201,8 +206,7 @@ session_start();
                         <h6 id="cedula" style="display: none;">
                            
                         </h6>
-                        
-
+                    
                     </div>
                 </div>
             </div>
@@ -215,7 +219,6 @@ session_start();
                                     <div class="card-block p-5">
                                         <h6 class="text-center"><i class=" "> </i><span
                                                 class="text-white text-center">xxxx</span></h6>
-
                                     </div>
                                 </div>
                             </div>
@@ -234,19 +237,16 @@ session_start();
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#pacModal">
                                             <h6 class="text-center text-white"><i class=""></i><span>Ingresar Paciente</span></h6>
                                         </a>
-
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
-
                 </section>
             </div>
-
-
+            <div>
+                <?php include_once "medicos/tablamedicos.php"?>
+            </div>
         </div>
     </div>
 
@@ -266,7 +266,7 @@ session_start();
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="form-group">
-                                <form class="row center" action="registroPaciente.php" method="POST">
+                                <form class="row center" action="guardarDatosBD.php" method="POST">
                                 <h3>Pacientes</h3>
                                     <div class="form-row col-md-6">
                                         <div class="form-group">
@@ -319,58 +319,6 @@ session_start();
         </div>
     </div>
 
-    <!-- Modal de médicos -->
-    <div class="modal fade" id="medModal" tabindex="-1" aria-labelledby="MedModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="pacModalLabel text-danger">CEDOCABAR</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>                
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <form class="row center" action="registroPaciente.php" method="POST">
-                                        <h3>Pacientes</h3>
-                                        <div class="form-row col-md-6">
-                                            <div class="form-group">
-                                                <label for="inputNombre">Nombres</label>
-                                                <input type="nombre" name="medNom" class="form-control" id="medNombre" placeholder="Ej: Maria José">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputTelefono">Telefono</label>
-                                                <input type="number" onkeydown="return event.keyCode !== 69" name="medTel" class="form-control" id="inputTel" placeholder="04XX-XXXXXXX">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputCedula">Cedula</label>
-                                                <input type="number" onkeydown="return event.keyCode !== 69" name="medCed" class="form-control" id="inputCed" placeholder="Ej: 5674123">
-                                            </div>
-                                        </div>
-                                        <div class="form-row col-md-6">
-                                            <div class="form-group">
-                                                <label for="inputApellido">Apellidos</label>
-                                                <input type="text" name="medApe" class="form-control" id="inputApell" placeholder="Ej: Torres Pérez">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputEspecialidad">Cargo</label>
-                                                <input type="text" name="medCargo" class="form-control" id="inputCargo" placeholder="Ej: Director, R1, R2, etc.">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputEspecialidad">Especialidad</label>
-                                                <input type="text" name="medEspec" class="form-control" id="inputEspec" placeholder="Ej: Pediatra, Cardiólogo, etc.">
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn bg-c-blue w-60 text-dark mt-4" id="aceptar" name="regMedico">Aceptar</button>        
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Modal de cambio de contraseña-->
     <div class="modal fade" id="pacModal2" tabindex="-1" aria-labelledby="pacModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -378,8 +326,8 @@ session_start();
                 <div class="modal-header">
                     <h5 class="modal-title" id="pacModalLabel text-danger">CEDOCABAR <span id="pass" style="display: none;">
                             <?php echo $_SESSION['password'];?>
-                        </span></h5>
-
+                        </span>
+                    </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -405,6 +353,44 @@ session_start();
             </div>
         </div>
     </div>
+
+        <!-- Modal de registro de médicos -->
+    <div class="modal fade" id="medModal" tabindex="-1" aria-labelledby="MedModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pacModalLabel text-danger">CEDOCABAR</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>                
+                </div>
+                <div class="modal-body table-responsive">
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                            <th scope="col">Cedula</th>
+                            <th scope="col">Nombres</th>
+                            <th scope="col">Apellidos</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col">Especialidad</th>
+                            <th scope="col">Cargo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>nombre</td>
+                                <td>apellido</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <!-- fin modal filtrar  ARC-->
     <!-- script para mostrar estados -->

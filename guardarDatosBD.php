@@ -12,13 +12,6 @@
     <script src="sweetalert2.all.min.js"></script>
 </head>
 <body>
-<script>
-    Swal.fire({
-    title: "The Internet?",
-    text: "That thing is still around?",
-    icon: "question"
-    });
-</script>
 <?php
     function crearPaciente(){
         include 'conectarBD.php';
@@ -45,12 +38,12 @@
             $stmt->execute();
         
             if ($stmt->rowCount() > 0) {
-                header('Location: dashboard.php?shSuccMsg=1');
+                header('Location: panelUsuario.php?shSuccMsg=1');
                 exit;
             }
         } 
         catch (PDOException $e) {
-            header('Location: dashboard.php?shSuccMsg=0');
+            header('Location: panelUsuario.php?shSuccMsg=0');
             exit;
         }
     }
@@ -73,12 +66,12 @@
             $stmt->bindParam(':cargo', $MedCargo);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
-                header('Location: dashboard.php?shSuccMsg=1');
+                header('Location: panelUsuario.php?shSuccMsg=1');
                 exit;
             }
         }
         catch (PDOException $e){
-            header('Location: dashboard.php?shSuccMsg=2');
+            header('Location: panelUsuario.php?shSuccMsg=0');
             exit;
         }
         }
