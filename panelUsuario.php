@@ -31,34 +31,7 @@ $stmt->setFetchMode(PDO::FETCH_OBJ);
     import Swal from 'sweetalert2';
 </script>
 <body>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        if (location.search.includes('shSuccMsg=1')) {
-        Swal.fire({
-            icon: 'success',
-            title: 'Datos registrados con éxito',
-            showConfirmButton: false,
-            timer: 1500
-        }).then(() => {
-            history.pushState('', document.title, window.location.pathname);
-        });
-    }
-});
-    document.addEventListener('DOMContentLoaded', function() {
-        if (location.search.includes('shSuccMsg=0')) {
-            Swal.fire({
-            icon: "error",
-            title: "¡Este usuario ya existe!",
-            showConfirmButton: false,
-            timer: 1500
-            }).then(() => {
-            history.pushState('', document.title, window.location.pathname);
-        });
-    }
-});
-
-// </script>
-</script>
+    <?php include "alertas.php"?>
     <script src="assets/static/js/initTheme.js"></script>
     <div id="app">
         <div id="sidebar">

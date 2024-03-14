@@ -13,7 +13,7 @@
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
-            <tbody class="mx-auto">
+            <tbody>
                 <?php include "medicos/funcionesCRUD.php";
                         leerDatos();
                 ?>
@@ -69,6 +69,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
             </div>
         </div>
     </div> 
