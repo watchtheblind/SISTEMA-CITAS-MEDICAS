@@ -15,8 +15,9 @@
                     <form action='medicos/funcionesCRUD.php' method='post'>
                         <input type='hidden' name='cedula'  value='".$fila['cedula']."'>
                         <button type='submit' name='eliminar' class='btn btn-danger'>Borrar</button>  
-                        <button type='button' name='editar' data-bs-toggle='modal' data-bs-target='#editMedModal' class='btn btn-primary'>Editar</button>
-                    </form>
+                        <button type='button' name='edit' data-bs-toggle='modal' data-bs-target='#editMedModal' class='btn btn-primary'>Editar</button>";                        
+                        include "modales/editMedico.php";
+                echo"</form>
                     </td>";
             echo "</tr>";
         }
@@ -41,12 +42,16 @@
         $MedEspecialidad = $_POST['medEspec'];
         $cedula = $_POST["cedula"];
         include "../conectarBD.php";
-        $stmt = $conn->prepare("UPDATE medicos SET telf=$MedTelefono, cargo=$MedCargo, especialidad=$MedEspecialidad WHERE cedula = :cedula");
+        $stmt = $conn->prepare("UPDATE medicos SET telf=:telefono, cargo=:cargo, especialidad=:especialidad WHERE cedula = :cedula");
         $stmt->bindParam(':cedula', $cedula);
+        $stmt->bindParam(':telefono', $MedTelefono);
+        $stmt->bindParam(':cargo', $MedCargo);
+        $stmt->bindParam(':especialidad', $MedEspecialidad);
+
         $stmt->execute();
         $afectado = $stmt->rowCount();
         if($afectado ==1){
-            header('Location: ../panelUsuario.php?shSuccMsg=2');
+            header('Location: ../panelUsuario.php?shSuccMsg=3');
             exit;
         }
     }
@@ -57,5 +62,5 @@
     else if (isset($_POST["editar"])){
         editarDatos();
     }
-    include "modales/editMedico.php";
+
 ?>

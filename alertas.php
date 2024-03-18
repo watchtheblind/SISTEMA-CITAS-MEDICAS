@@ -39,4 +39,17 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+document.addEventListener('DOMContentLoaded', function() {
+        if (location.search.includes('shSuccMsg=3')) {
+            Swal.fire({
+            icon: 'success',
+            title: 'Datos actualizados con éxito',
+            showConfirmButton: false,
+            timer: 1500
+            }).then(() => {
+            history.pushState('', document.title, window.location.pathname);
+        });
+    }
+});
+
 </script>
