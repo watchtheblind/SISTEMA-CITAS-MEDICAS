@@ -2,14 +2,7 @@
 include "conectarBD.php";
 session_start(); 
 //consulta para obtener los datos de los médicos
-
-$stmt = $conn->query("SELECT * FROM medicos");
-$stmt->setFetchMode(PDO::FETCH_OBJ);
-
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="es">
@@ -119,7 +112,6 @@ $stmt->setFetchMode(PDO::FETCH_OBJ);
                                 <span>Cambiar Contraseña</span>
                             </a>
                         </li>
-
                         <li class="sidebar-item  ">
                             <a href="cerrarSesion.php" class='sidebar-link text-danger '>
                                 <i class="bi bi-box-arrow-right"></i>
