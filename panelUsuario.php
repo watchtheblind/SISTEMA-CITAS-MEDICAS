@@ -3,7 +3,22 @@ include "conectarBD.php";
 session_start(); 
 //consulta para obtener los datos de los médicos
 ?>
+<style>
+.try label::before {
+    content: " * ";
+    color: red;
+    font-size: 15px;
+}
+.editMed label::after {
+    content: "Obligatorio";
+    color: red;
+    font-size: 14px;
+    font-style: italic;
+    margin-bottom: 50px;
 
+}
+
+</style>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -191,7 +206,7 @@ session_start();
                                 <div class="card bg-c-green order-card">
                                     <div class="card-block p-5">
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#medModal">
-                                            <h6 class="text-center text-white"><i class=""></i><span>Registrar Médico</span></h6>
+                                            <h6 class="text-center text-white"><i class=""></i><span>xx</span></h6>
                                         </a>
                                     </div>
                                 </div>
@@ -379,8 +394,7 @@ session_start();
     <script src="assets/static/js/pages/dashboard.js"></script>
     <script src="assets/js/sweetalert2.all.min.js"></script>
     <script src="app/jquery.min.js"></script>
+    <script src="assets/js/funcionalidades.js"></script>
+
 </body>
-
-
-
 </html>

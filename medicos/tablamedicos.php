@@ -1,5 +1,14 @@
-<div class="container">
-    <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#medModal">Registrar Médico</button>
+<div class="container d-flex justify-content-start">
+    <button class="btn btn-success " data-bs-toggle="modal" data-bs-target="#medModal">Registrar Médico</button>
+    &nbsp;&nbsp;
+    <div class="input-group w-25">
+        <span class="input-group-text bg-primary " id="basic-addon1">
+            <i class="bi bi-search"></i>
+        </span>
+        <input type="text" class="form-control" placeholder="Busque aqui..." aria-label="Input group example" aria-describedby="basic-addon1">
+    </div>
+</div>
+</div>
     <div class="table-responsive">
         <table class="table">
             <thead class="thead-light">
