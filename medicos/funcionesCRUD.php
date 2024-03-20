@@ -33,15 +33,7 @@
                                                             <div class="form-row col-md-12 mt-4">
                                                                 <div class="form-group">
                                                                     <label for="inputTelefono">Telefono</label>
-                                                                    <input required type="number" onkeydown="return event.keyCode !== 69" name="medTel"  value="'.$fila['telf'].'" class="form-control" id="inputTel" placeholder="04XX-XXXXXXX">
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="inputEspecialidad">Cargo</label>
-                                                                    <input required type="text" name="medCargo" class="form-control" id="inputCargo"  value="'.$fila['cargo'].'" placeholder="Ej: Director, R1, R2, etc." >
-                                                                </div>
-                                                                <div class="form-group">
-                                                                    <label for="inputEspecialidad">Especialidad</label>
-                                                                    <input required type="text" name="medEspec" class="form-control" id="inputEspec"  value="'.$fila['especialidad'].'" placeholder="Ej: Pediatra, Cardiólogo, etc.">
+                                                                    <input required type="number" onkeydown="return event.keyCode !== 69" name="medTel" class="form-control" id="inputTel" placeholder="EJ: 04243552206">
                                                                 </div>
                                                             </div>
                                                             <div class="editMed"><label></label></div>
