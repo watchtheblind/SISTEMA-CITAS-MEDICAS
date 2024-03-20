@@ -1,16 +1,16 @@
-<div class="container d-flex justify-content-start">
+<div class="container d-flex justify-content-start mb-3">
     <button class="btn btn-success " data-bs-toggle="modal" data-bs-target="#medModal">Registrar Médico</button>
     &nbsp;&nbsp;
     <div class="input-group w-25">
-        <span class="input-group-text bg-primary " id="basic-addon1">
-            <i class="bi bi-search"></i>
-        </span>
-        <input type="text" class="form-control" placeholder="Busque aqui..." aria-label="Input group example" aria-describedby="basic-addon1">
+        <input type="text" class="form-control light-table-filter" data-table="table_id" placeholder="Busque aqui..." aria-label="Input group example" aria-describedby="basic-addon1">
+        <button type="button" class="btn btn-primary">
+        <i class="bi bi-search"></i>
+        </button>
     </div>
 </div>
 </div>
     <div class="table-responsive">
-        <table class="table">
+        <table class="table table_id">
             <thead class="thead-light">
                 <tr class="text-center">
                     <th scope="col">Cedula</th>
@@ -24,7 +24,7 @@
             </thead>
             <tbody>
                 <?php include "medicos/funcionesCRUD.php";
-                        leerDatos();
+                    leerDatos();
                 ?>
             </tbody>
         </table>
