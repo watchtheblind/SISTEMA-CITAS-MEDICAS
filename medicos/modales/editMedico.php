@@ -1,5 +1,5 @@
 <?php echo '
-                    <div class="modal fade" fade" id="editMedModal-'.$fila['cedula'].'" tabindex="-1" aria-labelledby="editMedModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="editMedModal-'.$fila['cedula'].'" tabindex="-1" aria-labelledby="editMedModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered modal-sm">
                             <div class="modal-content">
                                 <div class="modal-header">

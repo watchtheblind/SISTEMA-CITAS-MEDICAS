@@ -108,7 +108,7 @@ require "verificarUsuario.php";
                                     <i class="bi bi-file-earmark-medical-fill"></i>
                                     <span>Registrar médico</span>
                                 </a>
-                            </li>
+                            </li>';
                             <li class="sidebar-item  op1">
                                 <a href="#" class='sidebar-link'>
                                     <i class="bi bi-file-earmark-medical-fill"></i>
@@ -116,8 +116,8 @@ require "verificarUsuario.php";
                                 </a>
                             </li>
                         <?php else: ?>
-                            <li class="sidebar-item active ">
-                            <a href="index.html" class="sidebar-link bg-c-blue">
+                            <li class="sidebar-item">
+                            <a href="panelUsuario.php" class="sidebar-link">
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Control de citas</span>
                             </a>
@@ -134,8 +134,8 @@ require "verificarUsuario.php";
                                     <span>Consultar citas</span>
                                 </a>
                             </li>
-                            <li class="sidebar-item  op1">
-                                <a href="especialidades.php" class='sidebar-link'>
+                            <li class="sidebar-item  op1 active">
+                                <a href="#" class='sidebar-link bg-c-blue'>
                                     <i class="bi bi-file-earmark-medical-fill"></i>
                                     <span>Especialidades</span>
                                 </a>
@@ -153,6 +153,8 @@ require "verificarUsuario.php";
                                 <span>Cerrar Sesion</span>
                             </a>
                         </li>
+
+
                     </ul>
                 </div>
             </div>
@@ -269,169 +271,60 @@ require "verificarUsuario.php";
                 </section>
             </div>
             <?php if($result['perfil'] == 1): include_once "medicos/tablamedicos.php";?><?php endif;?>
-            
             <div class="container d-flex justify-content-start mb-3">
-                <button class="btn btn-success " data-bs-toggle="modal">Cita Nueva</button>
+                <button class="btn btn-success " data-bs-toggle="modal" data-bs-target="#modalEspecialidad">Crear Especialidad</button>
+            </div>
+            <div>
+            <table id="myTable" class="display w-75 text-center">
+                <thead class="thead-light">
+                    <tr class="text-center">
+                        <th scope="col">Especialidad</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+            <tbody>
+                <?php include "especialidades/especialidadesCRUD.php";
+                    leerDatos();
+                ?>
+            </tbody>
+        </table>
             </div>
         </div>
     </div>
 
-
-    <!-- filtrar ARC-->
-
-
-    <!-- Modal de pacientes-->
-    <div class="modal fade" id="pacModal" tabindex="-1" aria-labelledby="pacModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="pacModalLabel text-danger">CEDOCABAR</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <form class="row center" action="guardarDatosBD.php" method="POST">
-                                <h3>Registrar pacientes</h3>
-                                    <div class="form-row col-md-6">
-                                        <div class="form-group">
-                                            <label for="inputNombre1">Nombres</label>
-                                            <input type="nombre" name="pacNom" class="form-control" id="inputEmail4" placeholder="Ej: Pedro José">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputAddress2">Telefono</label>
-                                            <input type="number" onkeydown="return event.keyCode !== 69" name="pacTel" class="form-control" id="inputTel" placeholder="04XX-XXXXXXX">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputAddress">Cedula</label>
-                                            <input type="number" onkeydown="return event.keyCode !== 69" name="pacCed" class="form-control" id="inputTel2" placeholder="Ej: 5674123">
-                                        </div>
-                                    </div>
-                                    <div class="form-row col-md-6">
-                                        <div class="form-group">
-                                            <label for="inputPassword4">Apellidos</label>
-                                            <input type="apellido" name="pacApe" class="form-control" id="inputPassword4" placeholder="Ej: Fernández Contreras">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputAddress3">Estado</label>
-                                            <select required class="form-select" name="pacEdo" id="estados" aria-label="Default select example">
-                                                <option  value="" disabled selected hidden>Escoja estado</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputAddress4">Municipio</label>
-                                            <input type="text" name="pacMun" class="form-control" id="inputMunicipio" placeholder="Ej: Girardot">
-                                        </div>
-                                    </div>
-                                    <div class="form-row col-md-12 text-center">
-                                        <div class="form-group">
-                                            <label for="inputAddress2">Parroquia</label>
-                                            <input type="text" name="pacParroq" class="form-control" id="inputAddress2" placeholder="Ej: Las Delicias">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputAddress2">Comunidad</label>
-                                            <input type="text" name="pacCom" class="form-control" id="inputAddress2" placeholder="Ej: La Pedrera">
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn bg-c-blue w-60 text-dark" id="aceptar" name="regPaciente">Aceptar</button>
-                                    
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de cambio de contraseña-->
-    <div class="modal fade" id="pacModal2" tabindex="-1" aria-labelledby="pacModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="pacModalLabel text-danger">CEDOCABAR <span id="pass" style="display: none;">
-                            <?php echo $_SESSION['password'];?>
-                        </span>
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label for="">Contraseña Actual </label>
-                                <input type="text" id="actual" name="actual" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Contraseña Nueva</label>
-                                <input type="password" id="nueva" name="nueva" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Repetir Contraseña </label>
-                                <input type="password" id="repetir" name="repetir" class="form-control">
-                            </div>
-                            <button class="btn bg-c-blue w-100 text-dark" id="cambiar"
-                                data-bs-dismiss="modal">Aceptar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-        <!-- Modal de registro de médicos -->
-    <div class="modal fade" id="medModal" tabindex="-1" aria-labelledby="MedModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+    <!-- modal de especialidad nueva  -->
+    <div class="modal fade" id="modalEspecialidad" tabindex="-1" aria-labelledby="editMedModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="pacModalLabel text-danger">CEDOCABAR</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>                
                 </div>
-                <div class="modal-body table-responsive">
-                    <table class="table">
-                        <thead class="thead-light">
-                            <tr>
-                            <th scope="col">Cedula</th>
-                            <th scope="col">Nombres</th>
-                            <th scope="col">Apellidos</th>
-                            <th scope="col">Telefono</th>
-                            <th scope="col">Especialidad</th>
-                            <th scope="col">Cargo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>nombre</td>
-                                <td>apellido</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="modal-body">
+                    <div class="row">
+                            <div class="col-lg">
+                                <div class="form-group">
+                                    <form class="row center" action="medicos/funcionesCRUD.php" method="post">
+                                        <h3 class="d-flex justify-content-center">Nueva Especialidad</h3>
+                                        <div class="form-row col-md">
+                                            <div class="form-group">
+                                                <input type="text" name="EspecNueva" class="form-control" placeholder="EJ: Traumatología">
+                                            </div>
+                                        </div>
+                                        <div class=" d-flex justify-content-center">
+                                            <button type="submit" name="editar" class="btn bg-c-blue w-75 text-dark mt-2" id="aceptar" name="regMedico">Aceptar</button>        
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
 
-
-    <!-- fin modal filtrar  ARC-->
-    <!-- script para mostrar estados -->
-    <script>
-        const estados = ['Aragua', 'Distrito Capital','Carabobo','Sucre','Amazonas','Anzoátegui','Apure','Barinas','Bolívar','Cojedes',
-        'Delta Amacuro','Falcón','Guárico','Lara','Mérida','Miranda','Monagas','Nueva Esparta','Portuguesa',
-        'Táchira','Trujillo','La Guaira','Yaracuy','Zulia'];
-        const select = document.getElementById('estados');
-        for (let i = 0; i < estados.length; i++) {
-            const option = document.createElement('option');
-            option.value = estados[i];
-            option.textContent = estados[i];
-            select.appendChild(option);
-        }
-    </script>
     <!-- script para mostrar especialidades-->
     <script>
         const especialidades = ['Medicina interna','Cardiología','endocrinología','fisiatría','nefrología','nutrición','psicología'];
