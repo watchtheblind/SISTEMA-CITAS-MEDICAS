@@ -1,16 +1,9 @@
 <div class="container d-flex justify-content-start mb-3">
     <button class="btn btn-success " data-bs-toggle="modal" data-bs-target="#medModal">Registrar Médico</button>
-    &nbsp;&nbsp;
-    <div class="input-group w-25">
-        <input type="text" class="form-control light-table-filter" data-table="table_id" placeholder="Busque aqui..." aria-label="Input group example" aria-describedby="basic-addon1">
-        <button type="button" class="btn btn-primary">
-        <i class="bi bi-search"></i>
-        </button>
-    </div>
 </div>
-</div>
+<div>
     <div class="table-responsive">
-        <table class="table table_id">
+        <table id="myTable" class="display">
             <thead class="thead-light">
                 <tr class="text-center">
                     <th scope="col">Cedula</th>
@@ -19,6 +12,7 @@
                     <th scope="col">Telefono</th>
                     <th scope="col">Especialidad</th>
                     <th scope="col">Cargo</th>
+                    <th scope="col">Atiende</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
@@ -30,6 +24,7 @@
         </table>
     </div>
 </div>
+
    <!-- Modal de registro de médicos -->
     <div class="modal fade" id="medModal" tabindex="-1" aria-labelledby="MedModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -43,7 +38,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <form class="row center" action="guardarDatosBD.php" method="POST">
-                                        <h3>Pacientes</h3>
+                                        <h3>Registrar Médicos</h3>
                                         <div class="form-row col-md-6">
                                             <div class="form-group">
                                                 <label for="inputNombre">Nombres</label>
@@ -70,6 +65,14 @@
                                             <div class="form-group">
                                                 <label for="inputEspecialidad">Especialidad</label>
                                                 <input type="text" name="medEspec" class="form-control" id="inputEspec" placeholder="Ej: Pediatra, Cardiólogo, etc.">
+                                            </div>
+                                        </div>
+                                        <div class="div d-flex justify-content-center">
+                                            <div class="form-row col-md-6 text-center">
+                                                <label for="inputEspecialidad">Especialidad que atiende</label>
+                                                <select required class="form-select" name="medAtencion" id="especialidades" aria-label="Default select example">
+                                                    <option  value="" disabled selected hidden>Escoja especialidad</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn bg-c-blue w-60 text-dark mt-4" id="aceptar" name="regMedico">Aceptar</button>        

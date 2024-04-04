@@ -55,15 +55,17 @@
         $MedTelefono = $_POST['medTel'];
         $MedCargo = $_POST['medCargo'];
         $MedEspecialidad = $_POST['medEspec'];
+        $MedAtencion = $_POST['medAtencion'];
         try {
-            $stmt = $conn->prepare("INSERT INTO medicos (cedula, nombre, apellido, telf, especialidad, cargo)
-            values (:cedula, :nombre, :apellido, :telf, :especialidad, :cargo)");
+            $stmt = $conn->prepare("INSERT INTO medicos (cedula, nombre, apellido, telf, especialidad, cargo, atiende)
+            values (:cedula, :nombre, :apellido, :telf, :especialidad, :cargo, :atiende)");
             $stmt->bindParam(':cedula', $MedCedula);
             $stmt->bindParam(':nombre', $MedNombres);
             $stmt->bindParam(':apellido', $MedApellidos);
             $stmt->bindParam(':telf', $MedTelefono);
             $stmt->bindParam(':especialidad', $MedEspecialidad);
             $stmt->bindParam(':cargo', $MedCargo);
+            $stmt->bindParam(':atiende', $MedAtencion);
             $stmt->execute();
             if ($stmt->rowCount() > 0) {
                 header('Location: panelUsuario.php?shSuccMsg=1');

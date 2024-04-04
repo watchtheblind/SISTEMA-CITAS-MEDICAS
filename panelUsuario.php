@@ -2,23 +2,9 @@
 include "conectarBD.php";
 session_start(); 
 //consulta para obtener los datos de los médicos
+require "verificarUsuario.php"; 
 ?>
-<style>
-.try label::before {
-    content: " * ";
-    color: red;
-    font-size: 15px;
-}
-.editMed label::after {
-    content: "Obligatorio";
-    color: red;
-    font-size: 14px;
-    font-style: italic;
-    margin-bottom: 50px;
 
-}
-
-</style>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -34,7 +20,21 @@ session_start();
     <link rel="stylesheet" href="./assets/compiled/css/estilo.css">
     <link rel="stylesheet" type="text/css" href="assets/css/sweetalert2.css">
     <link rel="stylesheet" href="./assets/compiled/css/bootstrap-icons.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" />
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
 </head>
+<script>
+    $(document).ready( function () {
+    $('#myTable').DataTable(
+                {
+            "language":{
+                "url":"//cdn.datatables.net/plug-ins/2.0.3/i18n/es-ES.json"
+            }
+        }
+    );
+} );
+</script>
 <script>
     import Swal from 'sweetalert2';
 </script>
@@ -90,32 +90,54 @@ session_start();
                 <div class="sidebar-menu">
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
-
-                        <li class="sidebar-item active ">
-                            <a href="index.html" class='sidebar-link bg-c-blue'>
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Dashboard</span>
-                            </a>
-
-
-                        </li>
-
-                        <li class="sidebar-item op1">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>Recibos de Pago</span>
-                            </a>
-                        </li>
+                        <?php 
+                                "verificarUsuario.php";
+                                if ($result['perfil'] == 1) {
+                                    echo '
+                                    <li class="sidebar-item active ">
+                                    <a href="index.html" class="sidebar-link bg-c-blue">
+                                        <i class="bi bi-grid-fill"></i>
+                                        <span>Médicos</span>
+                                    </a>
+                                    </li>
+                                    <li class="sidebar-item op1">
+                                    <a href="#" class="sidebar-link"  data-bs-toggle="modal" data-bs-target="#pacModal">
+                                        <i class="bi bi-file-earmark-medical-fill"></i>
+                                        <span>Ingresar paciente</span>
+                                    </a>
+                                    </li>
+                                    <li class="sidebar-item  op1">
+                                        <a href="#" class="sidebar-link" data-bs-toggle="modal" data-bs-target="#medModal">
+                                            <i class="bi bi-file-earmark-medical-fill"></i>
+                                            <span>Registrar médico</span>
+                                        </a>
+                                    </li>';
+                                } else {
+                                    echo '
+                                    <li class="sidebar-item active ">
+                                    <a href="index.html" class="sidebar-link bg-c-blue">
+                                        <i class="bi bi-grid-fill"></i>
+                                        <span>Control de citas</span>
+                                    </a>
+                                    </li>
+                                    <li class="sidebar-item op1">
+                                    <a href="#" class="sidebar-link"  data-bs-toggle="modal" data-bs-target="#pacModal">
+                                        <i class="bi bi-file-earmark-medical-fill"></i>
+                                        <span>Pacientes</span>
+                                    </a>
+                                    </li>
+                                    <li class="sidebar-item  op1">
+                                        <a href="#" class="sidebar-link" data-bs-toggle="modal" data-bs-target="#medModal">
+                                            <i class="bi bi-file-earmark-medical-fill"></i>
+                                            <span>Consultar citas</span>
+                                        </a>
+                                    </li>
+                                        ';
+                                }
+                        ?>
 
                         <li class="sidebar-item  op1">
                             <a href="#" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>Constancias</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item  op1">
-                            <a href="#" class='sidebar-link' data-bs-toggle="modal" data-bs-target="#pacModal">
                                 <i class="bi bi-file-earmark-medical-fill"></i>
                                 <span>ARC</span>
                             </a>
@@ -150,12 +172,12 @@ session_start();
                 <img src="assets/compiled/svg/recibo2.png" alt="" width="100%">
             </div>
             <div>
-                <div class="card bg-c-orenge order-card">
+                <div class="card order-card">
                     <div class="card-block p-2">
-                        <h4 class="d-flex justify-content-center mb-10 ">
+                        <h4 class="d-flex justify-content-center mb-10">
                             PROGRAMA DE CONTROL DE CITAS MÉDICAS CEDOCABAR
                         </h4>
-                        <h4 class="font-bold">
+                        <h4 >
                            <?php 
                             if (isset($_SESSION['user'])) {
                                 $nombreUsuario = $_SESSION['user'];
@@ -167,15 +189,9 @@ session_start();
                             }
                            ?>
                         </h4>
-                        <h4 class="mt-0 text-dark">
+                        <h4 class="mt-0 ">
                              PERFIL: 
                              <?php 
-                                $user = $_SESSION['user'];
-                                $stmt = $conn->prepare('SELECT perfil FROM usuarios WHERE nombre_usuario = :username');
-                                $stmt->bindParam(':username', $user);
-                                $stmt->execute();
-                                $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
                                 if ($result['perfil'] == 1) {
                                     echo "Administrador";
                                 } else {
@@ -183,22 +199,22 @@ session_start();
                                 }
                              ?>
                         </h4>
-                        <h6 id="cedula" style="display: none;">
-                           
+                        <h6 id="cedula" style="display: none;">                        
                         </h6>
-                    
                     </div>
                 </div>
             </div>
             <div class="page-content">
                 <section class="row" id="opciones">
                     <div class="col-12 col-lg-12">
+                        <?php "verificarUsuario.php"; if($result['perfil'] == 1): ?>
                         <div class="row">
                             <div class="col-md-6 col-lg-4">
                                 <div class="card bg-c-blue order-card">
                                     <div class="card-block p-5">
-                                        <h6 class="text-center"><i class=" "> </i><span
-                                                class="text-white text-center">xxxx</span></h6>
+                                        <h6 class="text-center"><i class=""></i>
+                                        <span class="text-white text-center">xxxx</span>
+                                    </h6>
                                     </div>
                                 </div>
                             </div>
@@ -206,7 +222,7 @@ session_start();
                                 <div class="card bg-c-green order-card">
                                     <div class="card-block p-5">
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#medModal">
-                                            <h6 class="text-center text-white"><i class=""></i><span>xx</span></h6>
+                                            <h6 class="text-center text-white"><i class=""></i><span>Registrar Médico</span></h6>
                                         </a>
                                     </div>
                                 </div>
@@ -221,11 +237,45 @@ session_start();
                                 </div>
                             </div>
                         </div>
+                        <?php endif; ?>
+                        <?php "verificarUsuario.php"; if($result['perfil'] == 0): ?>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card bg-c-blue order-card">
+                                    <div class="card-block p-5">
+                                        <h6 class="text-center"><i class=""></i>
+                                        <span class="text-white text-center">Pacientes registrados</span>
+                                    </h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card bg-c-green order-card">
+                                    <div class="card-block p-5">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#medModal">
+                                            <h6 class="text-center text-white"><i class=""></i><span>Citas para hoy: X</span></h6>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-lg-4">
+                                <div class="card bg-c-yellow order-card">
+                                    <div class="card-block p-5">
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#pacModal">
+                                            <h6 class="text-center text-white"><i class=""></i><span>Citas por atender: Y</span></h6>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endif; ?>
                     </div>
                 </section>
             </div>
-            <div>
-                <?php include_once "medicos/tablamedicos.php"?>
+            <?php if($result['perfil'] == 1): include_once "medicos/tablamedicos.php";?><?php endif;?>
+            
+            <div class="container d-flex justify-content-start mb-3">
+                <button class="btn btn-success " data-bs-toggle="modal">Cita Nueva</button>
             </div>
         </div>
     </div>
@@ -247,7 +297,7 @@ session_start();
                         <div class="col-lg-12">
                             <div class="form-group">
                                 <form class="row center" action="guardarDatosBD.php" method="POST">
-                                <h3>Pacientes</h3>
+                                <h3>Registrar pacientes</h3>
                                     <div class="form-row col-md-6">
                                         <div class="form-group">
                                             <label for="inputNombre1">Nombres</label>
@@ -259,7 +309,7 @@ session_start();
                                         </div>
                                         <div class="form-group">
                                             <label for="inputAddress">Cedula</label>
-                                            <input type="number" onkeydown="return event.keyCode !== 69" name="pacCed" class="form-control" id="inputTel" placeholder="Ej: 5674123">
+                                            <input type="number" onkeydown="return event.keyCode !== 69" name="pacCed" class="form-control" id="inputTel2" placeholder="Ej: 5674123">
                                         </div>
                                     </div>
                                     <div class="form-row col-md-6">
@@ -268,13 +318,13 @@ session_start();
                                             <input type="apellido" name="pacApe" class="form-control" id="inputPassword4" placeholder="Ej: Fernández Contreras">
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputAddress2">Estado</label>
+                                            <label for="inputAddress3">Estado</label>
                                             <select required class="form-select" name="pacEdo" id="estados" aria-label="Default select example">
                                                 <option  value="" disabled selected hidden>Escoja estado</option>
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="inputAddress2">Municipio</label>
+                                            <label for="inputAddress4">Municipio</label>
                                             <input type="text" name="pacMun" class="form-control" id="inputMunicipio" placeholder="Ej: Girardot">
                                         </div>
                                     </div>
@@ -380,22 +430,33 @@ session_start();
         'Táchira','Trujillo','La Guaira','Yaracuy','Zulia'];
         const select = document.getElementById('estados');
         for (let i = 0; i < estados.length; i++) {
-        const option = document.createElement('option');
-        option.value = estados[i];
-        option.textContent = estados[i];
-        select.appendChild(option);
+            const option = document.createElement('option');
+            option.value = estados[i];
+            option.textContent = estados[i];
+            select.appendChild(option);
         }
     </script>
-    <script src="assets/js/buscador.js"></script>
+    <!-- script para mostrar especialidades-->
+    <script>
+        const especialidades = ['Medicina interna','Cardiología','endocrinología','fisiatría','nefrología','nutrición','psicología'];
+        const select2 = document.getElementById('especialidades');
+        for (let i = 0; i < especialidades.length; i++) {
+            const option2 = document.createElement('option');
+            option2.value = especialidades[i];
+            option2.textContent = especialidades[i];
+            select2.appendChild(option2);
+        }
+    </script>
     <script src="assets/static/js/components/dark.js"></script>
     <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/compiled/js/app.js"></script>
+    <script src="assets/js/buscador.js"></script>
     <!-- Need: Apexcharts -->
     <script src="assets/extensions/apexcharts/apexcharts.min.js"></script>
     <script src="assets/static/js/pages/dashboard.js"></script>
     <script src="assets/js/sweetalert2.all.min.js"></script>
-    <script src="app/jquery.min.js"></script>
-    <script src="assets/js/funcionalidades.js"></script>
-
 </body>
+
+
+
 </html>
