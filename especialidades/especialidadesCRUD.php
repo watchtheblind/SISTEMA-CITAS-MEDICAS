@@ -1,23 +1,38 @@
+
 <?php
     function leerDatos() {
         include "conectarBD.php";
-        $query = $conn->query("SELECT especialidad FROM especialidades");
-        foreach ($query as $fila): ?>
+        // $query = $conn->query("SELECT especialidad FROM especialidades");
+        $query = $conn->prepare("SELECT atiende, nombre, apellido, COUNT(*) as num_doctors FROM medicos GROUP BY atiende");
+        $query->execute();
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($results as $fila):?>
             <tr class="mt-4">
                 <td>
-                    <?= $fila['especialidad'] ?>
+                    <?= $fila['atiende']?>
                 </td>
                 <td>
                     <form action='especialidades/especialidadesCRUD.php' method='post'>
-                        <div class='d-flex justify-content-center'>
-                            <input type='hidden' name='especialidad' value=<?=$fila['especialidad']?>>
+                        <div class='d-flex justify-content-start'>
+                            <input  type="hidden" name='espe' value=<?=$fila['atiende']?> >
                             <button type='submit' name='eliminar' class='btn btn-danger'>Borrar</button>  
-                            <button type='button' name='edit' data-bs-toggle='modal' data-bs-target='#editEspecialidadModal-<?=$fila['especialidad']?>' class='btn btn-primary'>Editar</button>
+                            <button type='button' name='edit' data-bs-toggle='modal' data-bs-target='#editEspecialidadModal-<?=$fila['atiende']?>' class='btn btn-primary' data-especialidad="<?= $fila['atiende'] ?>">Editar</button>
                         </div>
-                        <?php require "modales/editEspecialidad.php" ?>
+                        <?php require "especialidades/modales/editEspecialidad.php" ?>
+                        <?php require "especialidades/modales/verMedicos.php" ?>
+                    </form>
+                </td>
+                <td>
+                    <div class="d-flex justify-content-between">
+                        <p class>Médicos disponibles: <?=$fila['num_doctors']?></p>    
+                        <button type='button' data-bs-toggle='modal' data-bs-target='#verMedicos-<?= $fila['atiende']?>-modal' class='btn btn-warning'>Ver médicos</button>
+                    </div>
                 </td>
             </tr>
-        <?php endforeach;
+        <?php endforeach;?>
+        
+        <?php
+        
         }
     function borrarDatos(){
         include "../conectarBD.php";

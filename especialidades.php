@@ -275,11 +275,12 @@ require "verificarUsuario.php";
                 <button class="btn btn-success " data-bs-toggle="modal" data-bs-target="#modalEspecialidad">Crear Especialidad</button>
             </div>
             <div>
-            <table id="myTable" class="display w-75 text-center">
+            <table id="myTable" class=" w-75 display text-center">
                 <thead class="thead-light">
                     <tr class="text-center">
                         <th scope="col">Especialidad</th>
                         <th scope="col">Acciones</th>
+                        <th scope="col">Médicos en Atención</th>
                     </tr>
                 </thead>
             <tbody>
