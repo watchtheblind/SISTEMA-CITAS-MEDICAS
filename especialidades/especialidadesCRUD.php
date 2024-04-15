@@ -9,12 +9,12 @@
         foreach ($results as $fila):?>
             <tr class="mt-4">
                 <td>
-                    <?= $fila['atiende']?>
+                    <?= $fila['atiende']; ?>
                 </td>
                 <td>
                     <form action='especialidades/especialidadesCRUD.php' method='post'>
                         <div class='d-flex justify-content-start'>
-                            <input  type="hidden" name='espe' value=<?=$fila['atiende']?> >
+                            <input type="hidden" name="especialidad" value="<?= $fila['atiende']; ?>">
                             <button type='submit' name='eliminar' class='btn btn-danger'>Borrar</button>  
                             <button type='button' name='edit' data-bs-toggle='modal' data-bs-target='#editEspecialidadModal-<?=$fila['atiende']?>' class='btn btn-primary' data-especialidad="<?= $fila['atiende'] ?>">Editar</button>
                         </div>
@@ -25,19 +25,17 @@
                 <td>
                     <div class="d-flex justify-content-between">
                         <p class>Médicos disponibles: <?=$fila['num_doctors']?></p>    
-                        <button type='button' data-bs-toggle='modal' data-bs-target='#verMedicos-<?= $fila['atiende']?>-modal' class='btn btn-warning'>Ver médicos</button>
+                        <button type='button' data-bs-toggle='modal' data-bs-target='#verMedicos-<?php echo str_replace(' ', '', $fila['atiende']); ?>-modal' class='btn btn-warning'>Ver médicos</button>
                     </div>
                 </td>
             </tr>
-        <?php endforeach;?>
-        
-        <?php
-        
+        <?php endforeach;
+
         }
     function borrarDatos(){
         include "../conectarBD.php";
         $especialidad = $_POST["especialidad"];
-        $stmt = $conn->prepare("DELETE FROM especialidades WHERE especialidad = :especialidad");
+        $stmt = $conn->prepare("DELETE FROM medicos WHERE atiende = :especialidad");
         $stmt->bindParam(':especialidad', $especialidad);
         $stmt->execute();
         $afectado = $stmt->rowCount();

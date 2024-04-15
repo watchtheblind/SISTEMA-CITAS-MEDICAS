@@ -24,20 +24,45 @@ require "verificarUsuario.php";
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" />
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
 </head>
+<style>
+    
+</style>
 <script>
     $(document).ready( function () {
     $('#myTable').DataTable(
-                {
+        {
             "language":{
                 "url":"https://cdn.datatables.net/plug-ins/2.0.3/i18n/es-ES.json"
             }
+            
         }
     );
 } );
 </script>
+<!-- se le pasa el formato datatable a los modales de las especialidades en "ver médico": -->
+<?php 
+$query = $conn->prepare("SELECT atiende, nombre, apellido, COUNT(*) as num_doctors FROM medicos GROUP BY atiende");
+$query->execute();
+$results = $query->fetchAll(PDO::FETCH_ASSOC);
+foreach ($results as $fila):?>
+<script>
+    $(document).ready( function () {
+        $('#myTable<?php echo str_replace(' ', '', $fila['atiende']); ?>').DataTable(
+            {
+                "searching": false,
+                "language":{
+                    "url":"https://cdn.datatables.net/plug-ins/2.0.3/i18n/es-ES.json"
+                }
+            }
+        );
+    } );
+</script>
+<?php endforeach;?>
+<!-- alertas del crud:  -->
 <script>
     import Swal from 'sweetalert2';
 </script>
+
 <body>
     <?php include "alertas.php"?>
     <script src="assets/static/js/initTheme.js"></script>
