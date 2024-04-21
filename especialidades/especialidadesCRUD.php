@@ -16,7 +16,7 @@
                         <div class='d-flex justify-content-start'>
                             <input type="hidden" name="especialidad" value="<?= $fila['atiende']; ?>">
                             <button type='submit' name='eliminar' class='btn btn-danger'>Borrar</button>  
-                            <button type='button' name='edit' data-bs-toggle='modal' data-bs-target='#editEspecialidadModal-<?=$fila['atiende']?>' class='btn btn-primary' data-especialidad="<?= $fila['atiende'] ?>">Editar</button>
+                            <button type='button' name='edit' data-bs-toggle='modal' data-bs-target='#editEspecialidadModal-<?php echo str_replace(' ', '', $fila['atiende']); ?>' class='btn btn-primary' data-especialidad="<?= $fila['atiende'] ?>">Editar</button>
                         </div>
                         <?php require "especialidades/modales/editEspecialidad.php" ?>
                         <?php require "especialidades/modales/verMedicos.php" ?>
@@ -30,7 +30,6 @@
                 </td>
             </tr>
         <?php endforeach;
-
         }
     function borrarDatos(){
         include "../conectarBD.php";
@@ -39,22 +38,22 @@
         $stmt->bindParam(':especialidad', $especialidad);
         $stmt->execute();
         $afectado = $stmt->rowCount();
-        if($afectado ==1){
-            header('Location: ../panelUsuario.php?shSuccMsg=2');
+        if($afectado > 0){
+            header('Location: ../especialidades.php?shSuccMsg=2');
             exit;
         }
     }
     function editarDatos(){
         include "../conectarBD.php";
         $especialidad = $_POST["especialidad"];
-        $nuevaespecialidad = 
-        $stmt = $conn->prepare("UPDATE especialidades SET especialidad = :new_especialidad WHERE especialidad = :especialidad");
-        $stmt->bindParam(':new_especialidad', $new_especialidad);
+        $nuevaespecialidad = $_POST["nuevaEspecialidad"];
+        $stmt = $conn->prepare("UPDATE medicos SET atiende = :nueva_especialidad WHERE atiende = :especialidad");
+        $stmt->bindParam(':nueva_especialidad', $nuevaespecialidad);
         $stmt->bindParam(':especialidad', $especialidad);
         $stmt->execute();
         $afectado = $stmt->rowCount();
-        if($afectado ==1){
-            header('Location: ../panelUsuario.php?shSuccMsg=3');
+        if($afectado > 0){
+            header('Location: ../especialidades.php?shSuccMsg=3');
             exit;
         }
     }

@@ -366,6 +366,7 @@ foreach ($results as $fila):?>
     <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/compiled/js/app.js"></script>
     <script src="assets/js/buscador.js"></script>
+    <script src="assets/js/bloquearTeclaEnter.js"></script>
     <!-- Need: Apexcharts -->
     <script src="assets/extensions/apexcharts/apexcharts.min.js"></script>
     <script src="assets/static/js/pages/dashboard.js"></script>

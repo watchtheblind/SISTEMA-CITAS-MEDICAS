@@ -1,4 +1,4 @@
-<div class="modal fade" id="editEspecialidadModal-<?=$fila['atiende']?>" tabindex="-1" aria-labelledby="editEspecialidadLabel" aria-hidden="true">
+<div class="modal fade" id="editEspecialidadModal-<?php echo str_replace(' ', '', $fila['atiende']); ?>" tabindex="-1" aria-labelledby="editEspecialidadLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-sm">
         <div class="modal-content">
             <div class="modal-header">
