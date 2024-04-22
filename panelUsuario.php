@@ -92,41 +92,29 @@ require "verificarUsuario.php";
                         <li class="sidebar-title">Menu</li>
                         <?php if ($result['perfil'] == 1): ?>
                             <li class="sidebar-item active ">
-                            <a href="index.html" class="sidebar-link bg-c-blue">
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Médicos</span>
-                            </a>
-                            </li>
-                            <li class="sidebar-item op1">
-                            <a href="#" class="sidebar-link"  data-bs-toggle="modal" data-bs-target="#pacModal">
-                                <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>Ingresar paciente</span>
-                            </a>
-                            </li>
-                            <li class="sidebar-item  op1">
-                                <a href="#" class="sidebar-link" data-bs-toggle="modal" data-bs-target="#medModal">
-                                    <i class="bi bi-file-earmark-medical-fill"></i>
-                                    <span>Registrar médico</span>
+                                <a href="index.html" class="sidebar-link bg-c-blue">
+                                    <i class="bi bi-grid-fill"></i>
+                                    <span>Médicos</span>
                                 </a>
                             </li>
-                            <li class="sidebar-item  op1">
-                                <a href="#" class='sidebar-link'>
+                            <li class="sidebar-item op1">
+                                <a href="#" class="sidebar-link"  data-bs-toggle="modal" data-bs-target="#pacModal">
                                     <i class="bi bi-file-earmark-medical-fill"></i>
-                                    <span>ARC</span>
+                                    <span>Ingresar paciente</span>
                                 </a>
                             </li>
                         <?php else: ?>
                             <li class="sidebar-item active ">
-                            <a href="index.html" class="sidebar-link bg-c-blue">
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Control de citas</span>
-                            </a>
+                                <a href="index.html" class="sidebar-link bg-c-blue">
+                                    <i class="bi bi-grid-fill"></i>
+                                    <span>Control de citas</span>
+                                </a>
                             </li>
                             <li class="sidebar-item op1">
-                            <a href="#" class="sidebar-link"  data-bs-toggle="modal" data-bs-target="#pacModal">
-                                <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>Pacientes</span>
-                            </a>
+                                <a href="#" class="sidebar-link"  data-bs-toggle="modal" data-bs-target="#pacModal">
+                                    <i class="bi bi-file-earmark-medical-fill"></i>
+                                    <span>Pacientes</span>
+                                </a>
                             </li>
                             <li class="sidebar-item  op1">
                                 <a href="#" class="sidebar-link" data-bs-toggle="modal" data-bs-target="#medModal">
