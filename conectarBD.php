@@ -5,8 +5,6 @@
     $contrasena = "";
 //$conexion = mysqli_connect($nombreHost, $usuario, '',$baseDatos);
 
-
-
 try {
     $conn = new PDO("mysql:host=$nombreHost;dbname=$baseDatos", $usuario, $contrasena);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

@@ -1,13 +1,10 @@
 <?php 
-include "conectarBD.php";
-session_start(); 
+include "conectarBD.php";session_start(); 
 //consulta para obtener los datos de los médicos
 require "verificarUsuario.php"; 
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,45 +21,9 @@ require "verificarUsuario.php";
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" />
     <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
 </head>
-<style>
-    
-</style>
-<script>
-    $(document).ready( function () {
-    $('#myTable').DataTable(
-        {
-            "language":{
-                "url":"https://cdn.datatables.net/plug-ins/2.0.3/i18n/es-ES.json"
-            }
-            
-        }
-    );
-} );
-</script>
-<!-- se le pasa el formato datatable a los modales de las especialidades en "ver médico": -->
-<?php 
-$query = $conn->prepare("SELECT atiende, nombre, apellido, COUNT(*) as num_doctors FROM medicos GROUP BY atiende");
-$query->execute();
-$results = $query->fetchAll(PDO::FETCH_ASSOC);
-foreach ($results as $fila):?>
-<script>
-    $(document).ready( function () {
-        $('#myTable<?php echo str_replace(' ', '', $fila['atiende']); ?>').DataTable(
-            {
-                "searching": false,
-                "language":{
-                    "url":"https://cdn.datatables.net/plug-ins/2.0.3/i18n/es-ES.json"
-                }
-            }
-        );
-    } );
-</script>
-<?php endforeach;?>
+<!-- datatables de la sección especialidades -->
+<?= require "especialidades/datatables/datatables.php" ?>
 <!-- alertas del crud:  -->
-<script>
-    import Swal from 'sweetalert2';
-</script>
-
 <body>
     <?php include "alertas.php"?>
     <script src="assets/static/js/initTheme.js"></script>
@@ -115,57 +76,30 @@ foreach ($results as $fila):?>
                 <div class="sidebar-menu">
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
-                        <?php if ($result['perfil'] == 1): ?>
-                            <li class="sidebar-item active ">
-                            <a href="index.html" class="sidebar-link bg-c-blue">
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Médicos</span>
-                            </a>
-                            </li>
-                            <li class="sidebar-item op1">
-                            <a href="#" class="sidebar-link"  data-bs-toggle="modal" data-bs-target="#pacModal">
+                        <li class="sidebar-item">
+                        <a href="panelUsuario.php" class="sidebar-link">
+                            <i class="bi bi-grid-fill"></i>
+                            <span>Control de citas</span>
+                        </a>
+                        </li>
+                        <li class="sidebar-item op1">
+                        <a href="#" class="sidebar-link"  data-bs-toggle="modal" data-bs-target="#pacModal">
+                            <i class="bi bi-file-earmark-medical-fill"></i>
+                            <span>Pacientes</span>
+                        </a>
+                        </li>
+                        <li class="sidebar-item  op1">
+                            <a href="#" class="sidebar-link" data-bs-toggle="modal" data-bs-target="#medModal">
                                 <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>Ingresar paciente</span>
+                                <span>Consultar citas</span>
                             </a>
-                            </li>
-                            <li class="sidebar-item  op1">
-                                <a href="#" class="sidebar-link" data-bs-toggle="modal" data-bs-target="#medModal">
-                                    <i class="bi bi-file-earmark-medical-fill"></i>
-                                    <span>Registrar médico</span>
-                                </a>
-                            </li>';
-                            <li class="sidebar-item  op1">
-                                <a href="#" class='sidebar-link'>
-                                    <i class="bi bi-file-earmark-medical-fill"></i>
-                                    <span>ARC</span>
-                                </a>
-                            </li>
-                        <?php else: ?>
-                            <li class="sidebar-item">
-                            <a href="panelUsuario.php" class="sidebar-link">
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Control de citas</span>
-                            </a>
-                            </li>
-                            <li class="sidebar-item op1">
-                            <a href="#" class="sidebar-link"  data-bs-toggle="modal" data-bs-target="#pacModal">
+                        </li>
+                        <li class="sidebar-item  op1 active">
+                            <a href="#" class='sidebar-link bg-c-blue'>
                                 <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>Pacientes</span>
+                                <span>Especialidades</span>
                             </a>
-                            </li>
-                            <li class="sidebar-item  op1">
-                                <a href="#" class="sidebar-link" data-bs-toggle="modal" data-bs-target="#medModal">
-                                    <i class="bi bi-file-earmark-medical-fill"></i>
-                                    <span>Consultar citas</span>
-                                </a>
-                            </li>
-                            <li class="sidebar-item  op1 active">
-                                <a href="#" class='sidebar-link bg-c-blue'>
-                                    <i class="bi bi-file-earmark-medical-fill"></i>
-                                    <span>Especialidades</span>
-                                </a>
-                            </li>
-                        <?php endif ?>
+                        </li>
                         <li class="sidebar-item  ">
                             <a href="#" class='sidebar-link' data-bs-toggle="modal" data-bs-target="#pacModal2">
                                 <i class="bi bi-file-earmark-medical-fill"></i>
@@ -178,8 +112,6 @@ foreach ($results as $fila):?>
                                 <span>Cerrar Sesion</span>
                             </a>
                         </li>
-
-
                     </ul>
                 </div>
             </div>
@@ -190,7 +122,6 @@ foreach ($results as $fila):?>
                     <i class="bi bi-justify fs-3"></i>
                 </a>
             </header>
-
             <div class="page-heading">
                 <img src="assets/compiled/svg/recibo2.png" alt="" width="100%">
             </div>
@@ -200,28 +131,13 @@ foreach ($results as $fila):?>
                         <h4 class="d-flex justify-content-center mb-10">
                             PROGRAMA DE CONTROL DE CITAS MÉDICAS CEDOCABAR
                         </h4>
-                        <h4 >
-                           <?php 
-                            if (isset($_SESSION['user'])) {
-                                $nombreUsuario = $_SESSION['user'];
-                                echo "¡Bienvenido, $nombreUsuario!";
-                            } else {
-                                // Redirige al usuario a la página de inicio de sesión si no ha iniciado sesión
-                                echo "error";
-                                exit;
-                            }
-                           ?>
-                        </h4>
-                        <h4 class="mt-0 ">
-                             PERFIL: 
-                             <?php 
-                                if ($result['perfil'] == 1) {
-                                    echo "Administrador";
-                                } else {
-                                    echo "Usuario";
-                                }
-                             ?>
-                        </h4>
+                        <?php if  (isset($_SESSION['user'])): $nombreUsuario = $_SESSION['user'];?>
+                            <h4  class="mt-0 ">
+                            ¡Bienvenido, <?=$nombreUsuario?>! <br><br>
+                            <?php endif; ?>
+                            <!-- mostrando si es admin o usuario -->
+                            PERFIL: <?php $statusPerfil =($result['perfil'] == 1) ? "administrador": "usuario"; echo $statusPerfil?>
+                            </h4>
                         <h6 id="cedula" style="display: none;">                        
                         </h6>
                     </div>
@@ -230,38 +146,6 @@ foreach ($results as $fila):?>
             <div class="page-content">
                 <section class="row" id="opciones">
                     <div class="col-12 col-lg-12">
-                        <?php "verificarUsuario.php"; if($result['perfil'] == 1): ?>
-                        <div class="row">
-                            <div class="col-md-6 col-lg-4">
-                                <div class="card bg-c-blue order-card">
-                                    <div class="card-block p-5">
-                                        <h6 class="text-center"><i class=""></i>
-                                        <span class="text-white text-center">xxxx</span>
-                                    </h6>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4">
-                                <div class="card bg-c-green order-card">
-                                    <div class="card-block p-5">
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#medModal">
-                                            <h6 class="text-center text-white"><i class=""></i><span>Registrar Médico</span></h6>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-lg-4">
-                                <div class="card bg-c-yellow order-card">
-                                    <div class="card-block p-5">
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#pacModal">
-                                            <h6 class="text-center text-white"><i class=""></i><span>Ingresar Paciente</span></h6>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <?php endif; ?>
-                        <?php "verificarUsuario.php"; if($result['perfil'] == 0): ?>
                         <div class="row">
                             <div class="col-md-6 col-lg-4">
                                 <div class="card bg-c-blue order-card">
@@ -291,66 +175,33 @@ foreach ($results as $fila):?>
                                 </div>
                             </div>
                         </div>
-                        <?php endif; ?>
                     </div>
                 </section>
             </div>
-            <?php if($result['perfil'] == 1): include_once "medicos/tablamedicos.php";?><?php endif;?>
             <div class="container d-flex justify-content-start mb-3">
                 <button class="btn btn-success " data-bs-toggle="modal" data-bs-target="#modalEspecialidad">Crear Especialidad</button>
             </div>
             <div>
-            <table id="myTable" class=" w-75 display text-center">
-                <thead class="thead-light">
-                    <tr class="text-center">
-                        <th scope="col">Especialidad</th>
-                        <th scope="col">Acciones</th>
-                        <th scope="col">Médicos en Atención</th>
-                    </tr>
-                </thead>
-            <tbody>
-                <?php include "especialidades/especialidadesCRUD.php";
-                    leerDatos();
-                ?>
-            </tbody>
-        </table>
+                <table id="myTable" class=" w-75 display text-center">
+                    <thead class="thead-light">
+                        <tr class="text-center">
+                            <th scope="col">Especialidad</th>
+                            <th scope="col">Acciones</th>
+                            <th scope="col">Médicos en Atención</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php include "especialidades/especialidadesCRUD.php";
+                            leerDatos();
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
     <!-- modal de especialidad nueva  -->
-    <div class="modal fade" id="modalEspecialidad" tabindex="-1" aria-labelledby="editMedModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="pacModalLabel text-danger">CEDOCABAR</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>                
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                            <div class="col-lg">
-                                <div class="form-group">
-                                    <form class="row center" action="medicos/funcionesCRUD.php" method="post">
-                                        <h3 class="d-flex justify-content-center">Nueva Especialidad</h3>
-                                        <div class="form-row col-md">
-                                            <div class="form-group">
-                                                <input type="text" name="EspecNueva" class="form-control" placeholder="EJ: Traumatología">
-                                            </div>
-                                        </div>
-                                        <div class=" d-flex justify-content-center">
-                                            <button type="submit" name="editar" class="btn bg-c-blue w-75 text-dark mt-2" id="aceptar" name="regMedico">Aceptar</button>        
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
+    <?= require "especialidades/modales/nuevaEspecialidad.php" ?>
     <!-- script para mostrar especialidades-->
     <script>
         const especialidades = ['Medicina interna','Cardiología','endocrinología','fisiatría','nefrología','nutrición','psicología'];

@@ -1,5 +1,5 @@
 
-
+<script> import Swal from 'sweetalert2'; </script>
 <script>
     // Alerta usuario ya existe 
     document.addEventListener('DOMContentLoaded', function() {

@@ -13,7 +13,7 @@
                 echo "<td>".$fila['atiende']."</td>";
                 // este input permite que se obtenga el valor cedula de cada fila BORRALE EL DFLEX LUIS
                 echo "<td class='d-flex align-middle justify-content-center'> 
-                    <form action='medicos/funcionesCRUD.php' method='post'>
+                    <form action='medicos/medicosCRUD.php' method='post'>
                         <div class='d-flex'>
                         <input type='hidden' name='cedula'  value='".$fila['cedula']."'>
                         <button type='submit' name='eliminar' class='btn btn-danger'>Borrar</button>  
