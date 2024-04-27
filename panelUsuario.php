@@ -16,12 +16,18 @@ require "verificarUsuario.php"; ?>
         <link rel="stylesheet" href="./assets/compiled/css/estilo.css">
         <link rel="stylesheet" type="text/css" href="assets/css/sweetalert2.css">
         <link rel="stylesheet" href="./assets/compiled/css/bootstrap-icons.css">
+        <!-- librería slick -->
+        <link rel="stylesheet" href="./assets/slick.css">
+        <link rel="stylesheet" href="./assets/slick-theme.css">
+        <!-- jquery -->
         <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-migrate-3.4.1.js"></script>
+        <!-- librería datatables -->
         <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" />
         <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
     </head>
-    <!-- sweetalert2 -->
     <body>
+            <!-- alertas con sweetalert2 -->
         <?php include "alertas.php"?>
         <script src="assets/static/js/initTheme.js"></script>
         <div id="app">
@@ -62,9 +68,7 @@ require "verificarUsuario.php"; ?>
                                         </path>
                                     </svg>
                                 </div>
-
                             </div>
-
                             <div class="sidebar-toggler  x">
                                 <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
                             </div>
@@ -227,9 +231,13 @@ require "verificarUsuario.php"; ?>
                 </div>
                 <!-- mostramos los médicos existentes si se está como administrador -->
                 <?php if($result['perfil'] == 1): include_once "medicos/tablamedicos.php";?><?php endif;?>
-                <div class="container d-flex justify-content-start mb-3">
-                    <button class="btn btn-success " data-bs-toggle="modal">Cita Nueva</button>
-                </div>
+                <!-- módulo de citas para perfil de usuario: -->
+                <?php if($result['perfil'] == 0): ?>
+                    <div class="container d-flex justify-content-start mb-3">
+                        <button class="btn btn-success " data-bs-toggle="modal" data-bs-target="#citaNueva">Cita Nueva</button>
+                    </div>
+                    <?php require "citas/modales/citaNuevaModal.php" ?>
+                <?php endif;?>
             </div>
         </div>
         <!-- Modal de pacientes-->
@@ -266,6 +274,8 @@ require "verificarUsuario.php"; ?>
         <script src="assets/js/bloquearTeclaEnter.js"></script>
         <!-- Need: Apexcharts -->
         <script src="assets/extensions/apexcharts/apexcharts.min.js"></script>
+        <script src="assets/slick.js"></script>
+        <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
         <script src="assets/static/js/pages/dashboard.js"></script>
         <script src="assets/js/sweetalert2.all.min.js"></script>
     </body>
