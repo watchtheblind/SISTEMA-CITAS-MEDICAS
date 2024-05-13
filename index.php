@@ -63,11 +63,9 @@
                         <img src="./assets/compiled/png/logo2.png" alt="Logo" width="50%">
                     </div>
                 </div>
-            
             </div>
         </div>
     </div>
-
 <script src="assets/js/jquery.js"></script>
 <script src="assets/js/jquery.mask.js"></script>
 <script src="assets/js/sweetalert2.all.min.js"></script>
