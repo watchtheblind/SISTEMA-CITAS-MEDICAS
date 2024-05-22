@@ -1,5 +1,4 @@
 // aplicando modal de formulario para todos los botones de reservar cita
-
 for (let i=1;i<=12;i++){
   $(`#cita-${i}`).click(function (){
     $(`#modalFormulario-${i}`).modal('show');
@@ -25,7 +24,7 @@ document.getElementById(`atiende-select-${i}`).addEventListener('change', functi
   }
 });
 }
-
+//filtrar médicos según la especialidad que yo seleccione
 $(document).ready(function() {
   for (let i = 1; i <= 12; i++) {
     $(`#atiende-select-${i}`).on('change', function() {
@@ -34,5 +33,13 @@ $(document).ready(function() {
       $(`#medico-select-${i} option`).hide();
       $(`#medico-select-${i} option[data-atiende="${atiendeValue}"]`).show();
     });
+  }
+});
+//hacer que la página se recargue si se cierra el modal de reservas
+$('#modalReservas').on('hidden.bs.modal', function() {
+  // Verificar si otro modal no se abrió después de cerrar este
+  if (!$('.modal:visible').length) {
+    // Recargar la página
+    location.reload();
   }
 });

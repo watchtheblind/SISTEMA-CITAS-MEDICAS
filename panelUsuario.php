@@ -16,9 +16,6 @@ require "verificarUsuario.php"; ?>
         <link rel="stylesheet" href="./assets/compiled/css/estilo.css">
         <link rel="stylesheet" type="text/css" href="assets/css/sweetalert2.css">
         <link rel="stylesheet" href="./assets/compiled/css/bootstrap-icons.css">
-        <!-- librería slick -->
-        <link rel="stylesheet" href="./assets/slick.css">
-        <link rel="stylesheet" href="./assets/slick-theme.css">
         <!-- jquery -->
         <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-migrate-3.4.1.js"></script>
@@ -201,26 +198,68 @@ require "verificarUsuario.php"; ?>
                                     <div class="card bg-c-blue order-card">
                                         <div class="card-block p-5">
                                             <h6 class="text-center"><i class=""></i>
-                                            <span class="text-white text-center">Pacientes registrados</span>
-                                        </h6>
+                                            <span class="text-white text-center">
+                                            <?php include "conectarBD.php";
+                                                //contar la cantidad de pacientes
+                                                $query = $conn->prepare("SELECT COUNT(*) FROM paciente");
+                                                $query->execute();
+                                                $results = $query->fetchAll(PDO::FETCH_ASSOC);
+                                                if (isset($results[0])) {
+                                                    $count = $results[0]['COUNT(*)'];
+                                                } else {
+                                                    $count = 0;
+                                                }
+                                                ?>
+                                                Pacientes registrados: <?php echo $count;?>
+                                            </span>
+                                            </h6>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card bg-c-green order-card">
                                         <div class="card-block p-5">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#medModal">
-                                                <h6 class="text-center text-white"><i class=""></i><span>Citas para hoy: X</span></h6>
-                                            </a>
+                                            <h6 class="text-center"><i class=""></i>
+                                            <span class="text-center text-white">
+                                                <?php include "conectarBD.php";
+                                                    //contar la cantidad de citas para hoy
+                                                    $fechaActual= date("Y-m-d"); // obtengo la fecha actual
+                                                    $query = $conn->prepare("SELECT COUNT(*) FROM consultas WHERE start = :fechaActual");
+                                                    $query->bindParam(':fechaActual', $fechaActual);
+                                                    $query->execute();
+                                                    $results = $query->fetchAll(PDO::FETCH_ASSOC);
+                                                    if (isset($results[0])) {
+                                                        $count = $results[0]['COUNT(*)'];
+                                                    } else {
+                                                        $count = 0;
+                                                    }
+                                                ?>
+                                                Citas para hoy: <?php echo $count;?>
+                                            </span>
+                                            </h6>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card bg-c-yellow order-card">
                                         <div class="card-block p-5">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#pacModal">
-                                                <h6 class="text-center text-white"><i class=""></i><span>Citas por atender: Y</span></h6>
-                                            </a>
+                                            <h6 class="text-center"><i class=""></i>
+                                                <span class="text-center text-white">
+                                                    <?php include "conectarBD.php";
+                                                        //contar la cantidad de citas para hoy
+                                                        $fechaActual= date("Y-m-d"); // obtengo la fecha actual
+                                                        $query = $conn->prepare("SELECT COUNT(*) FROM consultas");
+                                                        $query->execute();
+                                                        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+                                                        if (isset($results[0])) {
+                                                            $count = $results[0]['COUNT(*)'];
+                                                        } else {
+                                                            $count = 0;
+                                                        }
+                                                    ?>
+                                                    Citas por atender: <?php echo $count;?>
+                                                </span>
+                                            </h6>
                                         </div>
                                     </div>
                                 </div>
@@ -234,10 +273,38 @@ require "verificarUsuario.php"; ?>
                 <!-- módulo de citas para perfil de usuario: -->
                 <?php if($result['perfil'] == 0): ?>
                     <div class="container d-flex justify-content-start mb-3">
-                        <button class="btn btn-success " data-bs-toggle="modal" data-bs-target="#citaNueva">Cita Nueva</button>
+                        <button class="btn btn-success" onclick="openInPopup('calendar.php')">Nueva Cita</button>
+                        <button class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#reportModal">Generar Reporte</button>
                     </div>
-                    <?php require "citas/modales/citaNuevaModal.php" ?>
                 <?php endif;?>
+            </div>
+        </div>
+        <!-- modal de generar reporte -->
+        <div class="modal" tabindex="-1" id="reportModal" aria-labelledby="reportModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">CEDOCABAR</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class="row justify-content-center text-center">
+                            <div class="col-md-6">
+                                <label for="startDate">Fecha de inicio:</label>
+                                <input id="startDate" class="form-control mt-2" type="date" required/>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="endDate">Fecha de fin:</label>
+                                <input id="endDate" class="form-control mt-2" type="date" required/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary">Crear reporte</button>
+                </div>
+                </div>
             </div>
         </div>
         <!-- Modal de pacientes-->
@@ -274,9 +341,13 @@ require "verificarUsuario.php"; ?>
         <script src="assets/js/bloquearTeclaEnter.js"></script>
         <!-- Need: Apexcharts -->
         <script src="assets/extensions/apexcharts/apexcharts.min.js"></script>
-        <script src="assets/slick.js"></script>
-        <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script> -->
         <script src="assets/static/js/pages/dashboard.js"></script>
         <script src="assets/js/sweetalert2.all.min.js"></script>
+        <script>
+            function openInPopup(url) {
+                window.open(url, '_blank', 'width=800,height=800,scrollbars=yes,resizable=yes');
+                return false;
+            }
+        </script>
     </body>
 </html>

@@ -4,6 +4,7 @@
     $especialidad = $_POST['especialidad'];
     $pacienteCedula = $_POST['cedula'];
     $fechaCita = $_POST['fechaCita'];
+    $numero = $_POST['numero'];
 	# Incluyendo librerias necesarias #
     require "./code128.php";
     $pdf = new PDF_Code128('P','mm',array(80,120));
@@ -25,9 +26,11 @@
     $pdf->MultiCell(0,7,iconv("UTF-8", "ISO-8859-1","Consulta: ".$especialidad),0,'C',false);
     $pdf->MultiCell(0,7,iconv("UTF-8", "ISO-8859-1","Médico: ".$medicoNomApe),0,'C',false);
     $pdf->SetFont('Arial','B',12);
-    $pdf->MultiCell(0,19,iconv("UTF-8", "ISO-8859-1",""),0,'C',false);
+    $pdf->MultiCell(0,15,iconv("UTF-8", "ISO-8859-1",""),0,'C',false);
 
-    $pdf->MultiCell(0,2,iconv("UTF-8", "ISO-8859-1",strtoupper("Ticket Nro: 1")),0,'C',false);
-
+    $pdf->MultiCell(0,2,iconv("UTF-8", "ISO-8859-1",strtoupper("Ticket Nro: ").$numero),0,'C',false);
+    $pdf->SetFont('Arial','B',4);
+    $pdf->MultiCell(0,2,iconv("UTF-8", "ISO-8859-1",""),0,'C',false);
+    $pdf->MultiCell(0,2,iconv("UTF-8", "ISO-8859-1",strtoupper("ADVERTENCIA: No pierda este ticket, ya que no se le dara uno nuevo")),0,'C',false);
     # Nombre del archivo PDF #
-    $pdf->Output("I","Ticket_Nro_1.pdf",true);
+    $pdf->Output("I","Ticket_Nro_".$numero.".pdf",true);
