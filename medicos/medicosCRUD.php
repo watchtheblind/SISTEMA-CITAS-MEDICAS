@@ -16,8 +16,8 @@
                     <form action='medicos/medicosCRUD.php' method='post'>
                         <div class='d-flex'>
                         <input type='hidden' name='cedula'  value='".$fila['cedula']."'>
-                        <button type='submit' name='eliminar' class='btn btn-danger'>Borrar</button>  
-                        <button type='button' name='edit' data-bs-toggle='modal' data-bs-target='#editMedModal-".$fila['cedula']."' class='btn btn-primary'>Editar</button>
+                        <button type='submit' name='eliminar' class='btn btn-danger mx-1'><i class='bi bi-trash'></i></button>  
+                        <button type='button' name='edit' data-bs-toggle='modal' data-bs-target='#editMedModal-".$fila['cedula']."' class='btn btn-primary'><i class='bi bi-pen'></i></button>
                         </div>";
                     require "modales/editMedico.php";
             echo "</tr>";

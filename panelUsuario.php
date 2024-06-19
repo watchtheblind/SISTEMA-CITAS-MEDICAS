@@ -7,7 +7,7 @@ require "verificarUsuario.php"; ?>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Recibos de Pago</title>
+        <title>CEDOCABAR</title>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <link rel="shortcut icon" href="./assets/compiled/png/logo.png" type="image/x-icon">
         <link rel="stylesheet" href="./assets/compiled/css/app.css">
@@ -81,12 +81,6 @@ require "verificarUsuario.php"; ?>
                                         <span>Médicos</span>
                                     </a>
                                 </li>
-                                <li class="sidebar-item op1">
-                                    <a href="#" class="sidebar-link"  data-bs-toggle="modal" data-bs-target="#pacModal">
-                                        <i class="bi bi-file-earmark-medical-fill"></i>
-                                        <span>Ingresar paciente</span>
-                                    </a>
-                                </li>
                             <?php else: ?>
                                 <li class="sidebar-item active ">
                                     <a href="index.html" class="sidebar-link bg-c-blue">
@@ -100,12 +94,12 @@ require "verificarUsuario.php"; ?>
                                         <span>Pacientes</span>
                                     </a>
                                 </li>
-                                <li class="sidebar-item  op1">
+                                <!-- <li class="sidebar-item  op1">
                                     <a href="#" class="sidebar-link" data-bs-toggle="modal" data-bs-target="#medModal">
                                         <i class="bi bi-file-earmark-medical-fill"></i>
                                         <span>Consultar citas</span>
                                     </a>
-                                </li>
+                                </li> -->
                                 <li class="sidebar-item  op1">
                                     <a href="especialidades.php" class='sidebar-link'>
                                         <i class="bi bi-file-earmark-medical-fill"></i>
@@ -114,7 +108,7 @@ require "verificarUsuario.php"; ?>
                                 </li>
                             <?php endif ?>
                             <li class="sidebar-item  ">
-                                <a href="#" class='sidebar-link' data-bs-toggle="modal" data-bs-target="#pacModal2">
+                                <a href="#" class='sidebar-link' data-bs-toggle="modal" data-bs-target="#cambiarContrasena">
                                     <i class="bi bi-file-earmark-medical-fill"></i>
                                     <span>Cambiar Contraseña</span>
                                 </a>
@@ -166,7 +160,7 @@ require "verificarUsuario.php"; ?>
                                     <div class="card bg-c-blue order-card">
                                         <div class="card-block p-5">
                                             <h6 class="text-center"><i class=""></i>
-                                            <span class="text-white text-center">xxxx</span>
+                                            <span class="text-white text-center">Documentación</span>
                                         </h6>
                                         </div>
                                     </div>
@@ -246,16 +240,16 @@ require "verificarUsuario.php"; ?>
                                             <h6 class="text-center"><i class=""></i>
                                                 <span class="text-center text-white">
                                                     <?php include "conectarBD.php";
-                                                        //contar la cantidad de citas para hoy
-                                                        $fechaActual= date("Y-m-d"); // obtengo la fecha actual
-                                                        $query = $conn->prepare("SELECT COUNT(*) FROM consultas");
-                                                        $query->execute();
-                                                        $results = $query->fetchAll(PDO::FETCH_ASSOC);
-                                                        if (isset($results[0])) {
-                                                            $count = $results[0]['COUNT(*)'];
-                                                        } else {
-                                                            $count = 0;
-                                                        }
+                                                    $fechaActual = date("Y-m-d"); // obtengo la fecha actual
+                                                    $query = $conn->prepare("SELECT COUNT(*) FROM consultas WHERE DATE(start) >= :fechaActual");
+                                                    $query->bindParam(':fechaActual', $fechaActual);
+                                                    $query->execute();
+                                                    $results = $query->fetchAll(PDO::FETCH_ASSOC);
+                                                    if (isset($results[0])) {
+                                                        $count = $results[0]['COUNT(*)'];
+                                                    } else {
+                                                        $count = 0;
+                                                    }
                                                     ?>
                                                     Citas por atender: <?php echo $count;?>
                                                 </span>
@@ -280,37 +274,13 @@ require "verificarUsuario.php"; ?>
             </div>
         </div>
         <!-- modal de generar reporte -->
-        <div class="modal" tabindex="-1" id="reportModal" aria-labelledby="reportModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">CEDOCABAR</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="">
-                        <div class="row justify-content-center text-center">
-                            <div class="col-md-6">
-                                <label for="startDate">Fecha de inicio:</label>
-                                <input id="startDate" class="form-control mt-2" type="date" required/>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="endDate">Fecha de fin:</label>
-                                <input id="endDate" class="form-control mt-2" type="date" required/>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-primary">Crear reporte</button>
-                </div>
-                </div>
-            </div>
-        </div>
         <!-- Modal de pacientes-->
         <?php require "modalesPanelUsuario/registrarPacientes.php" ?>
         <!-- Modal de cambio de contraseña-->
         <?php require "modalesPanelUsuario/cambioContrasena.php" ?>
+
+
+        <?php require "modalesPanelUsuario/generarReporte.php" ?>
         <script>
             const estados = ['Aragua', 'Distrito Capital','Carabobo','Sucre','Amazonas','Anzoátegui','Apure','Barinas','Bolívar','Cojedes',
             'Delta Amacuro','Falcón','Guárico','Lara','Mérida','Miranda','Monagas','Nueva Esparta','Portuguesa',

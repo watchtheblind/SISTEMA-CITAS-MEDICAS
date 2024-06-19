@@ -12,6 +12,7 @@ require "verificarUsuario.php";
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="shortcut icon" href="./assets/compiled/png/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="./assets/compiled/css/app.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./assets/compiled/css/app-dark.css">
     <link rel="stylesheet" href="./assets/compiled/css/iconly.css">
     <link rel="stylesheet" href="./assets/compiled/css/estilo.css">
@@ -83,17 +84,17 @@ require "verificarUsuario.php";
                         </a>
                         </li>
                         <li class="sidebar-item op1">
-                        <a href="#" class="sidebar-link"  data-bs-toggle="modal" data-bs-target="#pacModal">
+                        <a href="" class="sidebar-link"  data-bs-toggle="modal" data-bs-target="#pacModal">
                             <i class="bi bi-file-earmark-medical-fill"></i>
                             <span>Pacientes</span>
                         </a>
                         </li>
-                        <li class="sidebar-item  op1">
+                        <!-- <li class="sidebar-item  op1">
                             <a href="#" class="sidebar-link" data-bs-toggle="modal" data-bs-target="#medModal">
                                 <i class="bi bi-file-earmark-medical-fill"></i>
                                 <span>Consultar citas</span>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="sidebar-item  op1 active">
                             <a href="#" class='sidebar-link bg-c-blue'>
                                 <i class="bi bi-file-earmark-medical-fill"></i>
@@ -101,7 +102,7 @@ require "verificarUsuario.php";
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="#" class='sidebar-link' data-bs-toggle="modal" data-bs-target="#pacModal2">
+                            <a href="#" class='sidebar-link' data-bs-toggle="modal" data-bs-target="#cambiarContrasena">
                                 <i class="bi bi-file-earmark-medical-fill"></i>
                                 <span>Cambiar Contraseña</span>
                             </a>
@@ -151,8 +152,21 @@ require "verificarUsuario.php";
                                 <div class="card bg-c-blue order-card">
                                     <div class="card-block p-5">
                                         <h6 class="text-center"><i class=""></i>
-                                        <span class="text-white text-center">Pacientes registrados</span>
-                                    </h6>
+                                            <span class="text-white text-center">
+                                                <?php include "conectarBD.php";
+                                                    //contar la cantidad de pacientes
+                                                    $query = $conn->prepare("SELECT COUNT(*) FROM paciente");
+                                                    $query->execute();
+                                                    $results = $query->fetchAll(PDO::FETCH_ASSOC);
+                                                    if (isset($results[0])) {
+                                                        $count = $results[0]['COUNT(*)'];
+                                                    } else {
+                                                        $count = 0;
+                                                    }
+                                                    ?>
+                                                    Pacientes registrados: <?php echo $count;?>
+                                            </span>
+                                        </h6>
                                     </div>
                                 </div>
                             </div>
@@ -160,7 +174,24 @@ require "verificarUsuario.php";
                                 <div class="card bg-c-green order-card">
                                     <div class="card-block p-5">
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#medModal">
-                                            <h6 class="text-center text-white"><i class=""></i><span>Citas para hoy: X</span></h6>
+                                            <h6 class="text-center text-white"><i class=""></i>
+                                                <span class="text-center text-white">
+                                                    <?php include "conectarBD.php";
+                                                        //contar la cantidad de citas para hoy
+                                                        $fechaActual= date("Y-m-d"); // obtengo la fecha actual
+                                                        $query = $conn->prepare("SELECT COUNT(*) FROM consultas WHERE start = :fechaActual");
+                                                        $query->bindParam(':fechaActual', $fechaActual);
+                                                        $query->execute();
+                                                        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+                                                        if (isset($results[0])) {
+                                                            $count = $results[0]['COUNT(*)'];
+                                                        } else {
+                                                            $count = 0;
+                                                        }
+                                                    ?>
+                                                    Citas para hoy: <?php echo $count;?>
+                                                </span>
+                                            </h6>
                                         </a>
                                     </div>
                                 </div>
@@ -169,7 +200,23 @@ require "verificarUsuario.php";
                                 <div class="card bg-c-yellow order-card">
                                     <div class="card-block p-5">
                                         <a href="#" data-bs-toggle="modal" data-bs-target="#pacModal">
-                                            <h6 class="text-center text-white"><i class=""></i><span>Citas por atender: Y</span></h6>
+                                            <h6 class="text-center text-white"><i class=""></i>
+                                            <span class="text-center text-white">
+                                                    <?php include "conectarBD.php";
+                                                    $fechaActual = date("Y-m-d"); // obtengo la fecha actual
+                                                    $query = $conn->prepare("SELECT COUNT(*) FROM consultas WHERE DATE(start) >= :fechaActual");
+                                                    $query->bindParam(':fechaActual', $fechaActual);
+                                                    $query->execute();
+                                                    $results = $query->fetchAll(PDO::FETCH_ASSOC);
+                                                    if (isset($results[0])) {
+                                                        $count = $results[0]['COUNT(*)'];
+                                                    } else {
+                                                        $count = 0;
+                                                    }
+                                                    ?>
+                                                    Citas por atender: <?php echo $count;?>
+                                                </span>
+                                            </h6>
                                         </a>
                                     </div>
                                 </div>
@@ -202,6 +249,9 @@ require "verificarUsuario.php";
 
     <!-- modal de especialidad nueva  -->
     <?= require "especialidades/modales/nuevaEspecialidad.php" ?>
+    <?php require "modalesPanelUsuario/registrarPacientes.php" ?>
+        <!-- Modal de cambio de contraseña-->
+    <?php require "modalesPanelUsuario/cambioContrasena.php" ?>
     <!-- script para mostrar especialidades-->
     <script>
         const especialidades = ['Medicina interna','Cardiología','endocrinología','fisiatría','nefrología','nutrición','psicología'];
