@@ -1,5 +1,5 @@
 
-
+<script> import Swal from 'sweetalert2'; </script>
 <script>
     // Alerta usuario ya existe 
     document.addEventListener('DOMContentLoaded', function() {
@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+//alerta de actualización de datos
 document.addEventListener('DOMContentLoaded', function() {
         if (location.search.includes('shSuccMsg=3')) {
             Swal.fire({
@@ -50,6 +51,24 @@ document.addEventListener('DOMContentLoaded', function() {
             }).then(() => {
             history.pushState('', document.title, window.location.pathname);
         });
+    }
+});
+document.addEventListener('DOMContentLoaded', function() {
+        if (location.search.includes('shSuccMsg=4')) {
+            Swal.fire({
+                title: "Do you want to save the changes?",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Save",
+                denyButtonText: `Don't save`
+                }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    Swal.fire("Saved!", "", "success");
+                } else if (result.isDenied) {
+                    Swal.fire("Changes are not saved", "", "info");
+                }
+                });
     }
 });
 

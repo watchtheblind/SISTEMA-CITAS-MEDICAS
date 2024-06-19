@@ -1,5 +1,17 @@
 
 <?php
+    function crearEspecialidad(){
+        include "../conectarBD.php";
+        $especialidad = $_POST["EspecNueva"];
+        $stmt = $conn->prepare("INSERT INTO medicos (atiende) VALUES (:especialidad)");
+        $stmt->bindParam(':especialidad', $especialidad);
+        $stmt->execute();
+        $afectado = $stmt->rowCount();
+        if($afectado > 0){
+            header('Location: ../especialidades.php?shSuccMsg=1');
+            exit;
+        }
+    }
     function leerDatos() {
         include "conectarBD.php";
         // $query = $conn->query("SELECT especialidad FROM especialidades");
@@ -15,8 +27,8 @@
                     <form action='especialidades/especialidadesCRUD.php' method='post'>
                         <div class='d-flex justify-content-start'>
                             <input type="hidden" name="especialidad" value="<?= $fila['atiende']; ?>">
-                            <button type='submit' name='eliminar' class='btn btn-danger'>Borrar</button>  
-                            <button type='button' name='edit' data-bs-toggle='modal' data-bs-target='#editEspecialidadModal-<?php echo str_replace(' ', '', $fila['atiende']); ?>' class='btn btn-primary' data-especialidad="<?= $fila['atiende'] ?>">Editar</button>
+                            <button type='submit' name='eliminar' class='btn btn-danger mx-1'><i class="bi bi-trash"></i></button>  
+                            <button type='button' name='edit' data-bs-toggle='modal' data-bs-target='#editEspecialidadModal-<?php echo str_replace(' ', '', $fila['atiende']); ?>' class='btn btn-primary' data-especialidad="<?= $fila['atiende'] ?>"><i class="bi bi-pen"></i></button>
                         </div>
                         <?php require "especialidades/modales/editEspecialidad.php" ?>
                         <?php require "especialidades/modales/verMedicos.php" ?>
@@ -30,7 +42,7 @@
                 </td>
             </tr>
         <?php endforeach;
-        }
+    }
     function borrarDatos(){
         include "../conectarBD.php";
         $especialidad = $_POST["especialidad"];
@@ -38,6 +50,7 @@
         $stmt->bindParam(':especialidad', $especialidad);
         $stmt->execute();
         $afectado = $stmt->rowCount();
+        echo "<script>alert(".$afectado.")</script>";
         if($afectado > 0){
             header('Location: ../especialidades.php?shSuccMsg=2');
             exit;
@@ -60,6 +73,9 @@
 
     if (isset($_POST["eliminar"])) {
         borrarDatos();
+    }
+    else if (isset($_POST["crearEspecialidad"])){
+        crearEspecialidad();
     }
     else if (isset($_POST["editar"])){
         editarDatos();

@@ -4,16 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recibos de Pago</title>
-    
-    
-    
     <link rel="shortcut icon" href="./assets/compiled/png/logo.png" type="image/x-icon">
-
-  <link rel="stylesheet" href="./assets/compiled/css/app.css">
-  <link rel="stylesheet" href="./assets/compiled/css/app-dark.css">
-  <link rel="stylesheet" href="./assets/compiled/css/auth.css">
-  <link rel="stylesheet" type="text/css" href="assets/css/sweetalert2.css">
-  <link rel="stylesheet" href="./assets/compiled/css/estilo.css">
+    <link rel="stylesheet" href="./assets/compiled/css/app.css">
+    <link rel="stylesheet" href="./assets/compiled/css/app-dark.css">
+    <link rel="stylesheet" href="./assets/compiled/css/auth.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/sweetalert2.css">
+    <link rel="stylesheet" href="./assets/compiled/css/estilo.css">
 </head>
 
 <body>
@@ -63,11 +59,9 @@
                         <img src="./assets/compiled/png/logo2.png" alt="Logo" width="50%">
                     </div>
                 </div>
-            
             </div>
         </div>
     </div>
-
 <script src="assets/js/jquery.js"></script>
 <script src="assets/js/jquery.mask.js"></script>
 <script src="assets/js/sweetalert2.all.min.js"></script>
