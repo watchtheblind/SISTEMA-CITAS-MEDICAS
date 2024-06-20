@@ -12,15 +12,14 @@ require "verificarUsuario.php";
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="shortcut icon" href="./assets/compiled/png/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="./assets/compiled/css/app.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./assets/compiled/css/app-dark.css">
     <link rel="stylesheet" href="./assets/compiled/css/iconly.css">
     <link rel="stylesheet" href="./assets/compiled/css/estilo.css">
     <link rel="stylesheet" type="text/css" href="assets/css/sweetalert2.css">
     <link rel="stylesheet" href="./assets/compiled/css/bootstrap-icons.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" />
-    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+    <script src="recursos/jquery-3.7.1.min.js"></script>
+    <link href="recursos/DataTables/datatables.min.css" rel="stylesheet">
+    <script src="recursos/DataTables/datatables.min.js"></script>
 </head>
 <!-- datatables de la sección especialidades -->
 <?= require "especialidades/datatables/datatables.php" ?>

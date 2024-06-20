@@ -17,11 +17,11 @@ require "verificarUsuario.php"; ?>
         <link rel="stylesheet" type="text/css" href="assets/css/sweetalert2.css">
         <link rel="stylesheet" href="./assets/compiled/css/bootstrap-icons.css">
         <!-- jquery -->
-        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-migrate-3.4.1.js"></script>
+        <script src="recursos/jquery-3.7.1.min.js"></script>
+        <script src="recursos/jquery-migrate-3.4.1.js"></script>
         <!-- librería datatables -->
-        <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css" />
-        <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+        <link href="recursos/DataTables/datatables.min.css" rel="stylesheet">
+        <script src="recursos/DataTables/datatables.min.js"></script>
     </head>
     <body>
             <!-- alertas con sweetalert2 -->
