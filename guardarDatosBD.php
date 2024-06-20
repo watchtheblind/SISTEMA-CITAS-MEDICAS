@@ -8,7 +8,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="recursos/sweetalert2-11.12.0/src/sweetalert2.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
     <script src="sweetalert2.all.min.js"></script>
 </head>
 <body>

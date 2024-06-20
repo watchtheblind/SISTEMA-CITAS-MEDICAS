@@ -9,7 +9,8 @@ require "verificarUsuario.php";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recibos de Pago</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="recursos/sweetalert2-11.12.0/src/sweetalert2.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
     <link rel="shortcut icon" href="./assets/compiled/png/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="./assets/compiled/css/app.css">
     <link rel="stylesheet" href="./assets/compiled/css/app-dark.css">
