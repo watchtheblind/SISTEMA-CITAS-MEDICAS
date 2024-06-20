@@ -78,14 +78,7 @@ require "verificarUsuario.php"; ?>
                                 <li class="sidebar-item active ">
                                     <a href="index.html" class="sidebar-link bg-c-blue">
                                         <i class="bi bi-grid-fill"></i>
-                                        <span>Médicos</span>
-                                    </a>
-                                </li>
-                            <?php else: ?>
-                                <li class="sidebar-item active ">
-                                    <a href="index.html" class="sidebar-link bg-c-blue">
-                                        <i class="bi bi-grid-fill"></i>
-                                        <span>Control de citas</span>
+                                        <span>Citas y Médicos</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item op1">
@@ -94,25 +87,26 @@ require "verificarUsuario.php"; ?>
                                         <span>Pacientes</span>
                                     </a>
                                 </li>
-                                <!-- <li class="sidebar-item  op1">
-                                    <a href="#" class="sidebar-link" data-bs-toggle="modal" data-bs-target="#medModal">
-                                        <i class="bi bi-file-earmark-medical-fill"></i>
-                                        <span>Consultar citas</span>
-                                    </a>
-                                </li> -->
                                 <li class="sidebar-item  op1">
                                     <a href="especialidades.php" class='sidebar-link'>
                                         <i class="bi bi-file-earmark-medical-fill"></i>
                                         <span>Especialidades</span>
                                     </a>
                                 </li>
-                            <?php endif ?>
-                            <li class="sidebar-item  ">
+                                <li class="sidebar-item  ">
                                 <a href="#" class='sidebar-link' data-bs-toggle="modal" data-bs-target="#cambiarContrasena">
                                     <i class="bi bi-file-earmark-medical-fill"></i>
                                     <span>Cambiar Contraseña</span>
                                 </a>
                             </li>
+                            <?php else: ?>
+                                <li class="sidebar-item active ">
+                                    <a href="index.html" class="sidebar-link bg-c-blue">
+                                        <i class="bi bi-grid-fill"></i>
+                                        <span>Control de citas</span>
+                                    </a>
+                                </li>
+                            <?php endif ?>
                             <li class="sidebar-item  ">
                                 <a href="cerrarSesion.php" class='sidebar-link text-danger '>
                                     <i class="bi bi-box-arrow-right"></i>

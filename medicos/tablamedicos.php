@@ -15,6 +15,8 @@
 
 <div class="container d-flex justify-content-start mb-3">
     <button class="btn btn-success " data-bs-toggle="modal" data-bs-target="#medModal">Registrar Médico</button>
+    <button class="btn btn-success ms-2" onclick="openInPopup('calendar.php')">Nueva Cita</button>
+    <button class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#reportModal">Generar Reporte</button>
 </div>
 <div>
     <div class="table-responsive">
