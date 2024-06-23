@@ -108,6 +108,14 @@ require "verificarUsuario.php"; ?>
                                     </a>
                                 </li>
                             <?php endif ?>
+                            <?php if ($result['perfil'] == 0):?> 
+                                <li class="sidebar-item op1">
+                                    <a href="#" class="sidebar-link"  data-bs-toggle="modal" data-bs-target="#pacModal">
+                                        <i class="bi bi-file-earmark-medical-fill"></i>
+                                        <span>Pacientes</span>
+                                    </a>
+                                </li>
+                            <?php endif ?>
                             <li class="sidebar-item  ">
                                 <a href="cerrarSesion.php" class='sidebar-link text-danger '>
                                     <i class="bi bi-box-arrow-right"></i>
