@@ -17,7 +17,7 @@ if ($stmt->rowCount() > 0) {
 echo '
 <script>
 //Alerta de Almacenamiento exitoso
-alert("El usuario no esta existe, debe verificar los datos");
+alert("El usuario no existe, debe verificar los datos");
 //Windows Location a index.php
 window.location.href= "index.php";
 </script>

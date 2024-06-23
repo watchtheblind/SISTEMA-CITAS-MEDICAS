@@ -12,8 +12,8 @@
           <form id="Formajax-<?php echo $i ?>" method="">
             <div class="row">
               <div class="col-md-6">
-                <label for="">Nombre (paciente)</label>
-                <input type="text" class="form-control" name="pacNombre" required>
+                <label for="cedula">Cédula (paciente)</label>
+                <input type="number" name="pacCedula" id="Cedula-<?php echo $i ?>" class="form-control" pattern="[0-9]*" oninput="fetchData(<?php echo $i ?>)">
               </div>
               <div class="col-md-6">
                 <label for="">Tipo de consulta</label>
@@ -27,8 +27,8 @@
             </div>
             <div class="row mt-3">
               <div class="col-md-6">
-                <label for="">Apellido (paciente)</label>
-                <input type="text" class="form-control" name="pacApellido">
+                <label for="">Nombre (paciente)</label>
+                <input type="text" class="form-control" name="pacNombre" id="Nombre-<?php echo $i ?>" required>
               </div>
               <div class="col-md-6">
                 <label for="">Doctor que lo atenderá</label>
@@ -42,8 +42,8 @@
             </div>
             <div class="row mt-3">
               <div class="col-md-6">
-                <label for="cedula">Cédula (paciente)</label>
-                <input type="number" name="pacCedula" class="form-control" pattern="[0-9]*">
+                  <label for="">Apellido (paciente)</label>
+                  <input type="text" class="form-control" name="pacApellido" id="Apellido-<?php echo $i ?>">
               </div>
               <div class="col-md-6">
                 <label for="fechaCita">Fecha de la cita</label>

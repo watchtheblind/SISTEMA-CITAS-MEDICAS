@@ -18,7 +18,7 @@
         info.el.style.backgroundColor = ''; // resetear el color del evento
       },
       navLinks: false, //fechas y semanas seleccionables
-      // pasar variables de la base de datos a un modal 👇
+      // pasar variables de la base de datos a un modal (el de imprimir ticket)👇
       eventClick: function(info){
         let events = <?php echo json_encode($events); ?>;
         var datos = <?php echo json_encode($datos); ?>;
@@ -33,7 +33,7 @@
         localStorage.setItem('ticketCounter', 0);
 
         // Cuando se imprime un ticket
-         // contenido del modal para cada fecha
+         // contenido del modal de generación de tickets, en el archivo mostrarinfo.php
         document.getElementById('eventModalBody').innerHTML =
         `
         <form action="tickets/ticket.php" method="post" target="_blank">
@@ -71,12 +71,18 @@
               <strong><p>V-${cedulaPaciente}</p></strong>
               <input type="hidden" name="cedula" value="${cedulaPaciente}"/>
               <label>Estado de consulta:</label>
-              <strong><p>${estadoConsulta}</p></strong>
+              <strong><p>Por atender</p></strong>
               <label>Fecha de atención:</label>
               <strong><p>${fechaCita}</p></strong>
               <input type="hidden" name="fechaCita" value="${fechaCita}"/>
               <button class="btn btn-primary mt-2" type="submit">Generar ticket</button>
             </div>
+          </div>
+        </form>
+        <form action="borrarConsulta.php" method="post">
+          <div class="col-md-12 d-flex justify-content-center mt-3">
+            <input type="hidden" name="cedula" value="${cedulaPaciente}"/>
+            <button id="borrarEvento" class="btn btn-danger w-75">Borrar consulta</button>
           </div>
         </form>
         `;
