@@ -85,7 +85,7 @@ require "verificarUsuario.php"; ?>
                                 <li class="sidebar-item op1">
                                     <a href="#" class="sidebar-link"  data-bs-toggle="modal" data-bs-target="#pacModal">
                                         <i class="bi bi-file-earmark-medical-fill"></i>
-                                        <span>Pacientes</span>
+                                        <span>Crear Pacientes</span>
                                     </a>
                                 </li>
                                 <li class="sidebar-item  op1">
@@ -112,7 +112,7 @@ require "verificarUsuario.php"; ?>
                                 <li class="sidebar-item op1">
                                     <a href="#" class="sidebar-link"  data-bs-toggle="modal" data-bs-target="#pacModal">
                                         <i class="bi bi-file-earmark-medical-fill"></i>
-                                        <span>Pacientes</span>
+                                        <span>Crear Pacientes</span>
                                     </a>
                                 </li>
                             <?php endif ?>
@@ -187,6 +187,84 @@ require "verificarUsuario.php"; ?>
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card bg-c-blue order-card">
+                                        <div class="card-block p-5">
+                                            <h6 class="text-center"><i class=""></i>
+                                                <span class="text-white text-center">
+                                                    <?php include "conectarBD.php";
+                                                        //contar la cantidad de pacientes
+                                                        $query = $conn->prepare("SELECT COUNT(*) FROM paciente");
+                                                        $query->execute();
+                                                        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+                                                        if (isset($results[0])) {
+                                                            $count = $results[0]['COUNT(*)'];
+                                                        } else {
+                                                            $count = 0;
+                                                        }
+                                                        ?>
+                                                        <span class="text-white text-center small">
+                                                            Pacientes registrados: <?php echo $count;?>
+                                                        </span>
+                                                </span>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card bg-c-green order-card">
+                                        <div class="card-block p-5">
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#medModal">
+                                                <h6 class="text-center text-white"><i class=""></i>
+                                                    <span class="text-center text-white">
+                                                        <?php include "conectarBD.php";
+                                                            //contar la cantidad de citas para hoy
+                                                            $fechaActual= date("Y-m-d"); // obtengo la fecha actual
+                                                            $query = $conn->prepare("SELECT COUNT(*) FROM consultas WHERE start = :fechaActual");
+                                                            $query->bindParam(':fechaActual', $fechaActual);
+                                                            $query->execute();
+                                                            $results = $query->fetchAll(PDO::FETCH_ASSOC);
+                                                            if (isset($results[0])) {
+                                                                $count = $results[0]['COUNT(*)'];
+                                                            } else {
+                                                                $count = 0;
+                                                            }
+                                                        ?>
+                                                        Citas para hoy: <?php echo $count;?>
+                                                    </span>
+                                                </h6>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="card bg-c-yellow order-card">
+                                        <div class="card-block p-5">
+                                            <a href="#">
+                                                <h6 class="text-center text-white"><i class=""></i>
+                                                <span class="text-center text-white">
+                                                        <?php include "conectarBD.php";
+                                                        $fechaActual = date("Y-m-d"); // obtengo la fecha actual
+                                                        $query = $conn->prepare("SELECT COUNT(*) FROM consultas WHERE DATE(start) >= :fechaActual");
+                                                        $query->bindParam(':fechaActual', $fechaActual);
+                                                        $query->execute();
+                                                        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+                                                        if (isset($results[0])) {
+                                                            $count = $results[0]['COUNT(*)'];
+                                                        } else {
+                                                            $count = 0;
+                                                        }
+                                                        ?>
+                                                        Citas por atender: <?php echo $count;?>
+                                                    </span>
+                                                </h6>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                        </div>
                             <?php endif; ?>
                             <!-- solo se muestra para usuarios comunes -->
                             <?php "verificarUsuario.php"; if($result['perfil'] == 0): ?>
@@ -207,7 +285,9 @@ require "verificarUsuario.php"; ?>
                                                     $count = 0;
                                                 }
                                                 ?>
-                                                Pacientes registrados: <?php echo $count;?>
+                                                <span class="text-white text-center small">
+                                                    Pacientes registrados: <?php echo $count;?>
+                                                </span>
                                             </span>
                                             </h6>
                                         </div>

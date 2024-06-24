@@ -199,7 +199,7 @@ require "verificarUsuario.php";
                             <div class="col-md-6 col-lg-4">
                                 <div class="card bg-c-yellow order-card">
                                     <div class="card-block p-5">
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#pacModal">
+                                        <a href="#">
                                             <h6 class="text-center text-white"><i class=""></i>
                                             <span class="text-center text-white">
                                                     <?php include "conectarBD.php";
@@ -253,16 +253,6 @@ require "verificarUsuario.php";
         <!-- Modal de cambio de contraseña-->
     <?php require "modalesPanelUsuario/cambioContrasena.php" ?>
     <!-- script para mostrar especialidades-->
-    <script>
-        const especialidades = ['Medicina interna','Cardiología','endocrinología','fisiatría','nefrología','nutrición','psicología'];
-        const select2 = document.getElementById('especialidades');
-        for (let i = 0; i < especialidades.length; i++) {
-            const option2 = document.createElement('option');
-            option2.value = especialidades[i];
-            option2.textContent = especialidades[i];
-            select2.appendChild(option2);
-        }
-    </script>
     <script src="assets/static/js/components/dark.js"></script>
     <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/compiled/js/app.js"></script>

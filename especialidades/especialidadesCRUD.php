@@ -2,7 +2,42 @@
 <?php
     function crearEspecialidad(){
         include "../conectarBD.php";
-        $especialidad = $_POST["EspecNueva"];
+        $MedAtencion = $_POST["EspecNueva"];
+        $MedCedula = $_POST['medCed'];
+        $MedNombres = $_POST['medNom'];
+        $MedApellidos = $_POST['medApe'];
+        $MedTelefono = $_POST['medTel'];
+        $MedCargo = $_POST['medCargo'];
+        $MedEspecialidad = $_POST['medEspec'];
+
+        try {
+            // Verificar si la cédula ya existe
+            $stmt = $conn->prepare("SELECT * FROM medicos WHERE cedula = :cedula");
+            $stmt->bindParam(':cedula', $MedCedula);
+            $stmt->execute();
+            if ($stmt->rowCount() == 1) {
+                header('Location: ../especialidades.php?shSuccMsg=0');
+                exit;
+            }
+            $stmt = $conn->prepare("INSERT INTO medicos (cedula, nombre, apellido, telf, especialidad, cargo, atiende)
+            values (:cedula, :nombre, :apellido, :telf, :especialidad, :cargo, :atiende)");
+            $stmt->bindParam(':cedula', $MedCedula);
+            $stmt->bindParam(':nombre', $MedNombres);
+            $stmt->bindParam(':apellido', $MedApellidos);
+            $stmt->bindParam(':telf', $MedTelefono);
+            $stmt->bindParam(':especialidad', $MedEspecialidad);
+            $stmt->bindParam(':cargo', $MedCargo);
+            $stmt->bindParam(':atiende', $MedAtencion);
+            $stmt->execute();
+            if ($stmt->rowCount() == 1) {
+                header('Location: ../especialidades.php?shSuccMsg=1');
+                exit;
+            }
+        }
+        catch (PDOException $e){
+            header('Location: ../especialidades.php?shSuccMsg=0&shErrorMsg='.urlencode($e->getMessage()));
+            exit;
+        }
         $stmt = $conn->prepare("INSERT INTO medicos (atiende) VALUES (:especialidad)");
         $stmt->bindParam(':especialidad', $especialidad);
         $stmt->execute();
