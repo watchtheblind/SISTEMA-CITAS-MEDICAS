@@ -297,8 +297,17 @@ require "verificarUsuario.php"; ?>
             }
         </script>
         <!-- script para mostrar especialidades-->
+        <!-- Esto devolverá un array asociativo con los valores únicos de la columna atiende en PHP, que puedes luego leer en JavaScript  -->
+        <?php 
+        $stmt = $conn->prepare("SELECT DISTINCT atiende FROM medicos");
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);     
+        $atiende = array_map(function($row) {
+            return $row['atiende'];
+        }, $result);
+        ?>
         <script>
-            const especialidades = ['Medicina interna','Cardiología','endocrinología','fisiatría','nefrología','nutrición','psicología'];
+            const especialidades = JSON.parse('<?php echo json_encode($atiende); ?>');
             const select2 = document.getElementById('especialidades');
             for (let i = 0; i < especialidades.length; i++) {
                 const option2 = document.createElement('option');
