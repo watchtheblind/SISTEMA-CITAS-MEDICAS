@@ -25,6 +25,14 @@
         $PacParroquia = $_POST['pacParroq'];
         $PacComunidad = $_POST['pacCom'];
         try {
+            // Verificar si la cédula ya existe
+            $stmt = $conn->prepare("SELECT * FROM paciente WHERE cedula = :cedula");
+            $stmt->bindParam(':cedula', $PacCedula);
+            $stmt->execute();
+            if ($stmt->rowCount() == 1) {
+                header('Location: panelUsuario.php?shSuccMsg=0');
+                exit;
+            }
             // Your database code here
             $stmt = $conn->prepare("INSERT INTO paciente (cedula, nombre, apellido, telf, estado, municipio, parroquia, comunidad)
             values (:cedula, :nombre, :apellido, :telf, :estado, :municipio, :parroquia, :comunidad)");
@@ -38,13 +46,13 @@
             $stmt->bindParam(':comunidad', $PacComunidad );
             $stmt->execute();
         
-            if ($stmt->rowCount() > 0) {
+            if ($stmt->rowCount() == 1) {
                 header('Location: panelUsuario.php?shSuccMsg=1');
                 exit;
             }
         } 
         catch (PDOException $e) {
-            header('Location: panelUsuario.php?shSuccMsg=0');
+            header('Location: error.php?error='.urlencode($e->getMessage()));
             exit;
         }
     }
@@ -58,6 +66,14 @@
         $MedEspecialidad = $_POST['medEspec'];
         $MedAtencion = $_POST['medAtencion'];
         try {
+            // Verificar si la cédula ya existe
+            $stmt = $conn->prepare("SELECT * FROM medicos WHERE cedula = :cedula");
+            $stmt->bindParam(':cedula', $MedCedula);
+            $stmt->execute();
+            if ($stmt->rowCount() == 1) {
+                header('Location: panelUsuario.php?shSuccMsg=0');
+                exit;
+            }
             $stmt = $conn->prepare("INSERT INTO medicos (cedula, nombre, apellido, telf, especialidad, cargo, atiende)
             values (:cedula, :nombre, :apellido, :telf, :especialidad, :cargo, :atiende)");
             $stmt->bindParam(':cedula', $MedCedula);
@@ -68,16 +84,16 @@
             $stmt->bindParam(':cargo', $MedCargo);
             $stmt->bindParam(':atiende', $MedAtencion);
             $stmt->execute();
-            if ($stmt->rowCount() > 0) {
+            if ($stmt->rowCount() == 1) {
                 header('Location: panelUsuario.php?shSuccMsg=1');
                 exit;
             }
         }
         catch (PDOException $e){
-            header('Location: panelUsuario.php?shSuccMsg=0');
+            header('Location: panelUsuario.php?shSuccMsg=0&shErrorMsg='.urlencode($e->getMessage()));
             exit;
         }
-        }
+    }
     if (isset($_POST['regPaciente'])) {
         crearPaciente();
     }

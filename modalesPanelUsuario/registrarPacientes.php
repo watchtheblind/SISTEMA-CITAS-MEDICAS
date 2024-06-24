@@ -14,21 +14,21 @@
                                 <div class="form-row col-md-6">
                                     <div class="form-group">
                                         <label for="inputNombre1">Nombres</label>
-                                        <input type="nombre" name="pacNom" class="form-control" id="inputEmail4" placeholder="Ej: Pedro José">
+                                        <input required type="nombre" name="pacNom" class="form-control" id="inputEmail4" placeholder="Ej: Pedro José">
                                     </div>
                                     <div class="form-group">
                                         <label for="inputAddress2">Telefono</label>
-                                        <input type="number" onkeydown="return event.keyCode !== 69" name="pacTel" class="form-control" id="inputTel" placeholder="04XX-XXXXXXX">
+                                        <input required type="number" onkeydown="return event.keyCode !== 69" name="pacTel" class="form-control" id="inputTel" placeholder="04XX-XXXXXXX">
                                     </div>
                                     <div class="form-group">
                                         <label for="inputAddress">Cedula</label>
-                                        <input type="number" onkeydown="return event.keyCode !== 69" name="pacCed" class="form-control" id="inputTel2" placeholder="Ej: 5674123">
+                                        <input required type="number" onkeydown="return event.keyCode !== 69" name="pacCed" class="form-control" id="inputTel2" placeholder="Ej: 5674123">
                                     </div>
                                 </div>
                                 <div class="form-row col-md-6">
                                     <div class="form-group">
                                         <label for="inputPassword4">Apellidos</label>
-                                        <input type="apellido" name="pacApe" class="form-control" id="inputPassword4" placeholder="Ej: Fernández Contreras">
+                                        <input required type="apellido" name="pacApe" class="form-control" id="inputPassword4" placeholder="Ej: Fernández Contreras">
                                     </div>
                                     <div class="form-group">
                                         <label for="inputAddress3">Estado</label>
@@ -38,17 +38,17 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="inputAddress4">Municipio</label>
-                                        <input type="text" name="pacMun" class="form-control" id="inputMunicipio" placeholder="Ej: Girardot">
+                                        <input required type="text" name="pacMun" class="form-control" id="inputMunicipio" placeholder="Ej: Girardot">
                                     </div>
                                 </div>
                                 <div class="form-row col-md-12 text-center">
                                     <div class="form-group">
                                         <label for="inputAddress2">Parroquia</label>
-                                        <input type="text" name="pacParroq" class="form-control" id="inputAddress2" placeholder="Ej: Las Delicias">
+                                        <input required type="text" name="pacParroq" class="form-control" id="inputAddress2" placeholder="Ej: Las Delicias">
                                     </div>
                                     <div class="form-group">
                                         <label for="inputAddress2">Comunidad</label>
-                                        <input type="text" name="pacCom" class="form-control" id="inputAddress2" placeholder="Ej: La Pedrera">
+                                        <input required type="text" name="pacCom" class="form-control" id="inputAddress2" placeholder="Ej: La Pedrera">
                                     </div>
                                 </div>
                                 <button type="submit" class="btn bg-c-blue w-60 text-dark" id="aceptar" name="regPaciente">Aceptar</button>   

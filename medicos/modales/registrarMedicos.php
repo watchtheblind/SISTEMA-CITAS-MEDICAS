@@ -14,29 +14,29 @@
                                         <div class="form-row col-md-6">
                                             <div class="form-group">
                                                 <label for="inputNombre">Nombres</label>
-                                                <input type="nombre" name="medNom" class="form-control" id="medNombre" placeholder="Ej: Maria José">
+                                                <input type="nombre" required  name="medNom" class="form-control" id="medNombre" placeholder="Ej: Maria José">
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputTelefono">Telefono</label>
-                                                <input type="number" onkeydown="return event.keyCode !== 69" name="medTel" class="form-control" id="inputTel" placeholder="04XX-XXXXXXX">
+                                                <input type="number" required onkeydown="return event.keyCode !== 69" name="medTel" class="form-control" id="inputTel" placeholder="04XX-XXXXXXX">
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputCedula">Cedula</label>
-                                                <input type="number" onkeydown="return event.keyCode !== 69" name="medCed" class="form-control" id="inputCed" placeholder="Ej: 5674123">
+                                                <input type="number" required onkeydown="return event.keyCode !== 69" name="medCed" class="form-control" id="inputCed" placeholder="Ej: 5674123">
                                             </div>
                                         </div>
                                         <div class="form-row col-md-6">
                                             <div class="form-group">
                                                 <label for="inputApellido">Apellidos</label>
-                                                <input type="text" name="medApe" class="form-control" id="inputApell" placeholder="Ej: Torres Pérez">
+                                                <input type="text" required name="medApe" class="form-control" id="inputApell" placeholder="Ej: Torres Pérez">
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputEspecialidad">Cargo</label>
-                                                <input type="text" name="medCargo" class="form-control" id="inputCargo" placeholder="Ej: Director, R1, R2, etc.">
+                                                <input type="text" required name="medCargo" class="form-control" id="inputCargo" placeholder="Ej: Director, R1, R2, etc.">
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputEspecialidad">Especialidad</label>
-                                                <input type="text" name="medEspec" class="form-control" id="inputEspec" placeholder="Ej: Pediatra, Cardiólogo, etc.">
+                                                <input type="text" required name="medEspec" class="form-control" id="inputEspec" placeholder="Ej: Pediatra, Cardiólogo, etc.">
                                             </div>
                                         </div>
                                         <div class="div d-flex justify-content-center">
