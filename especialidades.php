@@ -164,7 +164,9 @@ require "verificarUsuario.php";
                                                         $count = 0;
                                                     }
                                                     ?>
-                                                    Pacientes registrados: <?php echo $count;?>
+                                                    <span class="text-white text-center small">
+                                                        Pacientes registrados: <?php echo $count;?>
+                                                    </span>
                                             </span>
                                         </h6>
                                     </div>
