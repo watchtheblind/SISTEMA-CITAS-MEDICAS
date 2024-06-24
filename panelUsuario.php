@@ -94,12 +94,12 @@ require "verificarUsuario.php"; ?>
                                         <span>Especialidades</span>
                                     </a>
                                 </li>
-                                <li class="sidebar-item  ">
-                                <a href="#" class='sidebar-link' data-bs-toggle="modal" data-bs-target="#cambiarContrasena">
-                                    <i class="bi bi-file-earmark-medical-fill"></i>
-                                    <span>Cambiar Contraseña</span>
-                                </a>
-                            </li>
+                                <!-- <li class="sidebar-item  ">
+                                    <a href="#" class='sidebar-link' data-bs-toggle="modal" data-bs-target="#cambiarContrasena">
+                    Cambiar Contras                   <i class="bi bi-file-earmark-medical-fill"></i>
+                                        <span>eña</span>
+                                    </a>
+                                </li> -->
                             <?php else: ?>
                                 <li class="sidebar-item active ">
                                     <a href="index.html" class="sidebar-link bg-c-blue">
