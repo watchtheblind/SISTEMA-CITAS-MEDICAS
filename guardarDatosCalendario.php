@@ -1,6 +1,6 @@
 <?php 
     $nombreHost = 'localhost';
-    $baseDatos = 'citas_medicas';
+    $baseDatos = 'citas_medicas2';
     $usuario = 'root';
     $contrasena = "";
 
