@@ -163,8 +163,8 @@ require "verificarUsuario.php"; ?>
                                     <div class="card bg-c-blue order-card">
                                         <div class="card-block p-5">
                                             <h6 class="text-center"><i class=""></i>
-                                            <span class="text-white text-center">Documentación</span>
-                                        </h6>
+                                            <a href="MANUALCITASMEDICAS.pdf" target="_blank"><span class="text-white text-center">Documentación</span></a>
+                                            </h6>
                                         </div>
                                     </div>
                                 </div>
