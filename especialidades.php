@@ -102,12 +102,6 @@ require "verificarUsuario.php";
                             </a>
                         </li>
                         <li class="sidebar-item  ">
-                            <a href="#" class='sidebar-link' data-bs-toggle="modal" data-bs-target="#cambiarContrasena">
-                                <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>Cambiar Contraseña</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  ">
                             <a href="cerrarSesion.php" class='sidebar-link text-danger '>
                                 <i class="bi bi-box-arrow-right"></i>
                                 <span>Cerrar Sesion</span>

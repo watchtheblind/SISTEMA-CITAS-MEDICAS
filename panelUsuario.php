@@ -178,17 +178,6 @@ require "verificarUsuario.php"; ?>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-4">
-                                    <div class="card bg-c-yellow order-card">
-                                        <div class="card-block p-5">
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#pacModal">
-                                                <h6 class="text-center text-white"><i class=""></i><span>Ingresar Paciente</span></h6>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 col-lg-4">
                                     <div class="card bg-c-blue order-card">
                                         <div class="card-block p-5">
                                             <h6 class="text-center"><i class=""></i>
@@ -212,6 +201,8 @@ require "verificarUsuario.php"; ?>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row d-flex justify-content-center">
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card bg-c-green order-card">
                                         <div class="card-block p-5">
