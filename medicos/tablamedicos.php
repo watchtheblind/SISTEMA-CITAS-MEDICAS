@@ -32,6 +32,7 @@
                     <th scope="col">Cargo</th>
                     <th scope="col">Atiende</th>
                     <th scope="col">Acciones</th>
+                    <th scope="col">Cantidad pacientes</th>
                 </tr>
             </thead>
             <tbody>

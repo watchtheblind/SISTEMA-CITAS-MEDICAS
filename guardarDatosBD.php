@@ -65,6 +65,7 @@
         $MedCargo = $_POST['medCargo'];
         $MedEspecialidad = $_POST['medEspec'];
         $MedAtencion = $_POST['medAtencion'];
+        $MedCantidad = $_POST["medCantidad"];
         try {
             // Verificar si la cédula ya existe
             $stmt = $conn->prepare("SELECT * FROM medicos WHERE cedula = :cedula");
@@ -74,8 +75,8 @@
                 header('Location: panelUsuario.php?shSuccMsg=0');
                 exit;
             }
-            $stmt = $conn->prepare("INSERT INTO medicos (cedula, nombre, apellido, telf, especialidad, cargo, atiende)
-            values (:cedula, :nombre, :apellido, :telf, :especialidad, :cargo, :atiende)");
+            $stmt = $conn->prepare("INSERT INTO medicos (cedula, nombre, apellido, telf, especialidad, cargo, atiende, cantidad_pacientes)
+            values (:cedula, :nombre, :apellido, :telf, :especialidad, :cargo, :atiende, :cantidad)");
             $stmt->bindParam(':cedula', $MedCedula);
             $stmt->bindParam(':nombre', $MedNombres);
             $stmt->bindParam(':apellido', $MedApellidos);
@@ -83,6 +84,7 @@
             $stmt->bindParam(':especialidad', $MedEspecialidad);
             $stmt->bindParam(':cargo', $MedCargo);
             $stmt->bindParam(':atiende', $MedAtencion);
+            $stmt->bindParam(':cantidad', $MedCantidad);
             $stmt->execute();
             if ($stmt->rowCount() == 1) {
                 header('Location: panelUsuario.php?shSuccMsg=1');
@@ -90,7 +92,7 @@
             }
         }
         catch (PDOException $e){
-            header('Location: panelUsuario.php?shSuccMsg=0&shErrorMsg='.urlencode($e->getMessage()));
+            echo "<script>alert('Error: $errorMessage');</script>";
             exit;
         }
     }

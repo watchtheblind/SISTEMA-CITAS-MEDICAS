@@ -19,6 +19,7 @@
                         <button type='submit' name='eliminar' class='btn btn-danger mx-1'><i class='bi bi-trash'></i></button>  
                         <button type='button' name='edit' data-bs-toggle='modal' data-bs-target='#editMedModal-".$fila['cedula']."' class='btn btn-primary'><i class='bi bi-pen'></i></button>
                         </div>";
+                echo "<td>".$fila['cantidad_pacientes']."</td>";
                     require "modales/editMedico.php";
             echo "</tr>";
         }

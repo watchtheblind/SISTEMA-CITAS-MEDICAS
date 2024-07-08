@@ -24,6 +24,10 @@
                                                 <label for="inputCedula">Cedula</label>
                                                 <input type="number" required onkeydown="return event.keyCode !== 69" name="medCed" class="form-control" id="inputCed" placeholder="Ej: 5674123">
                                             </div>
+                                            <div class="form-group">
+                                                <label for="inputEspecialidad">Cantidad de pacientes que atiende</label>
+                                                <input type="text" required name="medCantidad" class="form-control" id="inputEspec" placeholder="Ej: 10">
+                                            </div>  
                                         </div>
                                         <div class="form-row col-md-6">
                                             <div class="form-group">
@@ -38,9 +42,7 @@
                                                 <label for="inputEspecialidad">Especialidad</label>
                                                 <input type="text" required name="medEspec" class="form-control" id="inputEspec" placeholder="Ej: Pediatra, Cardiólogo, etc.">
                                             </div>
-                                        </div>
-                                        <div class="div d-flex justify-content-center">
-                                            <div class="form-row col-md-6 text-center">
+                                            <div class="form-group">
                                                 <label for="inputEspecialidad">Especialidad que atiende</label>
                                                 <select required class="form-select" name="medAtencion" id="especialidades" aria-label="Default select example">
                                                     <option  value="" disabled selected hidden>Escoja especialidad</option>
