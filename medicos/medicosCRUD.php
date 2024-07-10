@@ -22,15 +22,16 @@
                     require "modales/editTelefono.php";
                     
                     echo "<td>
-                    <form action='medicos/medicosCRUD.php' method='post'>
-                        <div class='d-flex justify-content-around'>
-                        <input type='hidden' name='cedula'  value='".$fila['cedula']."'>
-                        ".$fila['cantidad_pacientes']."
-                        <button type='button' name='edit' data-bs-toggle='modal' data-bs-target='#editCantModal-".$fila['cedula']."' class='btn btn-primary'><i class='bi bi-pen'></i></button>
-                        </div>";
-                    require "modales/editCantidad.php";
-                    echo "                    </form>
-                        </td>";
+                        <form action='medicos/medicosCRUD.php' method='post'>
+                            <div class='d-flex justify-content-around'>
+                            <input type='hidden' name='cedula'  value='".$fila['cedula']."'>
+                            ".$fila['cantidad_pacientes']."
+                            <button type='button' name='edit' data-bs-toggle='modal' data-bs-target='#editCantModal-".$fila['cedula']."' class='btn btn-primary'><i class='bi bi-pen'></i></button>
+                            </div>";
+                        require "modales/editCantidad.php";
+                        echo "
+                        </form>
+                    </td>";
             echo "</tr>";
         }
     }
