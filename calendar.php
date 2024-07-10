@@ -39,7 +39,7 @@
       </div>
     </div>
     <!-- modal para reservas -->
-    <?php require "calendario/modal/reservas.php"?>
+    <?php require "calendario/modal/cantidadPuestos.php"?>
     <!-- modales de formulario de cita -->
     <?php require "calendario/modal/formularioCita.php"?>
     <!-- modal que muestra la información  -->

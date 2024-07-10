@@ -31,7 +31,6 @@
         const estadoConsulta = datosEvento.estadoConsulta;
         const fechaCita = event.start;
         localStorage.setItem('ticketCounter', 0);
-
         // Cuando se imprime un ticket
          // contenido del modal de generación de tickets, en el archivo mostrarinfo.php
         document.getElementById('eventModalBody').innerHTML =
@@ -103,12 +102,12 @@
       hiddenDays: [0], //no se muestra el domingo
       //acciones que se dan al hacer click en una fecha: 👇
       dateClick: function(info) {
-        a = info.dateStr;
-        const fechaComoCadena = a;
-        let numeroDia = new Date (fechaComoCadena).getDay();
-        let dias = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes']
-        $('#modalReservas').modal('show');
-        $('#diaSemana').html(dias[numeroDia] + " " + a);
+        // a = info.dateStr;
+        // const fechaComoCadena = a;
+        // let numeroDia = new Date (fechaComoCadena).getDay();
+        // let dias = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes']
+        $('#modalFormulario').modal('show');
+        // $('#diaSemana').html(dias[numeroDia] + " " + a);
         // ajax para que los puestos se reserven
         let fecha = info.dateStr;
         let res ="";
@@ -120,14 +119,6 @@
         }
         });
       },
-      customButtons: {
-    myCustomButton: {
-      text: 'Mi botón personalizado',
-      click: function() {
-        alert('Has hecho clic en mi botón personalizado!');
-      }
-    }
-  },
     headerToolbar: {
       left: 'prev,next',
       center: 'title',

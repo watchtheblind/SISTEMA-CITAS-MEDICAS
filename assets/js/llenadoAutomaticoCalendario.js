@@ -1,7 +1,7 @@
 let smallElement = null;
 
-function fetchData(i) {
-  const cedula = document.getElementById(`Cedula-${i}`).value;
+function fetchData() {
+  const cedula = document.getElementById(`Cedula`).value;
   if (cedula !== "") {
     $.ajax({
       type: "POST",
@@ -14,17 +14,17 @@ function fetchData(i) {
       let apellido =
         response && response.apellido ? response.apellido.split(" ")[0] : "";
       if (nombre !== "") {
-        document.getElementById(`Nombre-${i}`).value = nombre;
+        document.getElementById(`Nombre`).value = nombre;
         // Elimina el elemento small si se encontró un resultado
         let smallElement = document
-          .getElementById(`Cedula-${i}`)
+          .getElementById(`Cedula`)
           .parentNode.querySelector("small");
         if (smallElement) {
           smallElement.remove();
         }
       }
       if (apellido !== "") {
-        document.getElementById(`Apellido-${i}`).value = apellido;
+        document.getElementById(`Apellido`).value = apellido;
       } else {
         if (!smallElement) {
           let textElement = document.createElement("small");
@@ -45,9 +45,7 @@ function fetchData(i) {
           textElement.appendChild(aElement);
           smallElement = textElement;
         }
-        document
-          .getElementById(`Cedula-${i}`)
-          .parentNode.appendChild(smallElement);
+        document.getElementById(`Cedula`).parentNode.appendChild(smallElement);
       }
     });
   }
