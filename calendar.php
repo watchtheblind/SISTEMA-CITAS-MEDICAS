@@ -44,7 +44,7 @@
     <?php require "calendario/modal/formularioCita.php"?>
     <!-- modal que muestra la información  -->
     <?php require "calendario/modal/mostrarInfo.php"?>
-    <script src="assets/js/modal.js"></script>
+    <script src="assets/js/medicosSegunEspecialidad.js"></script>
     <!-- enviar datos con ajax -->
     <script src="assets/js/ajaxCalendario.js"></script>
     <script src="assets/js/sweetalert2.all.min.js"></script>

@@ -47,6 +47,7 @@
               <div class="col-md-6">
                 <label for="fechaCita">Fecha de la cita</label>
                 <input type="text" class="form-control" name="fechadeCita" id="fechaCita"> 
+                <!-- <input type="number" class="form-control" name="nroPuesto" id="puesto" hidden> -->
               </div> 
             </div>
             </div>

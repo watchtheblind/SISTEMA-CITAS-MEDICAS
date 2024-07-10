@@ -102,10 +102,10 @@
       hiddenDays: [0], //no se muestra el domingo
       //acciones que se dan al hacer click en una fecha: 👇
       dateClick: function(info) {
-        // a = info.dateStr;
-        // const fechaComoCadena = a;
-        // let numeroDia = new Date (fechaComoCadena).getDay();
-        // let dias = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes']
+        getFecha = info.dateStr;
+        const fechaComoCadena = getFecha;
+        let numeroDia = new Date (fechaComoCadena).getDay();
+        let dias = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes']
         $('#modalFormulario').modal('show');
         // $('#diaSemana').html(dias[numeroDia] + " " + a);
         // ajax para que los puestos se reserven
