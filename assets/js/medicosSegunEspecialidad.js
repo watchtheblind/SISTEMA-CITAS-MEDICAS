@@ -29,6 +29,13 @@ $(document).ready(function () {
     var atiendeValue = $(this).val();
     $(`#medico-select option`).hide();
     $(`#medico-select option[data-atiende="${atiendeValue}"]`).show();
+    //mostrar el botón del ojo solo cuando se seleccione un médico
+    const select = document.getElementById("medico-select");
+    select.addEventListener("change", () => {
+      if (select.value !== "one") {
+        document.getElementById("ver-medicos").removeAttribute("hidden");
+      }
+    });
   });
 });
 //hacer que la página se recargue si se cierra el modal de reservas

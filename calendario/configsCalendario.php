@@ -114,9 +114,7 @@
         let url = "verificar_puesto.php";
         $.get(url,{fecha:fecha}, function (datos){
           res = datos;
-          for (let i = 1; i <= 12; i++) {
-          $(`#respuesta-${i}`).html(res);
-        }
+          $(`#respuesta`).html(res);
         });
       },
     headerToolbar: {

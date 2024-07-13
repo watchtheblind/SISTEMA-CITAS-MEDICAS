@@ -61,5 +61,6 @@
       }
     </script>
     <script src="assets/js/llenadoAutomaticoCalendario.js"></script>
+    <script src="assets/js/seleccionarSoloUnPuesto.js"></script>
   </body>
 </html>

@@ -31,12 +31,16 @@
               </div>
               <div class="col-md-6">
                 <label for="">Doctor que lo atenderá</label>
-                <select  disabled id="medico-select" name="docInfo" class="form-select" aria-label="Default select example">
-                  <option hidden>Elija opción...</option>
-                  <?php foreach ($medicosOptions as $row) {?>
-                    <option data-atiende="<?php echo $row['atiende'];?>" value="<?php echo  $row['nombre'].' '.$row['apellido'];?>"><?php echo $row['nombre'].' '.$row['apellido'];?></option>
-                  <?php }?>
-                </select>
+                <div class="d-flex">
+                  <select  disabled id="medico-select" name="docInfo" class="form-select" aria-label="Default select example">
+                    <option hidden data-atiende="default" value="one">Elija opción...</option>
+                    <?php foreach ($medicosOptions as $row) {?>
+                      <option data-atiende="<?php echo $row['atiende'];?>" value="<?php echo  $row['nombre'].' '.$row['apellido'];?>"><?php echo $row['nombre'].' '.$row['apellido'];?></option>
+                    <?php }?>
+                  </select>
+                  <button class="btn" type="button" hidden id="ver-medicos" data-bs-toggle="modal" 
+                  data-bs-target="#modalReservas"><i class="bi bi-eye"></i></button>
+                </div>
               </div>
             </div>
             <div class="row mt-3">
@@ -47,7 +51,7 @@
               <div class="col-md-6">
                 <label for="fechaCita">Fecha de la cita</label>
                 <input type="text" class="form-control" name="fechadeCita" id="fechaCita"> 
-                <!-- <input type="number" class="form-control" name="nroPuesto" id="puesto" hidden> -->
+                <input type="number" class="form-control" name="nroPuesto" id="puesto" hidden>
               </div> 
             </div>
             </div>
@@ -61,3 +65,13 @@
     </div>
   </div>
 </div>
+<script>
+    const selectElement = document.getElementById('medico-select');
+    const buttonElement = document.getElementById('ver-medicos');
+    selectElement.addEventListener('change', function() {
+      const selectedOption = selectElement.options[selectElement.selectedIndex];
+      const valor = selectedOption.value.replace(/\s+/g, '');
+      alert(valor);
+      buttonElement.dataset.bsTarget = `#modalReservas-${valor}`;
+    });
+</script>
