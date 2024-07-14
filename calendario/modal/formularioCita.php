@@ -71,7 +71,6 @@
     selectElement.addEventListener('change', function() {
       const selectedOption = selectElement.options[selectElement.selectedIndex];
       const valor = selectedOption.value.replace(/\s+/g, '');
-      alert(valor);
       buttonElement.dataset.bsTarget = `#modalReservas-${valor}`;
     });
 </script>

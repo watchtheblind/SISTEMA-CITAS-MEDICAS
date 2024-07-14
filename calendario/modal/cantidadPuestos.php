@@ -25,7 +25,7 @@ foreach ($optionsArray as $doctor) { ?>
                 <strong>turno mañana</strong>
               </div>
               <div class="d-grid gap-2 mt-4">
-                <?php for ($i=1; $i<=6; $i++):?>
+                <?php for ($i=1; $i<=7; $i++):?>
                   <input type="checkbox" class="btn-check" id="<?php echo doctorSinEspacio($doctor) ?>-<?php echo $i?>">
                   <label class="btn btn-outline-success" for="<?php echo doctorSinEspacio($doctor) ?>-<?php echo $i?>"><i class="bi bi-person"></i></label>
                 <?php endfor; ?>
@@ -36,7 +36,7 @@ foreach ($optionsArray as $doctor) { ?>
                 <strong>turno tarde</strong>
               </div>
               <div class="d-grid gap-2 mt-4">
-                <?php for ($i=7; $i<=12; $i++):?>
+                <?php for ($i=8; $i<=14; $i++):?>
                   <input type="checkbox" class="btn-check" id="<?php echo doctorSinEspacio($doctor) ?>-<?php echo $i?>">
                   <label class="btn btn-outline-success" for="<?php echo doctorSinEspacio($doctor) ?>-<?php echo $i?>"><i class="bi bi-person"></i></label>
                 <?php endfor; ?>
