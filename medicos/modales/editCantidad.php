@@ -13,7 +13,7 @@
                                 <h5 class="d-flex justify-content-center">Editar cantidad que atiende</h5>
                                 <div class="form-row col-md">
                                     <div class="form-group">
-                                        <input type="number" onkeydown="return event.keyCode !== 69" name="medCantidad" class="form-control" id="inputTel" placeholder="EJ: 04243552252">
+                                        <input type="number" max=15 oninput="this.value = this.value.slice(0, 2)"  onpaste="setTimeout(() => this.value = this.value.slice(0, 2), 0)" onkeydown="return event.keyCode !== 69" name="medCantidad" class="form-control" id="inputTel" placeholder="EJ: 12">
                                     </div>
                                 </div>
                                 <div class=" d-flex justify-content-center">

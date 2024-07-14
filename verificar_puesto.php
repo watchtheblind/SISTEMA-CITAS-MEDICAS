@@ -11,7 +11,7 @@ $stmt->execute();
 $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 function deshabilitarBotonesCita($resultados) {
-    $puestos = range(1, 14); //usar range para generar un array del 1 al 12
+    $puestos = range(1, 14); //usar range para generar un array del 1 al 14
     foreach ($resultados as $fila) {
         $puestoPaciente = $fila['puesto'];
         if (in_array($puestoPaciente, $puestos)) {

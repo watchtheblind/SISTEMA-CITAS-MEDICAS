@@ -13,7 +13,7 @@
                                                     <h3 class="d-flex justify-content-center">Editar Teléfono</h3>
                                                     <div class="form-row col-md">
                                                         <div class="form-group">
-                                                            <input type="number" onkeydown="return event.keyCode !== 69" name="medTel" class="form-control" id="inputTel" placeholder="EJ: 04243552252">
+                                                            <input type="number" oninput="this.value = this.value.slice(0, 11)"  onpaste="setTimeout(() => this.value = this.value.slice(0, 11), 0)" onkeydown="return event.keyCode !== 69" name="medTel" class="form-control" id="inputTel" placeholder="EJ: 04243552252">
                                                         </div>
                                                     </div>
                                                     <div class=" d-flex justify-content-center">
