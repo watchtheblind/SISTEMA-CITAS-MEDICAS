@@ -1,4 +1,7 @@
 
+<script>
+    alert("abriendo ");
+</script>
 <?php
 //este archivo es manejado por calendario/configsCalendario.php
 // Include the database connection file
@@ -17,10 +20,12 @@ function deshabilitarBotonesCita($resultados) {
         $puestoPaciente = $fila['puesto'];
         if (in_array($puestoPaciente, $puestos)) {
             $num = $puestoPaciente;
-            $puesto_res = "#cita-" . $num;
+            $puesto_res = "#".$fila['nombre_medico'].$fila['apellido_medico']."-".$num;
+            print_r($puesto_res);
             echo "<script>  
-                $('$puesto_res').attr('disabled', true);
-                $('$puesto_res').removeClass('btn-success').addClass('btn-secondary'); 
+                $('$puesto_res').prop('disabled', true);
+                $('$puesto_res').removeClass('btn-outline-success');
+                $('$puesto_res').prop('checked', true);
             </script>";
         }
     }

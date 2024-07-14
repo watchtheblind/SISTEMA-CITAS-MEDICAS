@@ -39,9 +39,10 @@
       </div>
     </div>
     <!-- modal para reservas -->
-    <?php require "calendario/modal/cantidadPuestos.php"?>
-    <!-- modales de formulario de cita -->
+         <!-- modales de formulario de cita -->
     <?php require "calendario/modal/formularioCita.php"?>
+    <?php require "calendario/modal/cantidadPuestos.php"?>
+
     <!-- modal que muestra la información  -->
     <?php require "calendario/modal/mostrarInfo.php"?>
     <script src="assets/js/medicosSegunEspecialidad.js"></script>

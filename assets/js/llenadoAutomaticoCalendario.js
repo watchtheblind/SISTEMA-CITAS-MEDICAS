@@ -36,9 +36,9 @@ function fetchData() {
             // Abrir modal
             $("#pacModal2").modal("show");
             // Ocultar modal ModalFormulario
-            $(`#modalFormulario-${i}`).modal("hide");
+            $(`#modalFormulario`).modal("hide");
             $("#pacModal2").on("hidden.bs.modal", function () {
-              $(`#modalFormulario-${i}`).modal("show");
+              $(`#modalFormulario`).modal("show");
             });
             // Aquí puedes incluir el código para abrir el modal
           });

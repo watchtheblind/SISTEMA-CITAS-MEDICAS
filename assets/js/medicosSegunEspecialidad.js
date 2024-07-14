@@ -43,6 +43,8 @@ $("#modalFormulario").on("hidden.bs.modal", function () {
   // Verificar si otro modal no se abrió después de cerrar este
   if (!$(".modal:visible").length) {
     // Recargar la página
+    alert("recarga");
     location.reload();
+    $("#medico-select").setAttribute("disabled", true);
   }
 });
