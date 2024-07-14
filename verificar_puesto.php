@@ -17,7 +17,6 @@ function deshabilitarBotonesCita($resultados) {
         if (in_array($puestoPaciente, $puestos)) {
             $num = $puestoPaciente;
             $puesto_res = "#".$fila['nombre_medico'].$fila['apellido_medico']."-".$num;
-            print_r($puesto_res);
             echo "<script>  
                 $('$puesto_res').prop('disabled', true);
                 $('$puesto_res').removeClass('btn-outline-success');
