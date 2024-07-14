@@ -53,7 +53,6 @@ foreach ($optionsArray as $doctor) { ?>
     </div>
   </div>
   <script>
-  try {
     const button = document.querySelector("#guardar-puesto-<?php echo doctorSinEspacio($doctor)?>");
     button.addEventListener("click", () => {
       //obtengo la casilla marcada
@@ -67,10 +66,6 @@ foreach ($optionsArray as $doctor) { ?>
       //obteniendo el numero de puesto del checkbox
       checkboxNumeroPuesto = checkboxString.replace(/[^0-9]/g, '');
       puesto.value = checkboxNumeroPuesto;
-      alert(puesto.value);
     });
-  } catch (error) {
-    alert(error);
-  }
-</script>
+  </script>
 <?php } ?>

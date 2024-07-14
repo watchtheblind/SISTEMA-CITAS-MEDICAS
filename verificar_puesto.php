@@ -1,7 +1,3 @@
-
-<script>
-    alert("abriendo ");
-</script>
 <?php
 //este archivo es manejado por calendario/configsCalendario.php
 // Include the database connection file
