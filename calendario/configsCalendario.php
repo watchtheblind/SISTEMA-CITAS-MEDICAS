@@ -30,6 +30,12 @@
         const especialidad = datosEvento.especialidadConsulta;
         const estadoConsulta = datosEvento.estadoConsulta;
         const fechaCita = event.start;
+        //para la reasignacion de datos:
+        const pacienteNom = datosEvento.nombrePaciente;
+        const pacienteApe = datosEvento.apellidoPaciente;
+        const medicoNom =  datosEvento.nombreMedico;
+        const medicoApe = datosEvento.apellidoMedico;
+        const tituloCita = datosEvento.title;
         localStorage.setItem('ticketCounter', 0);
         // Cuando se imprime un ticket
          // contenido del modal de generación de tickets, en el archivo mostrarinfo.php
@@ -78,13 +84,30 @@
             </div>
           </div>
         </form>
-        <form action="borrarConsulta.php" method="post">
-          <div class="col-md-12 d-flex justify-content-center mt-3">
-            <input type="hidden" name="cedula" value="${cedulaPaciente}"/>
-            <input type="hidden" name="fechaCita" value="${fechaCita}"/>
-            <button id="borrarEvento" class="btn btn-danger w-75">Borrar consulta</button>
+        <div class="mt-4 d-flex justify-content-around">
+          <div class="row align-items-center">
+            <div class="col">
+              <form action="borrarConsulta.php" method="post">
+                <input type="hidden" name="cedula" value="${cedulaPaciente}"/>
+                <input type="hidden" name="fechaCita" value="${fechaCita}"/>
+                <button id="borrarEvento" class="btn btn-danger">Eliminar Consulta</button>
+              </form>
+            </div>
+            <div class="col">
+              <form action="reasignarConsulta.php" method="post">
+                <input type="hidden" name="pacienteNom" value="${pacienteNom}">
+                <input type="hidden" name="pacienteApe" value="${pacienteApe}">
+                <input type="hidden" name="medicoNom" value="${medicoNom}">
+                <input type="hidden" name="medicoApe" value="${medicoApe}">
+                <input type="hidden" name="especialidad" value="${especialidad}">
+                <input type="hidden" name="cedula" value="${cedulaPaciente}">
+                <input type="hidden" name="fechaCita" value="${fechaCita}">
+                <input type="hidden" name="titulo" value="${tituloCita}">
+                <button id="borrarEvento" class="btn btn-warning">Reasignar Consulta</button>
+              </form>
+            </div>
           </div>
-        </form>
+        </div>
         `;
       // Show the modal
       var modal = new bootstrap.Modal(document.getElementById('eventModal'));
