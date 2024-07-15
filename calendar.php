@@ -42,6 +42,7 @@
          <!-- modales de formulario de cita -->
     <?php require "calendario/modal/formularioCita.php"?>
     <?php require "calendario/modal/cantidadPuestos.php"?>
+    <?php require "calendario/modal/reasignacionFecha.php"?>
 
     <!-- modal que muestra la información  -->
     <?php require "calendario/modal/mostrarInfo.php"?>

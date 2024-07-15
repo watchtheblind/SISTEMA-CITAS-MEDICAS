@@ -56,18 +56,9 @@
               <div class="d-flex align-items-center justify-content-center">
                 <label>Nro. del ticket:</label>
                 <select class="form-control w-25 ms-2 mt-2 text-center border border-primary" name="numero">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                  <option>11</option>
-                  <option>12</option>
+                  <?php for ($i = 1; $i <= 14; $i++) {?>
+                    <option><?= $i?></option>
+                  <?php }?>
                 </select>
               </div>
             </div>
@@ -86,14 +77,14 @@
         </form>
         <div class="mt-4 d-flex justify-content-around">
           <div class="row align-items-center">
-            <div class="col">
+            <div class="col-4">
               <form action="borrarConsulta.php" method="post">
                 <input type="hidden" name="cedula" value="${cedulaPaciente}"/>
                 <input type="hidden" name="fechaCita" value="${fechaCita}"/>
-                <button id="borrarEvento" class="btn btn-danger">Eliminar Consulta</button>
+                <button id="borrarEvento" class="btn btn-danger">Eliminar </button>
               </form>
             </div>
-            <div class="col">
+            <div class="col-8">
               <form action="reasignarConsulta.php" method="post">
                 <input type="hidden" name="pacienteNom" value="${pacienteNom}">
                 <input type="hidden" name="pacienteApe" value="${pacienteApe}">
@@ -103,7 +94,7 @@
                 <input type="hidden" name="cedula" value="${cedulaPaciente}">
                 <input type="hidden" name="fechaCita" value="${fechaCita}">
                 <input type="hidden" name="titulo" value="${tituloCita}">
-                <button id="borrarEvento" class="btn btn-warning">Reasignar Consulta</button>
+                <button id="ReasignarEvento" type="button" class="btn btn-warning" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#reasignacionModal">Reasignar Consulta</button>             
               </form>
             </div>
           </div>

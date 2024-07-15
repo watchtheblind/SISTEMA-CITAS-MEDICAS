@@ -1,3 +1,6 @@
+<script>
+  let button;
+</script>
 <?php
   $optionsArray = array();
   function doctorSinEspacio($doctor){
@@ -53,7 +56,7 @@ foreach ($optionsArray as $doctor) { ?>
     </div>
   </div>
   <script>
-    const button = document.querySelector("#guardar-puesto-<?php echo doctorSinEspacio($doctor)?>");
+    button = document.querySelector("#guardar-puesto-<?php echo doctorSinEspacio($doctor)?>");
     button.addEventListener("click", () => {
       //obtengo la casilla marcada
       const checkboxes = document.querySelectorAll(`#modalReservas-<?php echo doctorSinEspacio($doctor) ?> input[type="checkbox"]:checked`);
