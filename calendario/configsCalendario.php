@@ -36,6 +36,20 @@
         const medicoNom =  datosEvento.nombreMedico;
         const medicoApe = datosEvento.apellidoMedico;
         const tituloCita = datosEvento.title;
+        //guardando los valores en un objeto para pasarlo al modal que busca una fecha
+        const eventData = {
+          pacienteNomApe: pacienteNomApe,
+          cedulaPaciente: cedulaPaciente,
+          medicoNomApe: medicoNomApe,
+          especialidad: especialidad,
+          estadoConsulta: estadoConsulta,
+          fechaCita: fechaCita,
+          pacienteNom: datosEvento.nombrePaciente,
+          pacienteApe: datosEvento.apellidoPaciente,
+          medicoNom: datosEvento.nombreMedico,
+          medicoApe: datosEvento.apellidoMedico,
+          tituloCita: datosEvento.title
+        };
         localStorage.setItem('ticketCounter', 0);
         // Cuando se imprime un ticket
          // contenido del modal de generación de tickets, en el archivo mostrarinfo.php
@@ -85,20 +99,23 @@
               </form>
             </div>
             <div class="col-8">
-              <form action="reasignarConsulta.php" method="post">
-                <input type="hidden" name="pacienteNom" value="${pacienteNom}">
-                <input type="hidden" name="pacienteApe" value="${pacienteApe}">
-                <input type="hidden" name="medicoNom" value="${medicoNom}">
-                <input type="hidden" name="medicoApe" value="${medicoApe}">
-                <input type="hidden" name="especialidad" value="${especialidad}">
-                <input type="hidden" name="cedula" value="${cedulaPaciente}">
-                <input type="hidden" name="fechaCita" value="${fechaCita}">
-                <input type="hidden" name="titulo" value="${tituloCita}">
-                <button id="ReasignarEvento" type="button" class="btn btn-warning" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#reasignacionModal">Reasignar Consulta</button>             
-              </form>
+              <button id="ReasignarEvento" type="button" class="btn btn-warning" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#reasignacionModal">Reasignar Consulta</button>
             </div>
           </div>
         </div>
+        `;
+        document.getElementById('modal-reasignar').innerHTML =`
+          <form action="reasignarConsulta.php" method="post">
+            <input type='date' id='dateInput' class='form-control'>
+            <input type="hidden" name="pacienteApe" value="${pacienteApe}">
+            <input type="hidden" name="pacienteNom" value="${pacienteNom}">
+            <input type="hidden" name="medicoNom" value="${medicoNom}">
+            <input type="hidden" name="medicoApe" value="${medicoApe}">
+            <input type="hidden" name="especialidad" value="${especialidad}">
+            <input type="hidden" name="cedula" value="${cedulaPaciente}">
+            <input type="hidden" name="fechaCita" value="${fechaCita}">
+            <input type="hidden" name="titulo" value="${tituloCita}">             
+          </form>
         `;
       // Show the modal
       var modal = new bootstrap.Modal(document.getElementById('eventModal'));
