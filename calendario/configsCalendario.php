@@ -104,9 +104,10 @@
           </div>
         </div>
         `;
+        //contenido del modal de elegir fecha para reasignacion
         document.getElementById('modal-reasignar').innerHTML =`
-          <form action="reasignarConsulta.php" method="post">
-            <input type='date' id='dateInput' class='form-control'>
+          <form action="reasignarConsulta.php" method="post" class="d-grid justify-content-center">
+            <input type='date' id='dateInput' class='form-control my-3 w-100'  min="<?= date('Y-m-d'); ?>" max="<?= date('Y-m-d', strtotime('+1 day')); ?>>
             <input type="hidden" name="pacienteApe" value="${pacienteApe}">
             <input type="hidden" name="pacienteNom" value="${pacienteNom}">
             <input type="hidden" name="medicoNom" value="${medicoNom}">
@@ -114,7 +115,8 @@
             <input type="hidden" name="especialidad" value="${especialidad}">
             <input type="hidden" name="cedula" value="${cedulaPaciente}">
             <input type="hidden" name="fechaCita" value="${fechaCita}">
-            <input type="hidden" name="titulo" value="${tituloCita}">             
+            <input type="hidden" name="titulo" value="${tituloCita}">     
+            <button type="submit" class="btn btn-primary">Reasignar cita</button>        
           </form>
         `;
       // Show the modal
