@@ -19,7 +19,10 @@
                 </div>
                 <div class="modal-footer mt-2">
                     <button class="btn btn-primary" type="submit">Crear reporte</button>
+                    <button class="btn btn-warning" type="submit" onclick="document.getElementById('todos-reportes').submit()">Crear reporte (Todos los registros)</button>
                 </div>
+            </form>
+            <form id="todos-reportes" action="reportes/todosReporte.php" method="post" target="_blank">
             </form>
         </div>
     </div>

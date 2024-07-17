@@ -222,8 +222,21 @@
           select.disabled = false;
         });
       };
-        bloquearPuestos();
-        //contenido del modal de elegir fecha para reasignacion
+      async function cambiarComportamientoModales(){
+        await bloquearPuestos();
+        var modals = document.querySelectorAll('[id^="modalReservas"]');
+        modals.forEach(function(modal) {
+            modal.addEventListener('hidden.bs.modal', function() {
+                var nuevoModal = $(document.getElementById("reasignacionModal"));
+                nuevoModal.modal('show');
+            });
+        });
+        document.getElementById("cerrarReasignar").addEventListener('click', function() {
+          $(document.getElementById("eventModal")).modal('show');
+        });
+      }
+      cambiarComportamientoModales();
+      //contenido del modal de elegir fecha para reasignacion
 
       // Show the modal
       var modal = new bootstrap.Modal(document.getElementById('eventModal'));
