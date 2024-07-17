@@ -186,7 +186,37 @@
           buttonElement.dataset.bsTarget = `#modalReservas-${valor}`;
           });
         }
-        mostrarReasignacionModal();
+        async function bloquearPuestos(){
+          await mostrarReasignacionModal();
+          // Obtener el botón con el icono de ojo
+          const eyeButton = document.getElementById('ver-medicos-2');
+
+          // Agregar un evento de click al botón
+          eyeButton.addEventListener('click', function() {
+            // Obtener el valor del input date
+            const dateInput = document.getElementById('dateInput');
+            const dateValue = dateInput.value;
+            
+            // Obtener el día de la semana
+            const fechaComoCadena = dateValue;
+            let numeroDia = new Date(fechaComoCadena).getDay();
+            let dias = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes'];
+            let diaSemana = dias[numeroDia] + " " + a;
+
+            // Mostrar el día de la semana en un elemento HTML
+            document.getElementById('diaSemana').innerHTML = diaSemana;
+
+            // Continúa con el código restante
+            // Ajax para que los puestos se reserven
+            let fecha = dateValue;
+            let res ="";
+            let url = "verificar_puesto.php";
+            $.get(url,{fecha:fecha}, function (datos){
+              res = datos;
+              $(`#respuesta2`).html(res);
+            });
+        })};
+        bloquearPuestos();
         //contenido del modal de elegir fecha para reasignacion
 
       // Show the modal

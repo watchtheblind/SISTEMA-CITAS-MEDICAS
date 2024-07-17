@@ -7,6 +7,7 @@
       </div>
       <div class='modal-body' id="modal-reasignar">
       </div>
+      <div id="respuesta2"></div>
     </div>
   </div>
 </div>
