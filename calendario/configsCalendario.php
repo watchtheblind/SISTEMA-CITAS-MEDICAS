@@ -114,7 +114,7 @@
             <div class="row d-flex justify-content-center">
               <div class="col-md-6">
                 <label for="atiende-select-2">Nueva consulta: </label>
-                <select id="atiende-select-2" required class="form-select" name="tipoConsulta" aria-label="Default select example"  required>
+                <select disabled id="atiende-select-2" required class="form-select" name="tipoConsulta" aria-label="Default select example"  required>
                   <option hidden>Elija opción...</option>
                   <?php foreach ($atiendeOptions as $row) {?>
                     <option value="<?php echo $row['atiende'];?>"><?php echo $row['atiende'];?></option>
@@ -215,7 +215,13 @@
               res = datos;
               $(`#respuesta2`).html(res);
             });
-        })};
+        })
+        const dateInput = document.getElementById('dateInput');
+        dateInput.addEventListener('change', function() {
+          const select = document.getElementById('atiende-select-2');
+          select.disabled = false;
+        });
+      };
         bloquearPuestos();
         //contenido del modal de elegir fecha para reasignacion
 
