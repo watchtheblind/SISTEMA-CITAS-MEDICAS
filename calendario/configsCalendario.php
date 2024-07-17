@@ -24,32 +24,24 @@
         var datos = <?php echo json_encode($datos); ?>;
         const event = events.find(event => event.title === info.event.title);
         const datosEvento = datos.find(data => data.title === event.title);
-        const pacienteNomApe = datosEvento.nombrePaciente+" "+datosEvento.apellidoPaciente;
-        const cedulaPaciente = datosEvento.cedulaPaciente;
-        const medicoNomApe =  datosEvento.nombreMedico+" "+datosEvento.apellidoMedico;
-        const especialidad = datosEvento.especialidadConsulta;
-        const estadoConsulta = datosEvento.estadoConsulta;
-        const fechaCita = event.start;
-        //para la reasignacion de datos:
-        const pacienteNom = datosEvento.nombrePaciente;
-        const pacienteApe = datosEvento.apellidoPaciente;
-        const medicoNom =  datosEvento.nombreMedico;
-        const medicoApe = datosEvento.apellidoMedico;
-        const tituloCita = datosEvento.title;
-        //guardando los valores en un objeto para pasarlo al modal que busca una fecha
-        const eventData = {
-          pacienteNomApe: pacienteNomApe,
-          cedulaPaciente: cedulaPaciente,
-          medicoNomApe: medicoNomApe,
-          especialidad: especialidad,
-          estadoConsulta: estadoConsulta,
-          fechaCita: fechaCita,
-          pacienteNom: datosEvento.nombrePaciente,
-          pacienteApe: datosEvento.apellidoPaciente,
-          medicoNom: datosEvento.nombreMedico,
-          medicoApe: datosEvento.apellidoMedico,
-          tituloCita: datosEvento.title
-        };
+        const paciente = {
+            nombre: datosEvento.nombrePaciente,
+            apellido: datosEvento.apellidoPaciente,
+            cedula: datosEvento.cedulaPaciente
+          };
+
+          const medico = {
+            nombre: datosEvento.nombreMedico,
+            apellido: datosEvento.apellidoMedico
+          };
+
+          const cita = {
+            titulo: datosEvento.title,
+            especialidad: datosEvento.especialidadConsulta,
+            estado: datosEvento.estadoConsulta,
+            fecha: event.start
+          };
+
         localStorage.setItem('ticketCounter', 0);
         // Cuando se imprime un ticket
          // contenido del modal de generación de tickets, en el archivo mostrarinfo.php
@@ -59,14 +51,14 @@
           <div class="row text-center">
             <div class="col-md-6">
               <label>Paciente:</label>
-              <strong><p>${pacienteNomApe}</p></strong>
-              <input type="hidden" name="paciente" value="${pacienteNomApe}"/>
+              <strong><p>${paciente.nombre + " " + paciente.apellido}</p></strong>
+              <input type="hidden" name="paciente" value="${paciente.nombre + " " + paciente.apellido}"/>
               <label>Médico que lo atiende:</label>
-              <strong><p>${medicoNomApe}</p></strong>
-              <input type="hidden" name="medico" value="${medicoNomApe}"/>
+              <strong><p>${medico.nombre + " " + medico.apellido}</p></strong>
+              <input type="hidden" name="medico" value="${medico.nombre + " " + medico.apellido}"/>
               <label>Especialidad a atender:</label>
-              <strong><p>${especialidad}</p></strong>
-              <input type="hidden" name="especialidad" value="${especialidad}"/>
+              <strong><p>${cita.especialidad}</p></strong>
+              <input type="hidden" name="especialidad" value="${cita.especialidad}"/>
               <div class="d-flex align-items-center justify-content-center">
                 <label>Nro. del ticket:</label>
                 <select class="form-control w-25 ms-2 mt-2 text-center border border-primary" name="numero">
@@ -78,13 +70,13 @@
             </div>
             <div class="col-md-6">
               <label>Cédula del paciente:</label>
-              <strong><p>V-${cedulaPaciente}</p></strong>
-              <input type="hidden" name="cedula" value="${cedulaPaciente}"/>
+              <strong><p>V-${paciente.cedula}</p></strong>
+              <input type="hidden" name="cedula" value="${paciente.cedula}"/>
               <label>Estado de consulta:</label>
               <strong><p>Por atender</p></strong>
               <label>Fecha de atención:</label>
-              <strong><p>${fechaCita}</p></strong>
-              <input type="hidden" name="fechaCita" value="${fechaCita}"/>
+              <strong><p>${cita.fecha}</p></strong>
+              <input type="hidden" name="fechaCita" value="${cita.fecha}"/>
               <button class="btn btn-primary mt-2" type="submit">Generar ticket</button>
             </div>
           </div>
@@ -93,8 +85,8 @@
           <div class="row align-items-center">
             <div class="col-4">
               <form action="borrarConsulta.php" method="post">
-                <input type="hidden" name="cedula" value="${cedulaPaciente}"/>
-                <input type="hidden" name="fechaCita" value="${fechaCita}"/>
+                <input type="hidden" name="cedula" value="${paciente.cedula}"/>
+                <input type="hidden" name="fechaCita" value="${cita.fecha}"/>
                 <button id="borrarEvento" class="btn btn-danger">Eliminar </button>
               </form>
             </div>
@@ -104,21 +96,99 @@
           </div>
         </div>
         `;
-        //contenido del modal de elegir fecha para reasignacion
-        document.getElementById('modal-reasignar').innerHTML =`
-          <form action="reasignarConsulta.php" method="post" class="d-grid justify-content-center">
-            <input type='date' id='dateInput' class='form-control my-3 w-100'  min="<?= date('Y-m-d'); ?>" max="<?= date('Y-m-d', strtotime('+1 day')); ?>>
-            <input type="hidden" name="pacienteApe" value="${pacienteApe}">
-            <input type="hidden" name="pacienteNom" value="${pacienteNom}">
-            <input type="hidden" name="medicoNom" value="${medicoNom}">
-            <input type="hidden" name="medicoApe" value="${medicoApe}">
-            <input type="hidden" name="especialidad" value="${especialidad}">
-            <input type="hidden" name="cedula" value="${cedulaPaciente}">
-            <input type="hidden" name="fechaCita" value="${fechaCita}">
-            <input type="hidden" name="titulo" value="${tituloCita}">     
-            <button type="submit" class="btn btn-primary">Reasignar cita</button>        
+        //seccion para la reasignacion de consulta
+        async function textoModalReasignar(){
+          document.getElementById('modal-reasignar').innerHTML =`
+          <form action="reasignarConsulta.php" method="post" class="d-grid my-2">
+            <div class="row">
+              <div class="col-md-6">
+                <input type='date' required id='dateInput' class='form-control w-100'  min="<?= date('Y-m-d'); ?>">
+              </div>
+              <div class="col-md-6">
+                <div class="text-center">
+                  <label>Tipo de consulta:</label>
+                  <strong><p>${cita.especialidad}</p></strong>
+                </div>
+              </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+              <div class="col-md-6">
+                <label for="atiende-select-2">Nueva consulta: </label>
+                <select id="atiende-select-2" required class="form-select" name="tipoConsulta" aria-label="Default select example"  required>
+                  <option hidden>Elija opción...</option>
+                  <?php foreach ($atiendeOptions as $row) {?>
+                    <option value="<?php echo $row['atiende'];?>"><?php echo $row['atiende'];?></option>
+                  <?php }?>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="medico-select-2"> Medico que lo atenderá:</label>
+                <div class="d-flex">
+                  <select disabled id="medico-select-2" required name="docInfo" class="form-select" aria-label="Default select example">
+                    <option hidden data-atiende="default" value="one">Elija opción...</option>
+                    <?php foreach ($medicosOptions as $row) {?>
+                      <option data-atiende="<?php echo $row['atiende'];?>" value="<?php echo  $row['nombre'].' '.$row['apellido'];?>"><?php echo $row['nombre'].' '.$row['apellido'];?></option>
+                    <?php }?>
+                  </select>
+                  <button class="btn"required type="button" hidden id="ver-medicos-2" data-bs-toggle="modal" 
+                  data-bs-target="#modalReservas"><i class="bi bi-eye"></i></button>
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary mt-3">Reasignar cita</button> 
+            </div>
+            <input type="hidden" name="pacienteApe" value="${paciente.apellido}">
+            <input type="hidden" name="pacienteNom" value="${paciente.nombre}">
+            <input type="hidden" name="medicoNom" value="${medico.nombre}">
+            <input type="hidden" name="medicoApe" value="${medico.apellido}">
+            <input type="hidden" name="especialidad" value="${cita.especialidad}">
+            <input type="hidden" name="cedula" value="${paciente.cedula}">
+            <input type="hidden" name="fechaCita" value="${cita.fecha}">
+            <input type="hidden" name="titulo" value="${cita.titulo}">        
           </form>
         `;
+        }
+        async function eleccionDeMedico(){
+          await textoModalReasignar();
+          document.getElementById(`atiende-select-2`).addEventListener("change", function () {
+            document.getElementById(`medico-select-2`).selectedIndex = 0;
+          });
+          //el select del médico estará bloqueado hasta elegir una opción
+          document.getElementById(`atiende-select-2`).addEventListener("change", function () {
+            if (this.value !== "") {
+              document.getElementById(`medico-select-2`).disabled = false;
+            } else {
+              document.getElementById(`medico-select-2`).disabled = true;
+            }
+          });
+          //filtrar médicos según la especialidad que yo seleccione
+          $(document).ready(function () {
+            $(`#atiende-select-2`).on("change", function () {
+              var atiendeValue = $(this).val();
+              $(`#medico-select-2 option`).hide();
+              $(`#medico-select-2 option[data-atiende="${atiendeValue}"]`).show();
+              //mostrar el botón del ojo solo cuando se seleccione un médico
+              const select = document.getElementById("medico-select-2");
+              select.addEventListener("change", () => {
+                if (select.value !== "one") {
+                  document.getElementById("ver-medicos-2").removeAttribute("hidden");
+                }
+              });
+            });
+          });
+        }
+        async function mostrarReasignacionModal(){
+          await eleccionDeMedico();
+          const selectElement = document.getElementById('medico-select-2');
+          const buttonElement = document.getElementById('ver-medicos-2');
+          selectElement.addEventListener('change', function() {
+          const selectedOption = selectElement.options[selectElement.selectedIndex];
+          const valor = selectedOption.value.replace(/\s+/g, '');
+          buttonElement.dataset.bsTarget = `#modalReservas-${valor}`;
+          });
+        }
+        mostrarReasignacionModal();
+        //contenido del modal de elegir fecha para reasignacion
+
       // Show the modal
       var modal = new bootstrap.Modal(document.getElementById('eventModal'));
       modal.show();

@@ -12,7 +12,7 @@
             <div class="row">
               <div class="col-md-6">
                 <label for="cedula">Cédula (paciente)</label>
-                <input type="number" name="pacCedula" id="Cedula" oninput="this.value = this.value.slice(0, 8)"  onpaste="setTimeout(() => this.value = this.value.slice(0, 8), 0)"  class="form-control" pattern="[0-9]*" oninput="fetchData()">
+                <input type="number" name="pacCedula" id="Cedula" onpaste="setTimeout(() => this.value = this.value.slice(0, 8), 0)"  class="form-control" pattern="[0-9]*" oninput="fetchData()">
               </div>
               <div class="col-md-6">
                 <label for="">Tipo de consulta</label>
