@@ -17,7 +17,7 @@ foreach ($optionsArray as $doctor) { ?>
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Reservar cita con <span id="diaSemana"><?php echo $doctor ?></span></h5>
-          <button type="button" class="btn-close" id="cerrar" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modalFormulario" aria-label="Close">
+          <button type="button" class="btn-close cerrar"  data-bs-toggle="modal" aria-label="Close">
             <span aria-hidden="true"></span>
           </button>
         </div>
@@ -48,7 +48,7 @@ foreach ($optionsArray as $doctor) { ?>
           </div>
           <div class="row">
             <div class="col-md-12 my-4 d-flex justify-content-center">
-              <button class="btn btn-primary" type="button" id="guardar-puesto-<?php echo doctorSinEspacio($doctor)?>" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#modalFormulario">Guardar puesto</button>
+              <button class="btn btn-primary cerrar" type="button" id="guardar-puesto-<?php echo doctorSinEspacio($doctor)?>" data-bs-dismiss="modal" data-bs-toggle="modal">Guardar puesto</button>
             </div>
           </div>
         </div>

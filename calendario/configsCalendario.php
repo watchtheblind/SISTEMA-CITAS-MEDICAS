@@ -224,13 +224,7 @@
       };
       async function cambiarComportamientoModales(){
         await bloquearPuestos();
-        var modals = document.querySelectorAll('[id^="modalReservas"]');
-        modals.forEach(function(modal) {
-            modal.addEventListener('hidden.bs.modal', function() {
-                var nuevoModal = $(document.getElementById("reasignacionModal"));
-                nuevoModal.modal('show');
-            });
-        });
+        cambiarDataBsTarget('cerrar', "reasignacionModal");
         document.getElementById("cerrarReasignar").addEventListener('click', function() {
           $(document.getElementById("eventModal")).modal('show');
         });

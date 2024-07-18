@@ -3,6 +3,7 @@ $(`#modalFormulario`).on("shown.bs.modal", function () {
   $(`#fechaCita`).val(getFecha);
   // $(`#puesto`).val(i).prop("readonly", true);
   $(`#fechaCita`).prop("readonly", true);
+  cambiarDataBsTarget("cerrar", "modalFormulario");
 });
 
 // hacer que los select se cambien al cambiar la especialidad

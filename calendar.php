@@ -9,6 +9,7 @@
     <script src='recursos/fullcalendar-6.1.14/dist/index.global.min.js'></script>
     <link rel="stylesheet" href="./assets/compiled/css/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="assets/css/sweetalert2.css">
+    <script src="assets/js/cambiarBSTARGET.js"></script>
     <!-- PHP code separated from HTML -->
     <?php
     include "conectarBD.php";
