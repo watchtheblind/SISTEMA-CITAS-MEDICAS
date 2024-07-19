@@ -22,6 +22,9 @@ foreach ($optionsArray as $doctor) { ?>
           </button>
         </div>
         <div class="modal-body">
+          <div class="alert alert-danger" role="alert">
+            <strong>Advertencia:</strong> Ha sobrepasado la cantidad de pacientes que atiende el/la doctor/a. Se aconseja no añadir más citas.
+          </div>
           <div class="row">
             <div class="col-md-6">
               <div class="d-flex justify-content-center">
