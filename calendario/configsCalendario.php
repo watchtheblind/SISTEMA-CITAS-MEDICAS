@@ -102,7 +102,7 @@
           <form action="reasignarConsulta.php" method="post" class="d-grid my-2">
             <div class="row">
               <div class="col-md-6">
-                <input type='date' required id='dateInput' class='form-control w-100'  min="<?= date('Y-m-d'); ?>">
+                <input type='date' required id='dateInput' name="start" class='form-control w-100'  min="<?= date('Y-m-d'); ?>">
               </div>
               <div class="col-md-6">
                 <div class="text-center">
@@ -134,16 +134,13 @@
                   data-bs-target="#modalReservas"><i class="bi bi-eye"></i></button>
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary mt-3">Reasignar cita</button> 
+              <button type="submit" name="reasignar" class="btn btn-primary mt-3">Reasignar cita</button> 
             </div>
-            <input type="hidden" name="pacienteApe" value="${paciente.apellido}">
-            <input type="hidden" name="pacienteNom" value="${paciente.nombre}">
-            <input type="hidden" name="medicoNom" value="${medico.nombre}">
-            <input type="hidden" name="medicoApe" value="${medico.apellido}">
-            <input type="hidden" name="especialidad" value="${cita.especialidad}">
             <input type="hidden" name="cedula" value="${paciente.cedula}">
-            <input type="hidden" name="fechaCita" value="${cita.fecha}">
-            <input type="hidden" name="titulo" value="${cita.titulo}">        
+            <input type="hidden" name="tituloViejo" value="${cita.titulo}">
+            <input type="hidden" name="tipoConsultaVieja" value="${cita.especialidad}">
+            <input type="hidden" name="fechaCitaVieja" value="${cita.fecha}">
+            <input type="hidden" name="nroPuesto" required type="text" class="form-control" id="puesto2">        
           </form>
         `;
         }

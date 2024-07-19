@@ -64,11 +64,13 @@ foreach ($optionsArray as $doctor) { ?>
       const checkboxId = Array.from(checkboxes).map(checkbox => checkbox.id);
       //seleccionamos el campo puesto de formularioCita.php
       const puesto = document.querySelector("#puesto");
+      const puesto2 = document.querySelector("#puesto2");
       //pasamos el valor del checkbox a string 
       checkboxString = checkboxId.join(',');
       //obteniendo el numero de puesto del checkbox
       checkboxNumeroPuesto = checkboxString.replace(/[^0-9]/g, '');
       puesto.value = checkboxNumeroPuesto;
+      puesto2.value = checkboxNumeroPuesto;
     });
   </script>
 <?php } ?>
