@@ -15,14 +15,13 @@ foreach ($medicosOptions as $row) { ?>
           </button>
         </div>
         <div class="modal-body">
-          <div class="alert alert-danger" role="alert">
+          <div class="alert alert-danger" id="alerta-<?php echo $nombreCompletoDoctor?>" role="alert">
             <strong>Advertencia:</strong> Ha sobrepasado la cantidad de pacientes que atiende el/la doctor/a. Se aconseja no añadir más citas.
           </div>
           <div class="row">
             <div class="col-md-6">
               <div class="d-flex justify-content-center">
                 <strong>turno mañana</strong>
-                <?php echo $row['cantidad_pacientes'] ?>; 
               </div>
               <div class="d-grid gap-2 mt-4">
                 <?php for ($i=1; $i<=7; $i++):?>
@@ -68,6 +67,18 @@ foreach ($medicosOptions as $row) { ?>
       checkboxNumeroPuesto = checkboxString.replace(/[^0-9]/g, '');
       puesto.value = checkboxNumeroPuesto;
       puesto2.value = checkboxNumeroPuesto;
+    });
+    //verificar cuántos pacientes ya están registrados
+    $('#modalReservas-<?php echo $nombreCompletoDoctor ?>').on('show.bs.modal', function (e) {
+      let puestosOcupados = this.querySelectorAll('input[type="checkbox"][disabled]');
+      const alerta = document.querySelector("#alerta-<?php echo $nombreCompletoDoctor?>");
+      console.log(alerta);
+      let cantidadPuestosOcupados = puestosOcupados.length;
+      let cantidadPacientes = <?php echo $row['cantidad_pacientes']; ?>;
+      console.log(cantidadPacientes);
+      if (cantidadPuestosOcupados > cantidadPacientes) {
+        alerta.removeAttribute('hidden');
+      }
     });
   </script>
 <?php } ?>
