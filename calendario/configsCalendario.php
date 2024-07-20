@@ -87,6 +87,7 @@
               <form action="borrarConsulta.php" method="post">
                 <input type="hidden" name="cedula" value="${paciente.cedula}"/>
                 <input type="hidden" name="fechaCita" value="${cita.fecha}"/>
+                <input type="hidden" name="tituloCita" value="${cita.titulo}"/>
                 <button id="borrarEvento" class="btn btn-danger">Eliminar </button>
               </form>
             </div>
