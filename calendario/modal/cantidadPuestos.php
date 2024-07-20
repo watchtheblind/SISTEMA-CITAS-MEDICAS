@@ -2,21 +2,14 @@
   let button;
 </script>
 <?php
-  $optionsArray = array();
-  function doctorSinEspacio($doctor){
-    return str_replace(' ', '', $doctor);
-  }
-  foreach ($medicosOptions as $row) {
-    $optionsArray[] = $row['nombre']." ".$row['apellido'];
-  }
+foreach ($medicosOptions as $row) { ?>
+  <?php $nombreCompletoDoctor = str_replace(" ", "", $row['nombre']).str_replace(" ", "", $row['apellido']);
 ?>
-<?php 
-foreach ($optionsArray as $doctor) { ?>
-  <div class="modal fade" id="modalReservas-<?php echo doctorSinEspacio($doctor)?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="modalReservas-<?php echo $nombreCompletoDoctor?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Reservar cita con <span id="diaSemana"><?php echo $doctor ?></span></h5>
+          <h5 class="modal-title" id="exampleModalLabel">Reservar cita con <span id="diaSemana"><?php echo $row['nombre']." ".$row['apellido']?></span></h5>
           <button type="button" class="btn-close cerrar"  data-bs-toggle="modal" aria-label="Close">
             <span aria-hidden="true"></span>
           </button>
@@ -29,11 +22,12 @@ foreach ($optionsArray as $doctor) { ?>
             <div class="col-md-6">
               <div class="d-flex justify-content-center">
                 <strong>turno mañana</strong>
+                <?php echo $row['cantidad_pacientes'] ?>; 
               </div>
               <div class="d-grid gap-2 mt-4">
                 <?php for ($i=1; $i<=7; $i++):?>
-                  <input type="checkbox" class="btn-check" id="<?php echo doctorSinEspacio($doctor) ?>-<?php echo $i?>">
-                  <label class="btn btn-outline-success" for="<?php echo doctorSinEspacio($doctor) ?>-<?php echo $i?>"><i class="bi bi-person"></i></label>
+                  <input type="checkbox" class="btn-check" id="<?php echo $nombreCompletoDoctor ?>-<?php echo $i?>">
+                  <label class="btn btn-outline-success" for="<?php echo $nombreCompletoDoctor ?>-<?php echo $i?>"><i class="bi bi-person"></i></label>
                 <?php endfor; ?>
               </div>
             </div>
@@ -43,15 +37,15 @@ foreach ($optionsArray as $doctor) { ?>
               </div>
               <div class="d-grid gap-2 mt-4">
                 <?php for ($i=8; $i<=14; $i++):?>
-                  <input type="checkbox" class="btn-check" id="<?php echo doctorSinEspacio($doctor) ?>-<?php echo $i?>">
-                  <label class="btn btn-outline-success" for="<?php echo doctorSinEspacio($doctor) ?>-<?php echo $i?>"><i class="bi bi-person"></i></label>
+                  <input type="checkbox" class="btn-check" id="<?php echo $nombreCompletoDoctor ?>-<?php echo $i?>">
+                  <label class="btn btn-outline-success" for="<?php echo $nombreCompletoDoctor ?>-<?php echo $i?>"><i class="bi bi-person"></i></label>
                 <?php endfor; ?>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-12 my-4 d-flex justify-content-center">
-              <button class="btn btn-primary cerrar" type="button" id="guardar-puesto-<?php echo doctorSinEspacio($doctor)?>" data-bs-dismiss="modal" data-bs-toggle="modal">Guardar puesto</button>
+              <button class="btn btn-primary cerrar" type="button" id="guardar-puesto-<?php echo $nombreCompletoDoctor?>" data-bs-dismiss="modal" data-bs-toggle="modal">Guardar puesto</button>
             </div>
           </div>
         </div>
@@ -59,10 +53,10 @@ foreach ($optionsArray as $doctor) { ?>
     </div>
   </div>
   <script>
-    button = document.querySelector("#guardar-puesto-<?php echo doctorSinEspacio($doctor)?>");
+    button = document.querySelector("#guardar-puesto-<?php echo $nombreCompletoDoctor?>");
     button.addEventListener("click", () => {
       //obtengo la casilla marcada
-      const checkboxes = document.querySelectorAll(`#modalReservas-<?php echo doctorSinEspacio($doctor) ?> input[type="checkbox"]:checked`);
+      const checkboxes = document.querySelectorAll(`#modalReservas-<?php echo $nombreCompletoDoctor ?> input[type="checkbox"]:checked`);
       //la paso a un array y luego, paso su id a un array
       const checkboxId = Array.from(checkboxes).map(checkbox => checkbox.id);
       //seleccionamos el campo puesto de formularioCita.php

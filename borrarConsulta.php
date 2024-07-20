@@ -16,3 +16,4 @@
     if (isset($_POST["cedula"])) {
         reasignarDatos();
     }
+?>
