@@ -88,6 +88,7 @@
                 <input type="hidden" name="cedula" value="${paciente.cedula}"/>
                 <input type="hidden" name="fechaCita" value="${cita.fecha}"/>
                 <input type="hidden" name="tituloCita" value="${cita.titulo}"/>
+                <input type="hidden" name="especialidadCita" value="${cita.especialidad}"/>
                 <button id="borrarEvento" class="btn btn-danger">Eliminar </button>
               </form>
             </div>
