@@ -39,7 +39,7 @@
                     <?php }?>
                   </select>
                   <button class="btn" type="button" hidden id="ver-medicos" data-bs-toggle="modal" 
-                  data-bs-target="#modalReservas"><i class="bi bi-eye"></i></button>
+                  data-bs-target="#modalReservas"><i class="bi bi-eye" required></i></button>
                 </div>
               </div>
             </div>

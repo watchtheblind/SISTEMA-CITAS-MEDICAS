@@ -6,11 +6,11 @@ foreach ($medicosOptions as $row) { ?>
   <?php $nombreCompletoDoctor = str_replace(" ", "", $row['nombre']).str_replace(" ", "", $row['apellido']);
 ?>
   <div class="modal fade" id="modalReservas-<?php echo $nombreCompletoDoctor?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document"  data-bs-backdrop="static">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Reservar cita con <span id="diaSemana"><?php echo $row['nombre']." ".$row['apellido']?></span></h5>
-          <button type="button" class="btn-close cerrar"  data-bs-toggle="modal" aria-label="Close">
+          <button type="button" class="btn-close cerrar"  data-bs-toggle="modal" aria-label="Close" hidden>
             <span aria-hidden="true"></span>
           </button>
         </div>
@@ -72,13 +72,35 @@ foreach ($medicosOptions as $row) { ?>
     $('#modalReservas-<?php echo $nombreCompletoDoctor ?>').on('show.bs.modal', function (e) {
       let puestosOcupados = this.querySelectorAll('input[type="checkbox"][disabled]');
       const alerta = document.querySelector("#alerta-<?php echo $nombreCompletoDoctor?>");
-      console.log(alerta);
       let cantidadPuestosOcupados = puestosOcupados.length;
       let cantidadPacientes = <?php echo $row['cantidad_pacientes']; ?>;
-      console.log(cantidadPacientes);
       if (cantidadPuestosOcupados > cantidadPacientes) {
         alerta.removeAttribute('hidden');
       }
+    });
+    //bloquear guardar puesto:
+  // Seleccionamos el botón guardar puesto
+    // Función que se ejecutará cuando se cambie el estado de un checkbox
+    function verificarCheckbox() {
+      guardarPuesto = document.querySelector("#guardar-puesto-<?php echo $nombreCompletoDoctor?>");
+      // Obtenemos la cantidad de checkboxes seleccionados
+      checkboxesTodas = document.querySelectorAll(`#modalReservas-<?php echo $nombreCompletoDoctor ?> input[type="checkbox"]:checked`);
+      cantidadCheckboxSeleccionados = checkboxesTodas.length;
+      console.log(cantidadCheckboxSeleccionados);
+      // Si no hay checkboxes seleccionados, deshabilitamos el botón
+      if (cantidadCheckboxSeleccionados === 0) {
+        guardarPuesto.disabled = true;
+      } else {
+        // Si hay al menos uno seleccionado, habilitamos el botón
+        guardarPuesto.disabled = false;
+      }
+    }
+    // Ejecutamos la función cuando se cargue la página
+    verificarCheckbox();
+    // Ejecutamos la función cada vez que se cambie el estado de un checkbox
+    checkboxesMarcadas = document.querySelectorAll(`#modalReservas-<?php echo $nombreCompletoDoctor ?> input[type="checkbox"]`);
+    checkboxesMarcadas.forEach((checkbox) => {
+      checkbox.addEventListener('change', verificarCheckbox);
     });
   </script>
 <?php } ?>
