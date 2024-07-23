@@ -5,8 +5,8 @@
 foreach ($medicosOptions as $row) { ?>
   <?php $nombreCompletoDoctor = str_replace(" ", "", $row['nombre']).str_replace(" ", "", $row['apellido']);
 ?>
-  <div class="modal fade" id="modalReservas-<?php echo $nombreCompletoDoctor?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document"  data-bs-backdrop="static">
+  <div class="modal fade"  data-bs-backdrop="static" data-bs-keyboard="false" id="modalReservas-<?php echo $nombreCompletoDoctor?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Reservar cita con <span id="diaSemana"><?php echo $row['nombre']." ".$row['apellido']?></span></h5>
