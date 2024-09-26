@@ -102,7 +102,7 @@ require "verificarUsuario.php"; ?>
                                 </li> -->
                             <?php else: ?>
                                 <li class="sidebar-item active ">
-                                    <a href="index.html" class="sidebar-link bg-c-blue">
+                                    <a href="" class="sidebar-link bg-c-blue">
                                         <i class="bi bi-grid-fill"></i>
                                         <span>Control de citas</span>
                                     </a>
