@@ -206,7 +206,7 @@ require "verificarUsuario.php"; ?>
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card bg-c-green order-card">
                                         <div class="card-block p-5">
-                                            <a data-bs-toggle="modal" data-bs-target="#medModal">
+                                            <a>
                                                 <h6 class="text-center text-white"><i class=""></i>
                                                     <span class="text-center text-white">
                                                         <?php include "conectarBD.php";
@@ -232,7 +232,7 @@ require "verificarUsuario.php"; ?>
                                 <div class="col-md-6 col-lg-4">
                                     <div class="card bg-c-yellow order-card">
                                         <div class="card-block p-5">
-                                            <a href="#">
+                                            <a
                                                 <h6 class="text-center text-white"><i class=""></i>
                                                 <span class="text-center text-white">
                                                         <?php include "conectarBD.php";
