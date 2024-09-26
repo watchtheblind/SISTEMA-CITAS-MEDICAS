@@ -13,22 +13,23 @@
                             <h3>Registrar pacientes</h3>
                                 <div class="form-row col-md-6">
                                     <div class="form-group">
-                                        <label for="inputNombre1">Nombres</label>
-                                        <input required type="nombre" name="pacNom" class="form-control" id="inputEmail4" placeholder="Ej: Pedro José" tabindex="1">
+                                        <label for="inputAddress">Cedula</label>
+                                        <input required type="number" oninput="this.value = this.value.slice(0, 8)"  onpaste="setTimeout(() => this.value = this.value.slice(0, 8), 0)" onkeydown="return event.keyCode !== 69" name="pacCed" class="form-control" id="inputTel2" placeholder="Ej: 5674123"  tabindex="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputPassword4">Apellidos</label>
+                                        <input required type="apellido" name="pacApe" class="form-control" id="inputPassword4" placeholder="Ej: Fernández Contreras" tabindex="3">
                                     </div>
                                     <div class="form-group">
                                         <label for="inputAddress2">Telefono</label>
-                                        <input required type="number" oninput="this.value = this.value.slice(0, 11)"  onpaste="setTimeout(() => this.value = this.value.slice(0, 11), 0)" onkeydown="return event.keyCode !== 69" name="pacTel" class="form-control" id="inputTel" placeholder="04XX-XXXXXXX" tabindex="3">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="inputAddress">Cedula</label>
-                                        <input required type="number" oninput="this.value = this.value.slice(0, 8)"  onpaste="setTimeout(() => this.value = this.value.slice(0, 8), 0)" onkeydown="return event.keyCode !== 69" name="pacCed" class="form-control" id="inputTel2" placeholder="Ej: 5674123"  tabindex="5">
+                                        <input required type="number" oninput="this.value = this.value.slice(0, 11)"  onpaste="setTimeout(() => this.value = this.value.slice(0, 11), 0)" onkeydown="return event.keyCode !== 69" name="pacTel" class="form-control" id="inputTel" placeholder="04XX-XXXXXXX" tabindex="5">
                                     </div>
                                 </div>
                                 <div class="form-row col-md-6">
+
                                     <div class="form-group">
-                                        <label for="inputPassword4">Apellidos</label>
-                                        <input required type="apellido" name="pacApe" class="form-control" id="inputPassword4" placeholder="Ej: Fernández Contreras" tabindex="2">
+                                        <label for="inputNombre1">Nombres</label>
+                                        <input required type="nombre" name="pacNom" class="form-control" id="inputEmail4" placeholder="Ej: Pedro José" tabindex="2">
                                     </div>
                                     <div class="form-group">
                                         <label for="inputAddress3">Estado</label>
