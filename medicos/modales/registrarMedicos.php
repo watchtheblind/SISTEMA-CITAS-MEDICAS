@@ -26,7 +26,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputEspecialidad">Cantidad de pacientes que atiende</label>
-                                                <input type="text" required name="medCantidad" class="form-control" id="inputEspec" oninput="this.value = this.value.slice(0, 2)"  onpaste="setTimeout(() => this.value = this.value.slice(0, 2), 0)" placeholder="Ej: 10" tabindex="7">
+                                                <input type="number" required name="medCantidad" class="form-control" id="inputEspec" oninput="this.value = this.value.slice(0, 2)"  onpaste="setTimeout(() => this.value = this.value.slice(0, 2), 0)" placeholder="Ej: 10" tabindex="7">
                                             </div>  
                                         </div>
                                         <div class="form-row col-md-6">
