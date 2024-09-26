@@ -13,16 +13,16 @@
                                         <h3>Registrar Médicos</h3>
                                         <div class="form-row col-md-6">
                                             <div class="form-group">
-                                                <label for="inputNombre">Nombres</label>
-                                                <input type="nombre" required  name="medNom" class="form-control" id="medNombre" placeholder="Ej: Maria José" tabindex="1">
+                                                <label for="inputCedula">Cedula</label>
+                                                <input type="number" required onkeydown="return event.keyCode !== 69" name="medCed" class="form-control" id="inputCed" oninput="this.value = this.value.slice(0, 8)"   onpaste="setTimeout(() => this.value = this.value.slice(0, 8), 0)" placeholder="Ej: 5674123" tabindex="1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputApellido">Apellidos</label>
+                                                <input type="text" required name="medApe" class="form-control" id="inputApell" placeholder="Ej: Torres Pérez" tabindex="3">
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputTelefono">Telefono</label>
-                                                <input type="number" required onkeydown="return event.keyCode !== 69" name="medTel" class="form-control" id="inputTel" oninput="this.value = this.value.slice(0, 11)"  onpaste="setTimeout(() => this.value = this.value.slice(0, 11), 0)" placeholder="04XX-XXXXXXX" tabindex="3">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="inputCedula">Cedula</label>
-                                                <input type="number" required onkeydown="return event.keyCode !== 69" name="medCed" class="form-control" id="inputCed" oninput="this.value = this.value.slice(0, 8)"   onpaste="setTimeout(() => this.value = this.value.slice(0, 8), 0)" placeholder="Ej: 5674123" tabindex="5">
+                                                <input type="number" required onkeydown="return event.keyCode !== 69" name="medTel" class="form-control" id="inputTel" oninput="this.value = this.value.slice(0, 11)"  onpaste="setTimeout(() => this.value = this.value.slice(0, 11), 0)" placeholder="04XX-XXXXXXX" tabindex="5">
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputEspecialidad">Cantidad de pacientes que atiende</label>
@@ -31,8 +31,8 @@
                                         </div>
                                         <div class="form-row col-md-6">
                                             <div class="form-group">
-                                                <label for="inputApellido">Apellidos</label>
-                                                <input type="text" required name="medApe" class="form-control" id="inputApell" placeholder="Ej: Torres Pérez" tabindex="2">
+                                                <label for="inputNombre">Nombres</label>
+                                                <input type="nombre" required  name="medNom" class="form-control" id="medNombre" placeholder="Ej: Maria José" tabindex="2">
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputEspecialidad">Cargo</label>
@@ -40,7 +40,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputEspecialidad">Especialidad</label>
-                                                <input type="text" required name="medEspec" class="form-control" id="inputEspec" placeholder="Ej: Pediatra, Cardiólogo, etc." tabindex="5">
+                                                <input type="text" required name="medEspec" class="form-control" id="inputEspec" placeholder="Ej: Pediatra, Cardiólogo, etc." tabindex="6">
                                             </div>
                                             <div class="form-group">
                                                 <label for="inputEspecialidad">Especialidad que atiende</label>
