@@ -3,7 +3,8 @@
 </script>
 <?php
 foreach ($medicosOptions as $row) { ?>
-  <?php $nombreCompletoDoctor = str_replace(" ", "", $row['nombre']).str_replace(" ", "", $row['apellido']);
+  <?php 
+    $nombreCompletoDoctor = str_replace(" ", "", $row['nombre']).str_replace(" ", "", $row['apellido']);
 ?>
   <div class="modal fade"  data-bs-backdrop="static" data-bs-keyboard="false" id="modalReservas-<?php echo $nombreCompletoDoctor?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -16,6 +17,9 @@ foreach ($medicosOptions as $row) { ?>
         </div>
         <div class="modal-body">
           <div class="alert alert-danger" id="alerta-<?php echo $nombreCompletoDoctor?>" role="alert" hidden>
+            <strong>Advertencia:</strong> Ha alcanzado la cantidad de pacientes que atiende el/la doctor/a (<?php echo $row['cantidad_pacientes']; ?>). Se aconseja no añadir más citas.
+          </div>
+          <div class="alert alert-danger" id="alerta2-<?php echo $nombreCompletoDoctor?>" role="alert" hidden>
             <strong>Advertencia:</strong> Ha sobrepasado la cantidad de pacientes que atiende el/la doctor/a (<?php echo $row['cantidad_pacientes']; ?>). Se aconseja no añadir más citas.
           </div>
           <div class="row">
@@ -72,10 +76,14 @@ foreach ($medicosOptions as $row) { ?>
     $('#modalReservas-<?php echo $nombreCompletoDoctor ?>').on('show.bs.modal', function (e) {
       let puestosOcupados = this.querySelectorAll('input[type="checkbox"][disabled]');
       const alerta = document.querySelector("#alerta-<?php echo $nombreCompletoDoctor?>");
+      const alerta2 = document.querySelector("#alerta2-<?php echo $nombreCompletoDoctor?>");
       let cantidadPuestosOcupados = puestosOcupados.length;
       let cantidadPacientes = <?php echo $row['cantidad_pacientes']; ?>;
-      if (cantidadPuestosOcupados > cantidadPacientes) {
+      if (cantidadPuestosOcupados == cantidadPacientes) {
         alerta.removeAttribute('hidden');
+      }
+      else if (cantidadPuestosOcupados > cantidadPacientes) {
+        alerta2.removeAttribute('hidden');
       }
     });
     //bloquear guardar puesto:
